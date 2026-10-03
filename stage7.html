@@ -13,7 +13,7 @@
   gtag('config', 'G-9RTQCP2HXM');
 </script>
 <title>STAGE7 もうひとつの数列（モジュラー形式と谷山–志村予想） ― フェルマーの最終定理、証明への道</title>
-<meta name="description" content="無限に続く掛け算 q(1−q)²(1−q¹¹)²(1−q²)²(1−q²²)²… を展開すると、その係数が楕円曲線 y²＋y＝x³−x² の aₚ と一致する。モジュラー形式とは何か、q＝e^(2πiτ) と隠れた対称性、谷山–志村予想までを、中学生向けに計算で確かめながら解説。">
+<meta name="description" content="モジュラー形式と谷山–志村予想を中学生向けに解説。q(1−q)²(1−q¹¹)²… を展開した係数が楕円曲線の aₚ と一致することを手計算とシミュレータで確かめ、隠れた対称性の意味をたどる。">
 <link rel="canonical" href="https://fermat.habatakijuku.com/stage7">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="フェルマーの最終定理、証明への道">
@@ -35,7 +35,7 @@
     {
       "@type": "LearningResource",
       "name": "STAGE7 もうひとつの数列",
-      "description": "無限に続く掛け算 q(1−q)²(1−q¹¹)²(1−q²)²(1−q²²)²… を展開すると、その係数が楕円曲線 y²＋y＝x³−x² の aₚ と一致する。モジュラー形式とは何か、q＝e^(2πiτ) と隠れた対称性、谷山–志村予想までを、中学生向けに計算で確かめながら解説。",
+      "description": "モジュラー形式と谷山–志村予想を中学生向けに解説。q(1−q)²(1−q¹¹)²… を展開した係数が楕円曲線の aₚ と一致することを手計算とシミュレータで確かめ、隠れた対称性の意味をたどる。",
       "url": "https://fermat.habatakijuku.com/stage7",
       "inLanguage": "ja",
       "learningResourceType": "learning activity",
@@ -205,14 +205,14 @@
             <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
             <div class="dialog-name student">うさ美</div>
           </div>
-          <div class="dialog-bubble">e<sup>iθ</sup> は、<a href="https://complex-number.habatakijuku.com/" target="_blank" rel="noopener" style="color:var(--gold-dark);text-decoration:underline">『本当はおもしろい複素数の世界』</a>で学びました。単位円の上を、1 から弧の長さ θ だけ進んだ点です。2πiτ＝2πi(x＋iy)＝2πix−2πy なので、指数法則で q＝e<sup>2πix</sup>×e<sup>−2πy</sup>。e<sup>2πix</sup> は、単位円を1周の x 倍だけ回った点で、e<sup>−2πy</sup> は 1 より小さい正の数。q は、長さが e<sup>−2πy</sup> で、角度が1周の x 倍の矢印です。</div>
+          <div class="dialog-bubble">e<sup>iθ</sup> は、<a href="https://complex-number.habatakijuku.com/" target="_blank" rel="noopener" style="color:var(--gold-dark);text-decoration:underline">『本当はおもしろい複素数の世界』</a>で学びました。単位円の上を、1 から弧の長さ θ だけ進んだ点です。2πiτ＝2πi(x＋iy)＝2πix−2πy なので、指数法則で q＝e<sup>2πix</sup>×e<sup>−2πy</sup>。e<sup>2πix</sup> は、単位円を1周の x 倍だけ回った点で、e<sup>−2πy</sup> は正の実数。q は、長さが e<sup>−2πy</sup> で、角度が1周の x 倍の矢印です。</div>
         </div>
         <div class="dialog-row">
           <div class="dialog-character">
             <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
             <div class="dialog-name mentor">ねこ博士</div>
           </div>
-          <div class="dialog-bubble">よく覚えていたね。y＞0 だから、q の長さは 1 より小さい。だから qⁿ は n が大きくなるほど 0 に近づいて、終わりのない掛け算も、ちゃんと1つの複素数に落ち着く。こうして F は、τ を入れると複素数を返す関数 F(τ) になる。では、τ を τ＋1 に変えると、F(τ) はどうなるかな？</div>
+          <div class="dialog-bubble">よく覚えていたね。肩のマイナスは逆数の意味で、e<sup>−2πy</sup>＝1/e<sup>2πy</sup> だ。y＞0 なら e<sup>2πy</sup> は 1 より大きいから、q の長さは 1 より小さい。だから qⁿ は n が大きくなるほど 0 に近づいて、終わりのない掛け算も、ちゃんと1つの複素数に落ち着く。こうして F は、τ を入れると複素数を返す関数 F(τ) になる。では、τ を τ＋1 に変えると、F(τ) はどうなるかな？</div>
         </div>
         <div class="dialog-row right">
           <div class="dialog-character">

@@ -13,7 +13,7 @@
   gtag('config', 'G-9RTQCP2HXM');
 </script>
 <title>STAGE8 ありえない曲線（フライ曲線とリベットの定理） ― フェルマーの最終定理、証明への道</title>
-<meta name="description" content="フェルマーの最終定理と谷山–志村予想をつないだフライ曲線 y²＝x(x−aᵖ)(x＋bᵖ) を中学生向けに解説。判別式が 16(abc)²ᵖ という整いすぎた形になること、セールの予想とリベットの定理（レベルを下げる）、重さ2・レベル2 のモジュラー形式が存在しないことから、谷山–志村予想がフェルマーの最終定理を導く筋道をたどる。">
+<meta name="description" content="フライ曲線とリベットの定理を中学生向けに解説。aᵖ＋bᵖ＝cᵖ の解から作る楕円曲線の判別式が 16(abc)²ᵖ と整いすぎること、レベルを2まで下げると矛盾することから、谷山–志村予想が最終定理を導く筋道をたどる。">
 <link rel="canonical" href="https://fermat.habatakijuku.com/stage8">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="フェルマーの最終定理、証明への道">
@@ -35,7 +35,7 @@
     {
       "@type": "LearningResource",
       "name": "STAGE8 ありえない曲線",
-      "description": "フェルマーの最終定理と谷山–志村予想をつないだフライ曲線 y²＝x(x−aᵖ)(x＋bᵖ) を中学生向けに解説。判別式が 16(abc)²ᵖ という整いすぎた形になること、セールの予想とリベットの定理（レベルを下げる）、重さ2・レベル2 のモジュラー形式が存在しないことから、谷山–志村予想がフェルマーの最終定理を導く筋道をたどる。",
+      "description": "フライ曲線とリベットの定理を中学生向けに解説。aᵖ＋bᵖ＝cᵖ の解から作る楕円曲線の判別式が 16(abc)²ᵖ と整いすぎること、レベルを2まで下げると矛盾することから、谷山–志村予想が最終定理を導く筋道をたどる。",
       "url": "https://fermat.habatakijuku.com/stage8",
       "inLanguage": "ja",
       "learningResourceType": "learning activity",
@@ -119,7 +119,7 @@
             <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt=""></div>
             <div class="dialog-name mentor">ねこ博士</div>
           </div>
-          <div class="dialog-bubble">前のステージの最後に、フェルマーの最終定理と谷山–志村予想は、別の話だと思われていたと言ったね。その2つを結びつけたのが、ドイツの数学者<strong>ゲルハルト・フライ</strong>だ。1984年、彼はこんなことを考えた。背理法で、フェルマーの式に解があると仮定する。p を 5 以上の素数として、<strong>aᵖ＋bᵖ＝cᵖ</strong> をみたす自然数 a, b, c があったとしよう（共通の約数はないとしておく）。この a, b を使って、楕円曲線を1本作るんだ。</div>
+          <div class="dialog-bubble">前のステージで見た谷山–志村予想は、「どの楕円曲線も、aₚ の列がモジュラー形式の係数として現れる（モジュラーである）」という予想だった。そして、それとフェルマーの最終定理は、別の話だと思われていたと言ったね。その2つを結びつけたのが、ドイツの数学者<strong>ゲルハルト・フライ</strong>だ。1984年、彼はこんなことを考えた。背理法で、フェルマーの式に解があると仮定する。p を 5 以上の素数として、<strong>aᵖ＋bᵖ＝cᵖ</strong> をみたす自然数 a, b, c があったとしよう（共通の約数はないとしておく）。この a, b を使って、楕円曲線を1本作るんだ。</div>
         </div>
       </div>
 
@@ -238,7 +238,7 @@
             <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
             <div class="dialog-name mentor">ねこ博士</div>
           </div>
-          <div class="dialog-bubble">そう。リベットの定理によると、フライ曲線がモジュラーなら、<strong>重さ2・レベル2 のモジュラー形式</strong>で、係数を mod p で見るとフライ曲線の a<sub>ℓ</sub> と一致するものが存在しなければならない。ところが、<strong>重さ2・レベル2 のモジュラー形式は、1つも存在しない</strong>。これは昔から分かっていたことなんだ。STAGE7 で、レベル 11 では対称性が強すぎて F ただ1つしかなかったね。レベル 2 では、対称性の条件がさらにきつく効いて、条件をみたすのは 0 だけになってしまう。</div>
+          <div class="dialog-bubble">そう。リベットの定理によると、フライ曲線がモジュラーなら、<strong>重さ2・レベル2 の、q から始まる種類のモジュラー形式</strong>で、係数を mod p で見るとフライ曲線の a<sub>ℓ</sub> と一致するものが存在しなければならない。ところが、<strong>重さ2・レベル2 の、q から始まる種類のモジュラー形式は、1つも存在しない</strong>。これは昔から分かっていたことなんだ。STAGE7 で、レベル 11 では対称性が強すぎて F ただ1つしかなかったね。レベル 2 では、対称性の条件がさらにきつく効いて、条件をみたすのは 0 だけになってしまう。</div>
         </div>
       </div>
 
@@ -306,7 +306,7 @@
         <span class="step">判別式 <span class="nw">Δ＝16(r₁−r₂)²(r₂−r₃)²(r₁−r₃)²</span>。交点の差は aᵖ, bᵖ, aᵖ＋bᵖ＝cᵖ なので <span class="nw">Δ＝16(abc)²ᵖ</span>（整いすぎている）</span>
         <span class="step">谷山–志村予想が正しく、フライ曲線がモジュラーでないなら → 解はない（谷山–志村予想 ⇒ フェルマーの最終定理）</span>
         <span class="step">リベットの定理（1986年）：判別式の指数が p の倍数の素数は、mod p の指紋に映らず、レベルから取り除ける → フライ曲線ならレベル2 まで下がる</span>
-        <span class="step">重さ2・レベル2 のモジュラー形式は存在しない → 矛盾。残る課題は「半安定な楕円曲線の谷山–志村予想」</span>
+        <span class="step">重さ2・レベル2 の、q から始まる種類のモジュラー形式は存在しない → 矛盾。残る課題は「半安定な楕円曲線の谷山–志村予想」</span>
       </div>
 
       <h2 class="quiz-head">確認クイズ</h2>
@@ -326,16 +326,16 @@
           <button class="choice-btn">フェルマーの最終定理は誤りである</button>
           <button class="choice-btn">谷山–志村予想は誤りである</button>
         </div>
-        <div class="quiz-explain" hidden>正解！ フライ曲線がモジュラーなら、存在しない「重さ2・レベル2 のモジュラー形式」が必要になる。だから、半安定な楕円曲線がすべてモジュラーだと示せば、フェルマーの式の解はありえない。</div>
+        <div class="quiz-explain" hidden>正解！ フライ曲線がモジュラーなら、存在しない「重さ2・レベル2 の、q から始まる種類のモジュラー形式」が必要になる。だから、半安定な楕円曲線がすべてモジュラーだと示せば、フェルマーの式の解はありえない。</div>
       </div>
       <div class="quiz-card" data-quiz>
         <p class="quiz-q">Q3. フライ曲線がモジュラーだとすると矛盾が出る、最後の決め手は？</p>
         <div class="choice-list">
           <button class="choice-btn">判別式が負になること</button>
-          <button class="choice-btn">重さ2・レベル2 のモジュラー形式が1つも存在しないこと</button>
+          <button class="choice-btn">重さ2・レベル2 の、q から始まる種類のモジュラー形式が1つも存在しないこと</button>
           <button class="choice-btn">フライ曲線が有理点を1つももたないこと</button>
         </div>
-        <div class="quiz-explain" hidden>正解！ リベットの定理でレベルを 2 まで下げると、重さ2・レベル2 のモジュラー形式が必要になる。しかし、そのようなものは 0 しかない。</div>
+        <div class="quiz-explain" hidden>正解！ リベットの定理でレベルを 2 まで下げると、重さ2・レベル2 の、q から始まる種類のモジュラー形式が必要になる。しかし、そのようなものは 0 しかない。</div>
       </div>
 
       <div class="stage-nav">

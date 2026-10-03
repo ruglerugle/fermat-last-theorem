@@ -13,7 +13,7 @@
   gtag('config', 'G-9RTQCP2HXM');
 </script>
 <title>STAGE3 こわれた素因数分解（ラメとクンマー・素因数分解の一意性） ― フェルマーの最終定理、証明への道</title>
-<meta name="description" content="フェルマーの最終定理に19世紀の数学者が挑んだ方法を解説。xᵖ＋yᵖ を複素数で因数分解するラメの証明と、6＝2×3＝(1＋√−5)(1−√−5) のように素因数分解がただ1通りに決まらない世界、クンマーの理想数と正則素数までを中学生向けにたどる。">
+<meta name="description" content="素因数分解の一意性とフェルマーの最終定理。xᵖ＋yᵖ を複素数で因数分解したラメの証明が、6＝2×3＝(1＋√−5)(1−√−5) のような分解の乱れで崩れた理由と、クンマーの理想数を中学生向けに解説。">
 <link rel="canonical" href="https://fermat.habatakijuku.com/stage3">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="フェルマーの最終定理、証明への道">
@@ -35,7 +35,7 @@
     {
       "@type": "LearningResource",
       "name": "STAGE3 こわれた素因数分解",
-      "description": "フェルマーの最終定理に19世紀の数学者が挑んだ方法を解説。xᵖ＋yᵖ を複素数で因数分解するラメの証明と、6＝2×3＝(1＋√−5)(1−√−5) のように素因数分解がただ1通りに決まらない世界、クンマーの理想数と正則素数までを中学生向けにたどる。",
+      "description": "素因数分解の一意性とフェルマーの最終定理。xᵖ＋yᵖ を複素数で因数分解したラメの証明が、6＝2×3＝(1＋√−5)(1−√−5) のような分解の乱れで崩れた理由と、クンマーの理想数を中学生向けに解説。",
       "url": "https://fermat.habatakijuku.com/stage3",
       "inLanguage": "ja",
       "learningResourceType": "learning activity",
@@ -307,8 +307,34 @@
             <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
             <div class="dialog-name mentor">ねこ博士</div>
           </div>
-          <div class="dialog-bubble">クンマーは逆に、この世界を修理した。分けられないはずの数を、さらに細かく分ける「<strong>理想数</strong>」という見えない部品を考え出して、その部品のレベルでは分解がまたただ1通りになるようにしたんだ。たとえば 6 の場合、2, 3, 1±√−5 はどれも理想数の2個の積になっていて、2通りに見えた分解は、同じ4つの部品の組み合わせ方の違いにすぎない。この修理のおかげで、クンマーは<strong>正則素数</strong>と呼ばれる種類の素数すべてについて、フェルマーの最終定理を証明した。100 より小さい素数では、37, 59, 67 を除くすべてが正則素数だ。</div>
+          <div class="dialog-bubble">クンマーは逆に、この世界を修理した。分けられないはずの数を、さらに細かく分ける「<strong>理想数</strong>」という見えない部品を考え出して、その部品のレベルでは分解がまたただ1通りになるようにしたんだ。たとえば 6 の場合、2, 3, 1±√−5 はどれも理想数の2個の積になっていて、2通りに見えた分解は、同じ4つの部品の組み合わせ方の違いにすぎない。この修理のおかげで、クンマーは<strong>正則素数</strong>（理想数を使っても残る「分解の乱れぐあい」を表す数が、p で割り切れない素数）と呼ばれる種類の素数すべてについて、フェルマーの最終定理を証明した。100 より小さい素数では、37, 59, 67 を除くすべてが正則素数だ。</div>
         </div>
+      </div>
+
+      <div class="diagram-box">
+        <svg viewBox="0 0 420 250" role="img" aria-label="6の2通りの分解を、理想数の部品A、B、Cで表した図。2はA×A、3はB×C、1＋√−5はA×B、1−√−5はA×C。どちらの分解も、部品で見ると同じA×A×B×Cになる">
+          <text x="210" y="24" text-anchor="middle" font-size="18" font-weight="900" fill="#1c2b26">6</text>
+          <line x1="200" y1="30" x2="110" y2="56" stroke="#b9b0a3" stroke-width="1.5"/><line x1="220" y1="30" x2="310" y2="56" stroke="#b9b0a3" stroke-width="1.5"/>
+          <text x="110" y="76" text-anchor="middle" font-size="15" font-weight="900" fill="#1c2b26">2 × 3</text>
+          <text x="310" y="76" text-anchor="middle" font-size="15" font-weight="900" fill="#1c2b26">(1＋√−5) × (1−√−5)</text>
+          <line x1="88" y1="84" x2="70" y2="110" stroke="#b9b0a3"/><line x1="132" y1="84" x2="150" y2="110" stroke="#b9b0a3"/>
+          <line x1="270" y1="84" x2="262" y2="110" stroke="#b9b0a3"/><line x1="352" y1="84" x2="360" y2="110" stroke="#b9b0a3"/>
+          <text x="70" y="128" text-anchor="middle" font-size="12" font-weight="800" fill="#6b837a">2 は</text>
+          <text x="150" y="128" text-anchor="middle" font-size="12" font-weight="800" fill="#6b837a">3 は</text>
+          <text x="262" y="128" text-anchor="middle" font-size="12" font-weight="800" fill="#6b837a">1＋√−5 は</text>
+          <text x="360" y="128" text-anchor="middle" font-size="12" font-weight="800" fill="#6b837a">1−√−5 は</text>
+          <rect x="37" y="140" width="30" height="24" rx="6" fill="#41846b"/><text x="52" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">A</text><rect x="73" y="140" width="30" height="24" rx="6" fill="#41846b"/><text x="88" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">A</text>
+          <rect x="117" y="140" width="30" height="24" rx="6" fill="#9a6a1c"/><text x="132" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">B</text><rect x="153" y="140" width="30" height="24" rx="6" fill="#3f6fb5"/><text x="168" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">C</text>
+          <rect x="229" y="140" width="30" height="24" rx="6" fill="#41846b"/><text x="244" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">A</text><rect x="265" y="140" width="30" height="24" rx="6" fill="#9a6a1c"/><text x="280" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">B</text>
+          <rect x="327" y="140" width="30" height="24" rx="6" fill="#41846b"/><text x="342" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">A</text><rect x="363" y="140" width="30" height="24" rx="6" fill="#3f6fb5"/><text x="378" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">C</text>
+          <rect x="60" y="190" width="300" height="44" rx="10" fill="#eef7f2" stroke="#41846b"/>
+          <text x="210" y="210" text-anchor="middle" font-size="13" font-weight="900" fill="#2e5f4d">どちらの分け方も、部品で見ると</text>
+          <text x="210" y="227" text-anchor="middle" font-size="13" font-weight="900" fill="#2e5f4d">A × A × B × C</text>
+        </svg>
+        <div class="diagram-caption">クンマーの理想数の考え方（イメージ）。2, 3, 1＋√−5, 1−√−5 は、a＋b√−5 の世界ではこれ以上分けられないが、目に見えない部品 A, B, C の2個ずつの積だと考える。すると、2通りに見えた 6 の分解は、同じ4つの部品の組み合わせ方が違うだけになる</div>
+      </div>
+
+      <div class="dialogue-scene">
         <div class="dialog-row right">
           <div class="dialog-character">
             <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
