@@ -197,6 +197,16 @@
           </div>
           <div class="dialog-bubble">(x−x₁)(x−x₂)＝x²−(x₁＋x₂)x＋x₁x₂ に (x−x₃) を掛けると、x² の項は −x₃x² と −(x₁＋x₂)x² なので、x² の係数は <strong>−(x₁＋x₂＋x₃)</strong> です。いまの式 x³−x²−10x−8 では x² の係数が −1 なので、x₁＋x₂＋x₃＝1。−2＋(−1)＋x₃＝1 から <strong>x₃＝4</strong>。y＝x＋5 に入れて y＝9。<strong>(4, 9)</strong> です！ さっき見つけた点が、直線から出てきました。</div>
         </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step"><span class="nw">(x−x₁)(x−x₂)＝x²−(x₁＋x₂)x＋x₁x₂</span></span>
+        <span class="step">これに (x−x₃) を掛けたときの x² の項は、<span class="nw">x²×(−x₃)</span> と <span class="nw">−(x₁＋x₂)x×x</span> の2つ → <span class="nw">−(x₁＋x₂＋x₃)x²</span></span>
+        <span class="step"><span class="nw">x³−x²−10x−8</span> の x² の係数は −1 なので <span class="nw">x₁＋x₂＋x₃＝1</span></span>
+        <span class="step"><span class="nw">x₃＝1−(−2)−(−1)＝4</span>、<span class="nw">y＝4＋5＝9</span> → 3つ目の交点 (4, 9)</span>
+      </div>
+
+      <div class="dialogue-scene">
         <div class="dialog-row">
           <div class="dialog-character">
             <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
@@ -204,6 +214,16 @@
           </div>
           <div class="dialog-bubble">この計算を一般の場合でやってみよう。曲線 y²＝x³＋ax＋b と、傾き m の直線 y＝mx＋c を連立すると、(mx＋c)²＝x³＋ax＋b。移項すると x³ の係数は 1、x² の係数は −m² になる。</div>
         </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">直線 y＝mx＋c を曲線に入れる：<span class="nw">(mx＋c)²＝x³＋ax＋b</span></span>
+        <span class="step">左辺を展開：<span class="nw">m²x²＋2mcx＋c²＝x³＋ax＋b</span></span>
+        <span class="step">すべて右辺へ移す：<span class="nw">0＝x³−m²x²＋(a−2mc)x＋(b−c²)</span></span>
+        <span class="step">x² の係数 −m² が −(x₁＋x₂＋x₃) に等しい → <span class="nw">x₁＋x₂＋x₃＝m²</span> → <span class="nw">x₃＝m²−x₁−x₂</span></span>
+      </div>
+
+      <div class="dialogue-scene">
         <div class="dialog-row right">
           <div class="dialog-character">
             <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
@@ -223,7 +243,8 @@
       <div class="formula-box">
         <span class="step">曲線の上の点 P と Q を通る直線が、曲線と交わる3つ目の点を R とする</span>
         <span class="step">R を x 軸について折り返した点（y の符号を変えた点）を <strong>P＋Q</strong> と決める</span>
-        <span class="step">計算式：傾き <span class="nw">m＝(y₂−y₁)/(x₂−x₁)</span> のとき、<span class="nw">x₃＝m²−x₁−x₂</span>、<span class="nw">y₃＝m(x₁−x₃)−y₁</span> が P＋Q</span>
+        <span class="step">計算式：傾き <span class="nw">m＝(y₂−y₁)/(x₂−x₁)</span> のとき、3つ目の交点 R の x 座標は <span class="nw">x₃＝m²−x₁−x₂</span></span>
+        <span class="step">R は P を通る傾き m の直線の上にあるので、R の y 座標は <span class="nw">y₁＋m(x₃−x₁)</span>。折り返して符号を変えると、P＋Q の y 座標は <span class="nw">y₃＝−y₁−m(x₃−x₁)＝m(x₁−x₃)−y₁</span></span>
         <span class="step">P＝Q のときは接線を使う。接線の傾きは <span class="nw">m＝(3x₁²＋a)/(2y₁)</span>（微分という道具で求まる式。ここでは結果だけ使う）</span>
       </div>
 
