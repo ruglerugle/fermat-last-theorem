@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>STAGE7 もうひとつの数列（モジュラー形式と谷山–志村予想） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="無限に続く掛け算 q(1−q)²(1−q¹¹)²(1−q²)²(1−q²²)²… を展開すると、その係数が楕円曲線 y²＋y＝x³−x² の aₚ と一致する。モジュラー形式とは何か、q＝e^(2πiτ) と隠れた対称性、谷山–志村予想までを、中学生向けに計算で確かめながら解説。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/stage7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="STAGE7 もうひとつの数列（モジュラー形式と谷山–志村予想） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="楕円曲線とは無関係に見える無限の掛け算を展開すると、曲線の指紋 aₚ がそのまま現れる。モジュラー形式と谷山–志村予想。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/stage7">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE7 もうひとつの数列",
+      "description": "無限に続く掛け算 q(1−q)²(1−q¹¹)²(1−q²)²(1−q²²)²… を展開すると、その係数が楕円曲線 y²＋y＝x³−x² の aₚ と一致する。モジュラー形式とは何か、q＝e^(2πiτ) と隠れた対称性、谷山–志村予想までを、中学生向けに計算で確かめながら解説。",
+      "url": "https://fermat.habatakijuku.com/stage7",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 7,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "フェルマーの最終定理、証明への道",
+        "url": "https://fermat.habatakijuku.com/"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "STAGE7 もうひとつの数列",
+          "item": "https://fermat.habatakijuku.com/stage7"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="design-system.css?v=20261003a">
+<style>
+#cv-mod{cursor:crosshair}
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="index.html" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">STAGE 7 ― もうひとつの数列 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 9</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">STAGE 7</span><h1 class="chapter-title">もうひとつの数列</h1>
+        <div class="chapter-sub">モジュラー形式と谷山–志村予想</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">q(1−q)²(1−q¹¹)²(1−q²)²(1−q²²)²… を q⁵ まで展開し、q², q³, q⁵ の係数が STAGE6 の a₂, a₃, a₅ と一致することを確かめよう。モジュラー形式の対称性と、谷山–志村予想の主張を説明できれば合格。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">前のステージで、楕円曲線 y²＋y＝x³−x² から、aₚ という数の列を作ったね。今日は、楕円曲線のことはいったん忘れて、まったく別のものを計算する。q を文字として、こんな<strong>終わりのない掛け算</strong>を考えよう。<br><strong>F＝q×<wbr>(1−q)²(1−q¹¹)²×<wbr>(1−q²)²(1−q²²)²×<wbr>(1−q³)²(1−q³³)²×<wbr>…</strong><br>n＝1, 2, 3, … のそれぞれについて (1−qⁿ)²(1−q¹¹ⁿ)² を、どこまでも掛けていくものだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">終わりがないのに、展開できるんですか？ 掛け算をいつまでも続けることになります。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">知りたいのは、展開したときの <strong>q の何乗の係数</strong>か、だよ。たとえば q⁵ の係数だけが知りたいなら、(1−q⁶)² から先のかっこは、1 のほかに q⁶ 以上の項しかもたないから、q⁵ までの係数には関係しない。同じ理由で、(1−q¹¹)² なども q¹² 以上の係数にしか効かない。だから、有限回の計算で済むんだ。最初に q が1つ掛かっているから、q⁵ までを知るには、残りの掛け算を q⁴ まで計算すればいい。やってごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">q⁴ までに効くのは (1−q)², (1−q²)², (1−q³)², (1−q⁴)² の4つです。q⁵ 以上の項は捨てながら、順に掛けていきます。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">(1−q)²＝1−2q＋q²</span>
+        <span class="step">×(1−q²)²＝×(1−2q²＋q⁴) → <span class="nw">1−2q−q²＋4q³−q⁴</span></span>
+        <span class="step">×(1−q³)²＝×(1−2q³＋…) → <span class="nw">1−2q−q²＋2q³＋3q⁴</span></span>
+        <span class="step">×(1−q⁴)²＝×(1−2q⁴＋…) → <span class="nw">1−2q−q²＋2q³＋q⁴</span></span>
+        <span class="step">最後に q を掛けて：<span class="nw">F＝q−2q²−q³＋2q⁴＋q⁵＋…</span></span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">q の右肩の数が素数のところ、q², q³, q⁵ の係数を、前のステージの a₂, a₃, a₅ と比べてごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">q² の係数は −2、q³ は −1、q⁵ は 1。a₂＝−2、a₃＝−1、a₅＝1 でした。……3つとも同じです！ でも、これは楕円曲線とは何の関係もない、ただの掛け算です。偶然ですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">偶然ではない。コンピュータで続きを計算すると、q⁷ の係数は −2、q¹¹ は 1、q¹³ は 4、q¹⁷ は −2、……と、<strong>どこまで行っても、素数 p について q<sup>p</sup> の係数が aₚ と一致する</strong>。片方は mod p で点を数えた結果、もう片方は掛け算の展開。まったく別の計算から、同じ数の列が出てくるんだ。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<div class="sim-controls">
+          <button class="btn btn-primary" type="button" id="btn-cmp">97 まで比べる</button>
+        </div>
+        <div class="table-scroll"><table class="num-table" id="tb-cmp"></table></div>
+        <div class="readout" id="ro-cmp"></div>
+        <div class="diagram-caption"><strong>2つの数列を比べる</strong>。上の段は、掛け算 F を展開したときの q<sup>p</sup> の係数。下の段は、STAGE6 と同じく楕円曲線 y²＋y＝x³−x² の点を mod p で数えて求めた aₚ＝p−Nₚ。どちらもページの中でその場で計算している</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">なぜ、この掛け算が楕円曲線の指紋を知っているんですか？ (1−q¹¹)² の 11 は、前のステージの導手の 11 と同じ数です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">11 が出てくるのも偶然ではない。理由を話すには、F の正体を知る必要がある。F は<strong>モジュラー形式</strong>と呼ばれる種類の関数なんだ。ここまで q はただの文字だったけれど、q に<strong>複素数</strong>を入れてみよう。τ（タウ）を、虚部が正の複素数 τ＝x＋iy（y＞0）として、<strong>q＝e<sup>2πiτ</sup></strong> とおく。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">e<sup>iθ</sup> は、<a href="https://complex-number.habatakijuku.com/" target="_blank" rel="noopener" style="color:var(--gold-dark);text-decoration:underline">『本当はおもしろい複素数の世界』</a>で学びました。単位円の上を、1 から弧の長さ θ だけ進んだ点です。2πiτ＝2πi(x＋iy)＝2πix−2πy なので、指数法則で q＝e<sup>2πix</sup>×e<sup>−2πy</sup>。e<sup>2πix</sup> は、単位円を1周の x 倍だけ回った点で、e<sup>−2πy</sup> は 1 より小さい正の数。q は、長さが e<sup>−2πy</sup> で、角度が1周の x 倍の矢印です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">よく覚えていたね。y＞0 だから、q の長さは 1 より小さい。だから qⁿ は n が大きくなるほど 0 に近づいて、終わりのない掛け算も、ちゃんと1つの複素数に落ち着く。こうして F は、τ を入れると複素数を返す関数 F(τ) になる。では、τ を τ＋1 に変えると、F(τ) はどうなるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">x が 1 増えると、e<sup>2πix</sup> は1周ちょうど余計に回るだけなので、同じ点です。q が変わらないので、F(τ＋1)＝F(τ)。τ を 1 ずらしても値が変わりません。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">それは q を使って書いたことから自動的に出てくる、当たり前の対称性だ。モジュラー形式の本当にすごいところは、<strong>隠れた対称性</strong>をもつことなんだ。F の場合、τ を τ/(11τ＋1) に取りかえると、次の式が成り立つ。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step"><span class="nw">F(τ/(11τ＋1))＝(11τ＋1)²×F(τ)</span></span>
+        <span class="step">一般に、整数 a, b, c, d が ad−bc＝1 をみたし、c が 11 の倍数なら：<br class="wbr"><span class="nw">F((aτ＋b)/(cτ＋d))＝(cτ＋d)²×F(τ)</span></span>
+        <span class="step">右肩の 2 を<strong>重さ</strong>、c が倍数でなければならない 11 を<strong>レベル</strong>という。F は「重さ2・レベル11」のモジュラー形式</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">τ/(11τ＋1) は、τ＋1 のような単純なずらし方ではありません。複素数どうしの割り算です。それなのに、F の値が (11τ＋1)² 倍になるだけ、というのは……掛け算の式を見ても、そんな性質があるようには見えません。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう、見ただけでは分からない。けれど成り立っている。τ にいろいろな複素数を入れて、両辺を数値で計算すると、ぴったり一致する。そして、このような対称性をもつ関数はめったにない。重さ2・レベル11 で、q から始まる種類のものは、<strong>本質的に F ただ1つ</strong>しかないことが分かっている。対称性があまりに強いので、係数が勝手に決まってしまうんだ。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<div class="cv-wrap wide"><canvas id="cv-mod" aria-label="τの平面（横が実部x、縦が虚部y）で、F(τ)の値の向きを色で塗り分けた図。横方向に周期1でくり返し、下の実軸に近づくほど細かい模様が無限に現れる"></canvas></div>
+        <div class="readout" id="ro-mod"></div>
+        <div class="diagram-caption"><strong>F(τ) の色地図</strong>。横が τ の実部 x（−1/2〜1/2、ちょうど1周期ぶん。F(τ＋1)＝F(τ) なので左右にはこの模様がくり返す）、縦が虚部 y（0.003〜0.2）。各点の色は、F(τ) を矢印と見たときの向き（角度）を表し、明るさは |F(τ)| に y² を掛けた大きさを表す（隠れた対称性で写り合う2点では、この量が等しくなる）。実軸に近づくと、x＝0 の上に見える模様が、縮んだ形で無限にくり返し現れる。図をタップ（クリック）すると、その点の τ で F(τ/(11τ＋1)) と (11τ＋1)²F(τ) を計算して比べる</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">楕円曲線の指紋が、こんなに対称性の強い関数の係数として出てくる……。ほかの楕円曲線でも、同じことが起きるんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">それが、この旅でいちばん大事な予想だ。1955年、日本の若い数学者<strong>谷山豊</strong>が、東京と日光で開かれた国際会議で、この方向の問題を提出した。それを<strong>志村五郎</strong>が磨き上げ、のちにフランスの<strong>ヴェイユ</strong>も研究して、次の形にまとまった。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step"><strong>谷山–志村予想</strong>：有理数を係数とするどんな楕円曲線にも、重さ2のモジュラー形式があって、</span>
+        <span class="step">そのレベルは楕円曲線の導手に等しく、q<sup>p</sup> の係数は（悪い素数を除いて）その楕円曲線の aₚ に等しい</span>
+        <span class="step">ひとことで：<strong>「すべての楕円曲線はモジュラーである」</strong></span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">楕円曲線は「方程式の世界」で、モジュラー形式は「複素数の関数の世界」です。まったく別の世界のものが、全部1対1でつながっている、という主張ですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。2つの世界の間に、すべての楕円曲線について橋がかかっている、という主張だ。たくさんの曲線で数値的には確かめられていって、多くの数学者が正しいと信じるようになった。けれど、証明の手がかりはまったくなかった。谷山は1958年、31歳で亡くなり、予想が解かれるのを見ることはなかった。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">すごい予想だということは分かりました。でも、これがフェルマーの最終定理と、どうつながるんですか？ xⁿ＋yⁿ＝zⁿ には、楕円曲線もモジュラー形式も出てきません。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">1980年代まで、ほとんどの数学者もそう思っていた。谷山–志村予想は数論の大問題、フェルマーの最終定理は昔からの難問で、2つは別の話だとね。その2つが、ある1本の楕円曲線によって結びつけられる。次のステージでは、その<strong>ありえない曲線</strong>を作ってみよう。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step"><span class="nw">F＝q(1−q)²(1−q¹¹)²(1−q²)²(1−q²²)²…</span> を展開すると <span class="nw">q−2q²−q³＋2q⁴＋q⁵＋…</span></span>
+        <span class="step">素数 p について、q<sup>p</sup> の係数＝楕円曲線 y²＋y＝x³−x² の aₚ（どこまでも一致する）</span>
+        <span class="step">q＝e<sup>2πiτ</sup>（τ の虚部は正）とおくと F(τ) は関数になる。<span class="nw">F(τ＋1)＝F(τ)</span></span>
+        <span class="step">隠れた対称性 <span class="nw">F(τ/(11τ＋1))＝(11τ＋1)²F(τ)</span>：重さ2・レベル11 のモジュラー形式。レベル 11＝曲線の導手 11</span>
+        <span class="step">谷山–志村予想（1955年〜）：すべての楕円曲線はモジュラー（aₚ がモジュラー形式の係数として現れ、レベル＝導手）</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. 掛け算 F を展開したとき、q⁵ の係数を知るために必要なかっこは？</p>
+        <div class="choice-list">
+          <button class="choice-btn">すべてのかっこ（無限個）</button>
+          <button class="choice-btn">(1−q)² から (1−q⁴)² まで（最初の q を除くと、q⁴ までが分かればよい）</button>
+          <button class="choice-btn">(1−q¹¹)² だけ</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 最初に q が1つ掛かっているので、残りの掛け算は q⁴ まで分かればよい。(1−q⁵)² より先のかっこは 1 のほかに q⁵ 以上の項しかもたず、q⁴ までの係数に効かない。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. τ を τ＋1 に変えても F(τ) が変わらない理由は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">F がすべての τ で 0 だから</button>
+          <button class="choice-btn">τ と τ＋1 は同じ複素数だから</button>
+          <button class="choice-btn">q＝e^(2πiτ) は、τ の実部が 1 増えると単位円をちょうど1周余計に回るだけで、同じ値だから</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ e^(2πi(τ＋1))＝e^(2πiτ)×e^(2πi) で、e^(2πi) は1周回って 1。q が変わらないので F も変わらない。本当にすごいのは、τ/(11τ＋1) への取りかえのような隠れた対称性のほう。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. 谷山–志村予想の主張は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">すべての楕円曲線について、その aₚ を係数にもつ重さ2のモジュラー形式がある</button>
+          <button class="choice-btn">すべての楕円曲線は、有理点を1つももたない</button>
+          <button class="choice-btn">モジュラー形式の係数はすべて 0 である</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 楕円曲線（方程式の世界）とモジュラー形式（複素関数の世界）の間に、すべての曲線について橋がかかっている、という主張。モジュラー形式のレベルは、曲線の導手に等しい。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← トップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="js/progress.js?v=20261003a"></script>
+<script src="js/fermat.js?v=20261003a"></script>
+<script>FQ.initStagePage(7);</script>
+<script>
+/* F の係数（q^0〜q^M を整数で展開） */
+var FCOEF=(function(){
+  var M=100, c=new Array(M+1).fill(0); c[0]=1;
+  function mul1(k){ for(var i=M;i>=k;i--) c[i]-=c[i-k]; }
+  for(var n=1;n<=M;n++){ mul1(n); mul1(n); if(11*n<=M){ mul1(11*n); mul1(11*n); } }
+  return function(e){ return c[e-1]; }; // q を1つ掛けるので q^e の係数は c[e-1]
+})();
+
+/* 2つの数列を比べる */
+(function(){
+  var btn=document.getElementById('btn-cmp'), tb=document.getElementById('tb-cmp'), ro=document.getElementById('ro-cmp');
+  function ap(p){ var N=0; for(var x=0;x<p;x++){ var r=FL.mod(x*x*x-x*x,p); for(var y=0;y<p;y++) if(FL.mod(y*y+y,p)===r) N++; } return p-N; }
+  function run(max){
+    var PR=FL.primes(max), h1='<tr><th>p</th>', h2='<tr><th>F の q<sup>p</sup> の係数</th>', h3='<tr><th>曲線の aₚ</th>', ok=0;
+    PR.forEach(function(p){ var a=FCOEF(p), b=ap(p), same=a===b; if(same) ok++;
+      h1+='<td>'+p+'</td>'; h2+='<td class="'+(same?'hit':'miss')+'">'+FL.signed(a)+'</td>'; h3+='<td class="'+(same?'hit':'miss')+'">'+FL.signed(b)+'</td>'; });
+    tb.innerHTML=h1+'</tr>'+h2+'</tr>'+h3+'</tr>';
+    ro.innerHTML='<span>比べた素数 <b>'+PR.length+'</b> 個</span><span>一致 <b class="ok">'+ok+'</b> 個</span>';
+  }
+  btn.addEventListener('click',function(){ run(97); });
+  run(13);
+})();
+
+/* F(τ) の色地図と、対称性の数値チェック */
+(function(){
+  var ro=document.getElementById('ro-mod');
+  function cm(a,b){ return [a[0]*b[0]-a[1]*b[1], a[0]*b[1]+a[1]*b[0]]; }
+  function cdiv(a,b){ var d=b[0]*b[0]+b[1]*b[1]; return [(a[0]*b[0]+a[1]*b[1])/d,(a[1]*b[0]-a[0]*b[1])/d]; }
+  function F(x,y){
+    var m=Math.exp(-2*Math.PI*y), q=[m*Math.cos(2*Math.PI*x), m*Math.sin(2*Math.PI*x)];
+    var q11=q; for(var i=1;i<11;i++) q11=cm(q11,q);
+    var r=q.slice(), qn=[1,0], qn11=[1,0], mag=1;
+    for(var n=1;n<6000;n++){
+      qn=cm(qn,q); qn11=cm(qn11,q11); mag*=m;
+      var a=[1-qn[0],-qn[1]], b=[1-qn11[0],-qn11[1]];
+      r=cm(r,cm(cm(a,a),cm(b,b)));
+      if(mag<1e-13) break;
+    }
+    return r;
+  }
+  var X0=-0.5,X1=0.5,Y0=0.003,Y1=0.2;
+  var img=null, pending=0;
+  var st=FL.canvas('cv-mod',function(w){return w<520?0.7:0.5;},draw);
+  function hsl(h,s,l){ var k=function(n){return (n+h/30)%12;}, a=s*Math.min(l,1-l), f=function(n){return l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));}; return [f(0)*255,f(8)*255,f(4)*255]; }
+  function draw(st){
+    var ctx=st.ctx, W=st.W, H=st.H, dpr=st.cv.width/W;
+    var cols=Math.round(W/2), rows=Math.round(H/2);
+    var off=document.createElement('canvas'); off.width=cols; off.height=rows;
+    var octx=off.getContext('2d'), id=octx.createImageData(cols,rows), job=++pending, row=0;
+    function step(){
+      if(job!==pending) return;
+      var t0=performance.now();
+      while(row<rows && performance.now()-t0<30){
+        var y=Y1-(row+0.5)/rows*(Y1-Y0);
+        for(var col=0;col<cols;col++){
+          var x=X0+(col+0.5)/cols*(X1-X0), v=F(x,y), ang=Math.atan2(v[1],v[0]), mg=Math.hypot(v[0],v[1]);
+          var l=0.12+0.7*(1-Math.exp(-mg*y*y*40)), c=hsl((ang*180/Math.PI+360)%360,0.62,l), k=(row*cols+col)*4;
+          id.data[k]=c[0]; id.data[k+1]=c[1]; id.data[k+2]=c[2]; id.data[k+3]=255;
+        }
+        row++;
+      }
+      octx.putImageData(id,0,0);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.imageSmoothingEnabled=true; ctx.drawImage(off,0,0,W,H);
+      // 目盛り
+      [[-0.5,'−1/2','left'],[0,'0','center'],[0.5,'1/2','right']].forEach(function(g){ var px=(g[0]-X0)/(X1-X0)*W; FL.line(ctx,px,H-6,px,H,'#fff',1.2); FL.text(ctx,g[1],px+(g[2]==='left'?4:(g[2]==='right'?-4:0)),H-10,{size:11,color:'#fff',align:g[2]}); });
+      FL.text(ctx,'x（τ の実部）',W-6,14,{size:10.5,color:'#fff',align:'right'});
+      if(mark) { FL.dot(ctx,(mark[0]-X0)/(X1-X0)*W,(Y1-mark[1])/(Y1-Y0)*H,5,'#fff','#1c2b26'); }
+      if(row<rows) setTimeout(step,0);
+    }
+    setTimeout(step,0);
+  }
+  var mark=null;
+  function check(x,y){
+    mark=[x,y];
+    var tau=[x,y], den=[11*x+1,11*y], t2=cdiv(tau,den);
+    var lhs=F(t2[0],t2[1]), rhs=cm(cm(den,den),F(x,y));
+    function s(z){ return z[0].toFixed(6)+(z[1]<0?' − ':' ＋ ')+Math.abs(z[1]).toFixed(6)+'i'; }
+    ro.innerHTML='<span>τ＝'+(x<0?'−':'')+Math.abs(x).toFixed(3)+'＋'+y.toFixed(3)+'i</span><span>F(τ/(11τ＋1))＝<b>'+s(lhs)+'</b></span><span>(11τ＋1)²F(τ)＝<b>'+s(rhs)+'</b></span>';
+  }
+  st.cv.addEventListener('click',function(e){
+    var r=st.cv.getBoundingClientRect(), x=X0+(e.clientX-r.left)/r.width*(X1-X0), y=Y1-(e.clientY-r.top)/r.height*(Y1-Y0);
+    if(y<0.01) y=0.01; check(x,y); st.redraw();
+  });
+  check(-0.071,0.1);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>STAGE5 点を足す曲線（楕円曲線とは・有理点の足し算） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="フェルマーの最終定理の証明の主役、楕円曲線 y²＝x³＋ax＋b を中学生向けに解説。2つの有理点を通る直線から3つ目の有理点を作る方法、解と係数の関係、点の「足し算」の決まり、モーデルの定理までを、y²＝x³＋17 の実例とシミュレータで確かめる。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/stage5">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="STAGE5 点を足す曲線（楕円曲線とは・有理点の足し算） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="y²＝x³＋17 の上の2つの点 (−2, 3) と (−1, 4) を直線で結ぶと、3つ目の点 (4, 9) が現れる。曲線の上で点を「足す」楕円曲線の世界へ。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/stage5">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE5 点を足す曲線",
+      "description": "フェルマーの最終定理の証明の主役、楕円曲線 y²＝x³＋ax＋b を中学生向けに解説。2つの有理点を通る直線から3つ目の有理点を作る方法、解と係数の関係、点の「足し算」の決まり、モーデルの定理までを、y²＝x³＋17 の実例とシミュレータで確かめる。",
+      "url": "https://fermat.habatakijuku.com/stage5",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 5,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "フェルマーの最終定理、証明への道",
+        "url": "https://fermat.habatakijuku.com/"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "STAGE5 点を足す曲線",
+          "item": "https://fermat.habatakijuku.com/stage5"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="design-system.css?v=20261003a">
+<style>
+
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="index.html" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">STAGE 5 ― 点を足す曲線 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 9</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">STAGE 5</span><h1 class="chapter-title">点を足す曲線</h1>
+        <div class="chapter-sub">楕円曲線と有理点の足し算</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">楕円曲線 y²＝x³＋ax＋b の上で、2つの有理点を通る直線から3つ目の有理点が作れる理由（3つの交点の x 座標の和＝傾きの2乗）を理解し、点の足し算 P＋Q を計算できるようになろう。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">ここから旅の後半だ。最初の主役は<strong>楕円曲線</strong>。a と b を整数として、<strong>y²＝x³＋ax＋b</strong> という式で表される曲線のことだ。名前に「楕円」とつくけれど、楕円（だ円）とは形がまったく違う。楕円の周の長さを計算する研究の中から生まれた式なので、この名前が残っているんだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">x³ があるので、STAGE1 の最後に出てきた「3次の曲線」の仲間ですね。どんな形なんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">a と b によって、ひとつながりの曲線になったり、卵のような輪と曲線の2つに分かれたりする。どれも x 軸を鏡にして上下対称だ。y² の式だから、(x, y) が曲線の上にあれば (x, −y) も曲線の上にある。動かして形を見てごらん。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<div class="cv-wrap"><canvas id="cv-shape" aria-label="楕円曲線 y²＝x³＋ax＋b のグラフ。a と b を変えると、ひとつながりの曲線になったり、輪と曲線の2つに分かれたりする"></canvas></div>
+        <div class="sim-controls">
+          <label>a <input type="range" id="in-a" min="-6" max="6" value="-3"><output id="out-a">−3</output></label>
+          <label>b <input type="range" id="in-b" min="-6" max="6" value="1"><output id="out-b">1</output></label>
+        </div>
+        <div class="readout" id="ro-shape"></div>
+        <div class="diagram-caption"><strong>楕円曲線の形</strong>。a と b を動かすと形が変わる。どれも x 軸について上下対称。ただし、4a³＋27b²＝0 になる組（a＝−3, b＝2 など）では、曲線が自分自身と交わったり、とがった点ができたりする。そういうものは楕円曲線に含めない</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">輪と曲線に分かれるのが不思議です。それで、この曲線のどこが大事なんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">STAGE1 と同じく、<strong>有理点</strong>（座標が両方とも分数で書ける点）を探すんだ。例として y²＝x³＋17 を使おう。x＝−2 なら x³＋17＝−8＋17＝9＝3² だから、(−2, 3) は有理点だ。ほかにも整数の点が見つかるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">x＝−1 なら −1＋17＝16＝4² で (−1, 4)。x＝2 なら 8＋17＝25＝5² で (2, 5)。x＝4 なら 64＋17＝81＝9² で (4, 9)。それと、上下対称なので (−2, −3) なども全部そうです。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">STAGE1 では、円の上の有理点1つから直線を引いて、もう1つの有理点を作った。円は2次だから、直線との交点は2つだった。楕円曲線は3次だから、直線との交点は3つある。そこで今度は、<strong>2つの有理点を通る直線</strong>を引く。(−2, 3) と (−1, 4) を通る直線の式は？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">傾きは (4−3)÷(−1−(−2))＝1 で、x＝−2 のとき y＝3 だから y＝x＋5 です。これを y²＝x³＋17 に入れると、(x＋5)²＝x³＋17、x²＋10x＋25＝x³＋17。移項して <strong>x³−x²−10x−8＝0</strong>。3次方程式です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">この3次方程式の解が、3つの交点の x 座標だ。2つは −2 と −1 だと分かっている。ここで使える事実がある。x³ の係数が 1 の3次式が、x₁, x₂, x₃ を解にもつなら、(x−x₁)(x−x₂)(x−x₃) と因数分解できる。これを展開して、x² の係数を見てごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">(x−x₁)(x−x₂)＝x²−(x₁＋x₂)x＋x₁x₂ に (x−x₃) を掛けると、x² の項は −x₃x² と −(x₁＋x₂)x² なので、x² の係数は <strong>−(x₁＋x₂＋x₃)</strong> です。いまの式 x³−x²−10x−8 では x² の係数が −1 なので、x₁＋x₂＋x₃＝1。−2＋(−1)＋x₃＝1 から <strong>x₃＝4</strong>。y＝x＋5 に入れて y＝9。<strong>(4, 9)</strong> です！ さっき見つけた点が、直線から出てきました。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">この計算を一般の場合でやってみよう。曲線 y²＝x³＋ax＋b と、傾き m の直線 y＝mx＋c を連立すると、(mx＋c)²＝x³＋ax＋b。移項すると x³ の係数は 1、x² の係数は −m² になる。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">ということは、x₁＋x₂＋x₃＝m²、つまり <strong>x₃＝m²−x₁−x₂</strong>。2つの点が有理点なら、傾き m は分数どうしの割り算なので有理数で、x₃ も有理数になります。y₃＝mx₃＋c も有理数です。<strong>2つの有理点を通る直線は、必ず3つ目の有理点を通る</strong>、ということですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。STAGE1 で「3次の曲線では残りの交点が2つあって、有理数とは限らない」と言ったね。2つの有理点から始めれば、残りは1つだけで、それは必ず有理数になる。数学者はこれを使って、曲線の上の点に<strong>足し算</strong>を決めた。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">曲線の上の点 P と Q を通る直線が、曲線と交わる3つ目の点を R とする</span>
+        <span class="step">R を x 軸について折り返した点（y の符号を変えた点）を <strong>P＋Q</strong> と決める</span>
+        <span class="step">計算式：傾き <span class="nw">m＝(y₂−y₁)/(x₂−x₁)</span> のとき、<span class="nw">x₃＝m²−x₁−x₂</span>、<span class="nw">y₃＝m(x₁−x₃)−y₁</span> が P＋Q</span>
+        <span class="step">P＝Q のときは接線を使う。接線の傾きは <span class="nw">m＝(3x₁²＋a)/(2y₁)</span>（微分という道具で求まる式。ここでは結果だけ使う）</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">(−2, 3)＋(−1, 4) は、3つ目の点 (4, 9) を折り返して (4, −9) ですね。でも、なぜわざわざ折り返すんですか？ (4, 9) のままのほうが簡単です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">いい質問だね。折り返さない決め方だと、普通の足し算がもつ性質が崩れてしまうんだ。折り返して決めると、<strong>順番を入れ替えても同じ</strong>（P＋Q＝Q＋P）、<strong>どこから足しても同じ</strong>（(P＋Q)＋S＝P＋(Q＋S)）という、数の足し算と同じ規則が全部成り立つ。0 の役目をするのは、曲線のはるか上（無限の遠く）にあると考える特別な点 O だ。P とその折り返しを結ぶと縦の直線になって、3つ目の交点は無限の遠くの O になる。だから P と折り返しを足すと O、つまり 0 になる。折り返しは「−P」の役をしているんだ。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<div class="cv-wrap"><canvas id="cv-add" aria-label="楕円曲線 y²＝x³＋17 の上の2点PとQを通る直線と、3つ目の交点R、Rを折り返した点P＋Q"></canvas></div>
+        <div class="sim-controls">
+          <label>P <select id="sel-P"></select></label>
+          <label>Q <select id="sel-Q"></select></label>
+          <button class="btn" type="button" id="btn-chain">P＋Q を新しい P にする</button>
+        </div>
+        <div class="readout" id="ro-add"></div>
+        <div class="diagram-caption"><strong>点の足し算シミュレータ</strong>（曲線 y²＝x³＋17）。P と Q を選ぶと、2点を通る直線（P＝Q なら接線）と、3つ目の交点 R、それを折り返した P＋Q を描く。座標は分数のまま正確に計算する。「P＋Q を新しい P にする」を繰り返すと、分母と分子がどんどん大きくなっていく</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">接線の式で (−2, 3)＋(−2, 3) を計算してみます。m＝(3×(−2)²＋0)/(2×3)＝12/6＝2。x₃＝2²−(−2)−(−2)＝8、y₃＝2×(−2−8)−3＝−23。<strong>(8, −23)</strong> です。8³＋17＝512＋17＝529＝23² なので、確かに曲線の上にあります。足し算をくり返せば、有理点はいくらでも作れるんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">この曲線ではそうだね。足すたびに、分母と分子の桁はどんどん増えていく。そして 1922年、イギリスのモーデルが、どの楕円曲線でも<strong>有理点はすべて、有限個の点から、この足し算をくり返して作れる</strong>ことを証明した。有理点がまったく増えない曲線もある。たとえば、n＝3 のフェルマーの式 x³＋y³＝1 は、うまく変数を取りかえると楕円曲線 y²＝x³−432 に作り直せる。オイラーの n＝3 の証明は、この楕円曲線の有理点が、座標に0を含む自明なもの（に対応する点）しかないことを示したのと同じことなんだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">フェルマーの式が楕円曲線になるんですか！ n＝5 や n＝7 でも、同じように楕円曲線に作り直せるんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">n＝5 以上では、xⁿ＋yⁿ＝1 をそのまま楕円曲線に作り直すことはできない。けれど、まったく別の使い方がある。もし解があったら、それを材料にして1本の楕円曲線を組み立てるんだ。それは STAGE8 で話そう。その前に、楕円曲線にはもう1つの顔がある。STAGE4 で予告した<strong>指紋</strong>だ。次のステージでは、楕円曲線を mod p で見て、点を数える。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">楕円曲線：<span class="nw">y²＝x³＋ax＋b</span>（ただし <span class="nw">4a³＋27b²≠0</span>）。x 軸について上下対称。名前は楕円の周の長さの研究に由来</span>
+        <span class="step">3次式 (x−x₁)(x−x₂)(x−x₃) の x² の係数は <span class="nw">−(x₁＋x₂＋x₃)</span></span>
+        <span class="step">傾き m の直線と曲線の3交点：<span class="nw">x₁＋x₂＋x₃＝m²</span> → 2つの有理点を通る直線は、3つ目の有理点を通る</span>
+        <span class="step">足し算：3つ目の交点を折り返した点が P＋Q。例 <span class="nw">(−2, 3)＋(−1, 4)＝(4, −9)</span>（y²＝x³＋17）。0 の役は無限の遠くの点 O</span>
+        <span class="step">モーデルの定理（1922年）：有理点はすべて、有限個の点から足し算で作れる</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. 楕円曲線の上の2つの有理点を通る直線について、正しいものは？</p>
+        <div class="choice-list">
+          <button class="choice-btn">曲線とはそれ以上交わらない</button>
+          <button class="choice-btn">曲線ともう2か所で交わるが、有理点になるとは限らない</button>
+          <button class="choice-btn">曲線ともう1か所で交わり、その点も必ず有理点になる</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 3つの交点の x 座標の和は傾きの2乗 m² に等しい。m も既知の2つの x 座標も有理数なので、3つ目の x 座標 x₃＝m²−x₁−x₂ も有理数になる。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. y²＝x³＋17 で、P＝(−2, 3)、Q＝(−1, 4) のとき、P＋Q は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">(4, 9)</button>
+          <button class="choice-btn">(4, −9)</button>
+          <button class="choice-btn">(−3, 7)</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 直線 y＝x＋5 は3つ目の点 (4, 9) で曲線と交わる。それを x 軸について折り返した (4, −9) が P＋Q。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. 3次式 x³−5x²＋… が x＝1, 2, x₃ を解にもつとき、x₃ は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">2</button>
+          <button class="choice-btn">5</button>
+          <button class="choice-btn">−3</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ x² の係数は −(x₁＋x₂＋x₃)。−5＝−(1＋2＋x₃) から x₃＝2。重なった解でもかまわない（接線のときがそうなる）。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← トップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="js/progress.js?v=20261003a"></script>
+<script src="js/fermat.js?v=20261003a"></script>
+<script>FQ.initStagePage(5);</script>
+<script>
+/* 楕円曲線の形 */
+(function(){
+  var inA=document.getElementById('in-a'), inB=document.getElementById('in-b'), oa=document.getElementById('out-a'), ob=document.getElementById('out-b'), ro=document.getElementById('ro-shape');
+  var st=FL.canvas('cv-shape',0.8,draw);
+  function draw(st){
+    var ctx=st.ctx, a=+inA.value, b=+inB.value; oa.textContent=FL.signed(a); ob.textContent=FL.signed(b);
+    ctx.clearRect(0,0,st.W,st.H); ctx.fillStyle=FL.C.paper; ctx.fillRect(0,0,st.W,st.H);
+    var v=FL.view(st,9,0.5,0);
+    FL.axes(ctx,st,v,1);
+    var f=function(x){return x*x*x+a*x+b;};
+    ctx.strokeStyle=FL.C.theme; ctx.lineWidth=2.4;
+    FL.plotY2(ctx,f,-5,7,v.X,v.Y);
+    var D=4*a*a*a+27*b*b;
+    ro.innerHTML='<span>y²＝x³'+(a?(a>0?'＋':'−')+(Math.abs(a)===1?'':Math.abs(a))+'x':'')+(b?(b>0?'＋':'−')+Math.abs(b):'')+'</span><span>4a³＋27b²＝<b class="'+(D===0?'ng':'')+'">'+FL.signed(D)+'</b>'+(D===0?'（楕円曲線ではない）':'')+'</span>';
+  }
+  inA.addEventListener('input',function(){st.redraw();}); inB.addEventListener('input',function(){st.redraw();});
+})();
+
+/* y^2 = x^3 + 17 の上の足し算 */
+(function(){
+  var A=0n, B=17n;
+  var base=[[-2,3],[-1,4],[2,5],[4,9],[8,23],[-2,-3],[-1,-4],[2,-5],[4,-9],[8,-23]].map(function(p){return {x:FL.Q(p[0]),y:FL.Q(p[1])};});
+  var selP=document.getElementById('sel-P'), selQ=document.getElementById('sel-Q'), chain=document.getElementById('btn-chain'), ro=document.getElementById('ro-add');
+  var custom=null;
+  function label(p){ return p===null?'O（無限の遠く）':'('+FL.qstr(p.x)+', '+FL.qstr(p.y)+')'; }
+  function fill(sel,idx){ sel.innerHTML=''; base.forEach(function(p,i){var o=document.createElement('option');o.value=i;o.textContent=label(p);sel.appendChild(o);}); sel.value=idx; }
+  fill(selP,0); fill(selQ,1);
+  function add(P,Q){
+    if(P===null) return {S:Q}; if(Q===null) return {S:P};
+    var m;
+    if(FL.qeq(P.x,Q.x)){
+      if(!FL.qeq(P.y,Q.y) || P.y.n===0n) return {S:null,vertical:true};
+      m=FL.qdiv(FL.qadd(FL.qmul(FL.Q(3),FL.qmul(P.x,P.x)),FL.Q(A)),FL.qmul(FL.Q(2),P.y));
+    } else m=FL.qdiv(FL.qsub(Q.y,P.y),FL.qsub(Q.x,P.x));
+    var x3=FL.qsub(FL.qsub(FL.qmul(m,m),P.x),Q.x);
+    var y3=FL.qsub(FL.qmul(m,FL.qsub(P.x,x3)),P.y);
+    return {S:{x:x3,y:y3}, R:{x:x3,y:FL.qneg(y3)}, m:m};
+  }
+  function getP(){ return custom || base[+selP.value]; }
+  var st=FL.canvas('cv-add',0.85,draw);
+  function draw(st){
+    var ctx=st.ctx, P=getP(), Q=base[+selQ.value], res=add(P,Q);
+    ctx.clearRect(0,0,st.W,st.H); ctx.fillStyle=FL.C.paper; ctx.fillRect(0,0,st.W,st.H);
+    // x と y で縮尺を変える
+    var x0=-4,x1=10,y0=-34,y1=34, pad=14;
+    var X=function(x){return pad+(x-x0)/(x1-x0)*(st.W-2*pad);}, Y=function(y){return pad+(y1-y)/(y1-y0)*(st.H-2*pad);};
+    ctx.strokeStyle=FL.C.grid; ctx.lineWidth=1;
+    for(var gx=-4;gx<=10;gx+=2){ctx.beginPath();ctx.moveTo(X(gx),0);ctx.lineTo(X(gx),st.H);ctx.stroke();}
+    for(var gy=-30;gy<=30;gy+=10){ctx.beginPath();ctx.moveTo(0,Y(gy));ctx.lineTo(st.W,Y(gy));ctx.stroke();}
+    FL.line(ctx,0,Y(0),st.W,Y(0),FL.C.axis,1.3); FL.line(ctx,X(0),0,X(0),st.H,FL.C.axis,1.3);
+    for(gx=-2;gx<=10;gx+=2) if(gx) FL.text(ctx,String(gx),X(gx),Y(0)+13,{size:10,color:FL.C.muted,align:'center'});
+    for(gy=-30;gy<=30;gy+=10) if(gy) FL.text(ctx,FL.signed(gy),X(0)-4,Y(gy)+4,{size:10,color:FL.C.muted,align:'right'});
+    var xr=-Math.cbrt(17);
+    [1,-1].forEach(function(sg){ ctx.strokeStyle=FL.C.theme; ctx.lineWidth=2.4; ctx.beginPath(); ctx.moveTo(X(xr),Y(0)); for(var i=1;i<=600;i++){var x=xr+i*(x1-xr)/600; ctx.lineTo(X(x),Y(sg*Math.sqrt(x*x*x+17)));} ctx.stroke(); });
+    var px=FL.qnum(P.x), py=FL.qnum(P.y), qx=FL.qnum(Q.x), qy=FL.qnum(Q.y);
+    var txt='';
+    if(res.vertical){
+      FL.line(ctx,X(px),0,X(px),st.H,FL.C.gold,2,[6,4]);
+      txt='<span>P と Q は折り返しの関係。縦の直線の3つ目の交点は無限の遠くの O なので <b>P＋Q＝O</b>（0 の役）</span>';
+    } else if(res.S){
+      var m=FL.qnum(res.m), c=py-m*px;
+      ctx.save(); ctx.beginPath(); ctx.rect(0,0,st.W,st.H); ctx.clip();
+      FL.line(ctx,X(x0),Y(m*x0+c),X(x1),Y(m*x1+c),FL.C.gold,2);
+      var rx=FL.qnum(res.R.x), ry=FL.qnum(res.R.y), sy=FL.qnum(res.S.y);
+      FL.line(ctx,X(rx),Y(ry),X(rx),Y(sy),FL.C.red,1.6,[4,4]);
+      FL.dot(ctx,X(rx),Y(ry),5,FL.C.gold,'#fff'); FL.dot(ctx,X(rx),Y(sy),6.5,FL.C.red,'#fff');
+      FL.text(ctx,'R',X(rx)+8,Y(ry)-6,{color:FL.C.gold,size:13,halo:true});
+      FL.text(ctx,'P＋Q',X(rx)+9,Y(sy)+4,{color:FL.C.red,size:13,halo:true});
+      ctx.restore();
+      var inside=rx>=x0&&rx<=x1&&Math.abs(ry)<=y1;
+      txt='<span>傾き m＝<b>'+FL.qstr(res.m)+'</b></span><span>P＋Q＝<b>'+label(res.S)+'</b></span>'+(inside?'':'<span class="ng">（P＋Q は画面の外）</span>');
+    }
+    FL.dot(ctx,X(px),Y(py),5.5,FL.C.blue,'#fff'); FL.text(ctx,'P',X(px)-14,Y(py)-6,{color:FL.C.blue,size:13,halo:true});
+    FL.dot(ctx,X(qx),Y(qy),5.5,FL.C.blue,'#fff'); FL.text(ctx,'Q',X(qx)+7,Y(qy)+16,{color:FL.C.blue,size:13,halo:true});
+    ro.innerHTML='<span>P＝'+label(P)+'</span><span>Q＝'+label(Q)+'</span>'+txt;
+  }
+  selP.addEventListener('change',function(){ if(selP.value!=='c'){ custom=null; var old=selP.querySelector('option[value=c]'); if(old) selP.removeChild(old); } st.redraw();});
+  selQ.addEventListener('change',function(){st.redraw();});
+  chain.addEventListener('click',function(){
+    var r=add(getP(),base[+selQ.value]);
+    if(r.S===null||r.vertical){ custom=null; selP.value=0; }
+    else { custom=r.S; var old=selP.querySelector("option[value=c]"); if(old) selP.removeChild(old); var o=document.createElement('option'); o.value='c'; o.textContent='（足した結果）'; selP.appendChild(o); selP.value='c'; }
+    st.redraw();
+  });
+})();
+</script>
+</body>
+</html>

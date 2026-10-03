@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>STAGE4 時計の算術（mod・合同式の入門） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="割った余りだけで計算する「時計の算術」（mod・合同式）を中学生向けに解説。平方数を4で割った余りから2つの平方数の和にならない数を見分け、x³＋y³＝z³ を mod 7 で調べる。mod だけではフェルマーの最終定理を証明できない理由と、後半の旅で mod が果たす役割まで。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/stage4">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="STAGE4 時計の算術（mod・合同式の入門） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="10時の5時間後は3時。割った余りだけで計算する「時計の算術」で、方程式に解があるかを調べる。その力と限界。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/stage4">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE4 時計の算術",
+      "description": "割った余りだけで計算する「時計の算術」（mod・合同式）を中学生向けに解説。平方数を4で割った余りから2つの平方数の和にならない数を見分け、x³＋y³＝z³ を mod 7 で調べる。mod だけではフェルマーの最終定理を証明できない理由と、後半の旅で mod が果たす役割まで。",
+      "url": "https://fermat.habatakijuku.com/stage4",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 4,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "フェルマーの最終定理、証明への道",
+        "url": "https://fermat.habatakijuku.com/"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "STAGE4 時計の算術",
+          "item": "https://fermat.habatakijuku.com/stage4"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="design-system.css?v=20261003a">
+<style>
+#svg-clock{max-width:min(100%,300px)}
+  #tb-pow td,#tb-pow th{padding:3px 6px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="index.html" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">STAGE 4 ― 時計の算術 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 9</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">STAGE 4</span><h1 class="chapter-title">時計の算術</h1>
+        <div class="chapter-sub">mod の計算と、その限界</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">a≡b (mod p) の意味と、足し算・掛け算が余りだけで計算できる理由を理解しよう。x³＋y³＝z³ を mod 7 で調べ、mod の計算だけではフェルマーの最終定理を証明しきれない理由を説明できれば合格。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">前のステージの最後に予告した<strong>時計の算術</strong>を始めよう。時計で 10時の5時間後は何時かな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">3時です。10＋5＝15 ですが、時計は 12 で一回りするので、15 から 12 を引いて 3。15 を 12 で割った余りが 3、ということですね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。時計は、数を「12 で割った余り」だけで見ている。これを一般にして、整数を<strong>ある数 p で割った余りだけ</strong>で計算することを、「<strong>mod p</strong> で計算する」という。mod は英語の modulo（〜を法として）の略だ。2つの整数 a と b を p で割った余りが等しいとき、<strong>a≡b (mod p)</strong> と書いて、「a と b は mod p で合同」と読む。15≡3 (mod 12) という具合だ。余りが等しいということは、差 a−b が p の倍数だということでもある。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">負の数はどうなりますか？ −1 を 12 で割った余りというのが、よく分かりません。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">差が p の倍数かどうかで考えればいい。−1−11＝−12 は 12 の倍数だから、−1≡11 (mod 12)。時計で言えば、0時の1時間前は 11時だね。mod p の世界には、0 から p−1 までの p 個の数しかないと考えて、どんな整数もそのどれかと合同になる。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<svg id="svg-clock" viewBox="0 0 300 250" role="img" aria-label="mod 7 の時計。0から6までの7つの数が円周に並び、整数はこのどれかに一回りして重なる。10は3に、−1は6に重なる"></svg>
+        <div class="diagram-caption"><strong>mod 7 の時計</strong>。0〜6 の7つの数が円周に並ぶ。整数を 7 で割った余りの位置に置くと、10 は 3 に、−1 は 6 に重なる（10≡3、−1≡6 (mod 7)）</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">足し算は、時計を進めるだけなので余りで計算できそうです。掛け算も、余りだけで計算していいんですか？ たとえば 17×23 を 5 で割った余りを、17≡2 と 23≡3 から 2×3＝6≡1 と計算していいのか……実際に計算すると、17×23＝391＝5×78＋1 で、余り 1。合っています。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">なぜ合うのかも説明できるよ。17＝5×3＋2、23＝5×4＋3 と書いて、掛け算を展開してごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">(5×3＋2)(5×4＋3)＝5×3×5×4＋5×3×3＋2×5×4＋2×3。最後の 2×3 以外の項は、どれも 5 を掛けた形なので 5 の倍数です。だから余りに効くのは 2×3 だけ。余りどうしを掛ければいい、ということですね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。足し算・引き算・掛け算は、途中で何度余りに直しても答えは変わらない。じつは、この道具はもう使っているんだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">あ、STAGE2 で「奇数の2乗を 4 で割ると 1 余る」と計算しました。あれは mod 4 の計算です。奇数≡1 か 3 (mod 4) で、1²＝1、3²＝9≡1。偶数は 0 か 2 で、0²＝0、2²＝4≡0。どんな平方数も mod 4 で 0 か 1 になります。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">それを使うと、こんなことが言える。<strong>4 で割って 3 余る数は、2つの平方数の和にならない</strong>。理由は？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">平方数は mod 4 で 0 か 1 なので、2つ足すと 0, 1, 2 のどれかで、3 にはなれません。だから 3, 7, 11, 15, … は、2つの平方数の和になりません。調べなくても、無限にある数を一度に「ない」と言えるんですね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">それが mod の力だ。式を mod p で見て、余りの世界で解がなければ、本物の整数の世界にも解はない。整数の解があれば、その余りが余りの世界の解になるはずだからね。では、フェルマーの式にも使ってみよう。n＝3、mod 7 で、まず 0〜6 の3乗を 7 で割った余りを全部求めてごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">0³＝0、1³＝1、2³＝8≡1、3³＝27≡6、4³＝64≡1、5³＝125≡6、6³＝216≡6。3乗の余りは <strong>0, 1, 6</strong> の3種類しかありません。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">x, y, z がどれも 7 の倍数でないとしたら、x³＋y³≡z³ (mod 7) は成り立つかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">7 の倍数でなければ、3乗は 1 か 6 です。x³＋y³ は 1＋1＝2、1＋6＝7≡0、6＋6＝12≡5 のどれかで、1 にも 6 にもなりません。だから成り立ちません。……x³＋y³＝z³ に解があったとしたら、<strong>x, y, z のどれかは 7 の倍数</strong>でなければいけない、ということですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。ソフィー・ジェルマンが調べたのは、まさにこういう性質だった。mod で調べると、解の性質がいろいろ分かる。では、mod をうまく選べば「解は1つもない」まで言えるかというと、そうはいかない。xⁿ＋yⁿ≡zⁿ (mod p) には、<strong>どんな p でも必ず解がある</strong>んだ。たとえば n が奇数なら、1ⁿ＋(−1)ⁿ＝0ⁿ は普通の整数の式としてちゃんと成り立つ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">1−1＝0 ですね。整数の式として正しいので、どの mod p で見ても正しい。でも、−1 は自然数ではないし、0 も自然数ではありません。……余りの世界では、−1 は p−1 と同じ数になってしまうし、0 と p の倍数の区別もつきません。だから mod p では、「自然数の解」と「−1 や 0 を使った解」を見分けられない、ということですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そういうことだ。さらに、1916年にシューアという数学者が、p が十分大きければ x, y, z のどれも p の倍数でない解まで必ずあることを示した。mod 7 では「どれかは 7 の倍数」と言えたけれど、大きな p では、それすら言えなくなる。たとえば n＝3、p＝19 なら、どれも 19 の倍数でない解が 324 組もある。たとえば 1³＋4³＝65＝19×3＋8、2³＝8 だから、<strong>1³＋4³≡2³ (mod 19)</strong> だ。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<div class="sim-controls">
+          <label>n＝<select id="sel-n"><option>3</option><option>5</option><option>7</option></select></label>
+          <label>p＝<select id="sel-p"></select></label>
+        </div>
+        <div class="table-scroll"><table class="num-table" id="tb-pow"></table></div>
+        <div class="readout" id="ro-pow"></div>
+        <div class="diagram-caption"><strong>xⁿ＋yⁿ≡zⁿ (mod p) の解を数えるツール</strong>。表は 1〜p−1 の n 乗を p で割った余り。下の数は、x, y, z がどれも p の倍数でない（1〜p−1 の）組のうち、式をみたすものの個数。n＝3 なら p＝7, 13 で 0 個だが、p＝19 や 31 では解が見つかる</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">本物の整数では 1＋64＝65 で、8 とは全然違うのに、余りの世界では成り立ってしまうんですね。mod で調べるだけでは、フェルマーの最終定理は証明できない……。それなら、mod は後半の旅で何の役に立つんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">使い方を変えるんだ。「解があるかないか」を調べるのではなく、<strong>ある式を、素数 p ごとに mod p で見て、解が何個あるかを数える</strong>。p＝2, 3, 5, 7, 11, … と数えていくと、式ごとに数の列ができる。この列が、その式の<strong>指紋</strong>のような役割を果たす。後半で主役になるのは、この指紋なんだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">p が素数でないといけない理由はあるんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">mod p で p が素数だと、余りの世界でも<strong>割り算</strong>ができる。たとえば mod 7 では 3×5＝15≡1 だから、「1÷3」の答えは 5 だと考えられる。0 以外のどの数にも、掛けると 1 になる相手がいるんだ。mod 12 だと、2 に何を掛けても偶数で、1 にはならない。p が素数のとき、0〜p−1 の p 個の数だけで、普通の数と同じように四則計算ができる小さな世界になる。次のステージでは、いよいよ後半の主役の1つ、<strong>楕円曲線</strong>が登場する。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">mod p の計算：整数を p で割った余りだけで計算する。<span class="nw">a≡b (mod p)</span> ⇔ a と b の余りが等しい ⇔ a−b が p の倍数</span>
+        <span class="step">足し算・引き算・掛け算は、途中で余りに直しても答えが変わらない（p の倍数の項は余りに効かない）</span>
+        <span class="step">平方数は mod 4 で 0 か 1 → 4 で割って 3 余る数は2つの平方数の和にならない。余りの世界で解がなければ、整数にも解はない</span>
+        <span class="step">3乗の余りは mod 7 で 0, 1, 6 だけ → x³＋y³＝z³ の解があれば、x, y, z のどれかは 7 の倍数</span>
+        <span class="step">ただし xⁿ＋yⁿ≡zⁿ (mod p) には必ず解がある（1ⁿ＋(−1)ⁿ＝0ⁿ、大きな p ではシューアの定理）。mod だけでは証明できない</span>
+        <span class="step">後半の使い方：式の解を素数 p ごとに mod p で数え、その数の列を式の「指紋」にする。p が素数なら余りの世界で割り算もできる</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. 17×23 を 5 で割った余りは？（17≡2、23≡3 (mod 5) を使ってよい）</p>
+        <div class="choice-list">
+          <button class="choice-btn">3</button>
+          <button class="choice-btn">1</button>
+          <button class="choice-btn">4</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 余りどうしを掛けて 2×3＝6≡1 (mod 5)。実際 17×23＝391＝5×78＋1。5 の倍数の項は余りに効かないので、余りだけで計算してよい。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. 4 で割って 3 余る数（3, 7, 11, …）が、2つの平方数の和にならない理由は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">平方数は mod 4 で 0 か 1 なので、2つの和は 0, 1, 2 にしかならないから</button>
+          <button class="choice-btn">3 は素数だから</button>
+          <button class="choice-btn">平方数はすべて 4 の倍数だから</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 奇数の2乗は 4 で割って 1 余り、偶数の2乗は 4 で割り切れる。平方数2つの和の余りは 0, 1, 2 のどれかで、3 にはなれない。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. mod p の計算だけでは、フェルマーの最終定理を証明しきれない理由は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">mod p では掛け算ができないから</button>
+          <button class="choice-btn">素数 p が無限にあるから</button>
+          <button class="choice-btn">xⁿ＋yⁿ≡zⁿ (mod p) にはどの p でも解があり、自然数の解とそうでない解を余りの世界では見分けられないから</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ n が奇数なら 1ⁿ＋(−1)ⁿ＝0ⁿ がどの mod p でも成り立つ。余りの世界では −1 と p−1、0 と p の倍数の区別がつかない。大きな p では、どれも p の倍数でない解まである（シューア）。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← トップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="js/progress.js?v=20261003a"></script>
+<script src="js/fermat.js?v=20261003a"></script>
+<script>FQ.initStagePage(4);</script>
+<script>
+/* mod 7 の時計 */
+(function(){
+  var svg=document.getElementById('svg-clock'), NS='http://www.w3.org/2000/svg';
+  function el(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e;}
+  var cx=150,cy=125,R=82,p=7;
+  el('circle',{cx:cx,cy:cy,r:R,fill:'#f4faf7',stroke:'#41846b','stroke-width':2});
+  for(var k=0;k<p;k++){
+    var a=Math.PI/2-2*Math.PI*k/p, x=cx+R*Math.cos(a), y=cy-R*Math.sin(a);
+    el('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:13,fill:'#fff',stroke:'#41846b','stroke-width':1.6});
+    el('text',{x:x.toFixed(1),y:(y+4.5).toFixed(1),'text-anchor':'middle','font-size':13,'font-weight':900,fill:'#2e5f4d'},k);
+  }
+  function tag(k,label,dx,col){
+    var a=Math.PI/2-2*Math.PI*k/p, x=cx+(R+34)*Math.cos(a)+dx, y=cy-(R+34)*Math.sin(a)+4;
+    el('text',{x:x.toFixed(1),y:y.toFixed(1),'text-anchor':'middle','font-size':11.5,'font-weight':900,fill:col},label);
+  }
+  tag(3,'10, 17, …',8,'#9a6a1c'); tag(6,'−1, 13, …',-8,'#c8433f');
+  el('text',{x:cx,y:cy+5,'text-anchor':'middle','font-size':14,'font-weight':900,fill:'#6b837a'},'mod 7');
+})();
+
+/* x^n + y^n ≡ z^n (mod p) を数える */
+(function(){
+  var selN=document.getElementById('sel-n'), selP=document.getElementById('sel-p'), tb=document.getElementById('tb-pow'), ro=document.getElementById('ro-pow');
+  FL.primes(43).filter(function(p){return p>2;}).forEach(function(p){var o=document.createElement('option');o.textContent=p;if(p===7)o.selected=true;selP.appendChild(o);});
+  function pw(x,n,p){var r=1;for(var i=0;i<n;i++)r=r*x%p;return r;}
+  function run(){
+    var n=+selN.value, p=+selP.value, pows=[], set={};
+    var h1='<tr><th>x</th>', h2='<tr><th>xⁿ mod p</th>';
+    for(var x=1;x<p;x++){var v=pw(x,n,p);pows.push(v);set[v]=(set[v]||0)+1;h1+='<td>'+x+'</td>';h2+='<td>'+v+'</td>';}
+    tb.innerHTML=h1+'</tr>'+h2+'</tr>';
+    var cnt=0, ex=null;
+    for(var i=0;i<p-1;i++) for(var j=0;j<p-1;j++){var s=(pows[i]+pows[j])%p; if(set[s]){cnt+=set[s]; if(!ex){ for(var z=1;z<p;z++) if(pows[z-1]===s){ex=[i+1,j+1,z];break;} }}}
+    var kinds=Object.keys(set).map(Number).sort(function(a,b){return a-b;});
+    ro.innerHTML='<span>n 乗の余り（0 以外）：<b>'+kinds.join(', ')+'</b></span><span>どれも p の倍数でない解：<b class="'+(cnt?'ok':'ng')+'">'+cnt+' 組</b></span>'+(ex?'<span>例：'+ex[0]+'<sup>'+n+'</sup>＋'+ex[1]+'<sup>'+n+'</sup>≡'+ex[2]+'<sup>'+n+'</sup> (mod '+p+')</span>':'');
+  }
+  selN.addEventListener('change',run); selP.addEventListener('change',run);
+  run();
+})();
+</script>
+</body>
+</html>

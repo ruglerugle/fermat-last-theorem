@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>STAGE2 どこまでも小さくなる解（無限降下法で n＝4 を証明） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="フェルマーの最終定理の n＝4 の場合を、フェルマー自身の無限降下法で証明する。背理法、互いに素、素因数分解と平方数、整数の直角三角形の公式を組み合わせて、x⁴＋y⁴＝z² に自然数の解がないことを中学数学で示す。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/stage2">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="STAGE2 どこまでも小さくなる解（無限降下法で n＝4 を証明） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="解が1つあれば、もっと小さい解が作れてしまう。だから解は1つもない。フェルマーが残した唯一の証明、無限降下法で n＝4 を証明する。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/stage2">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE2 どこまでも小さくなる解",
+      "description": "フェルマーの最終定理の n＝4 の場合を、フェルマー自身の無限降下法で証明する。背理法、互いに素、素因数分解と平方数、整数の直角三角形の公式を組み合わせて、x⁴＋y⁴＝z² に自然数の解がないことを中学数学で示す。",
+      "url": "https://fermat.habatakijuku.com/stage2",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 2,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "フェルマーの最終定理、証明への道",
+        "url": "https://fermat.habatakijuku.com/"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "STAGE2 どこまでも小さくなる解",
+          "item": "https://fermat.habatakijuku.com/stage2"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="design-system.css?v=20261003a">
+<style>
+
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="index.html" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">STAGE 2 ― どこまでも小さくなる解 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 9</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">STAGE 2</span><h1 class="chapter-title">どこまでも小さくなる解</h1>
+        <div class="chapter-sub">無限降下法で n＝4 を証明する</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">「解があれば、もっと小さい解が作れる」という無限降下法の考え方を理解し、x⁴＋y⁴＝z² に自然数の解がないことを、直角三角形の公式を2回使って証明しよう。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">STAGE1 では、整数の直角三角形がすべて (n²−m², 2mn, n²＋m²) の形で作れることを見たね。今日は、その公式を道具にして、<strong>n＝4 の場合</strong>を証明する。フェルマーが自分で証明を書き残したのは、じつはこの場合だけなんだ。しかも彼は、少し強いことを示している。<strong>x⁴＋y⁴＝z² をみたす自然数 x, y, z はない</strong>、というものだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">右辺が z⁴ ではなく z² なんですね。……もし x⁴＋y⁴＝z⁴ に解があったら、z⁴＝(z²)² だから、w＝z² とおくと x⁴＋y⁴＝w² の解になります。だから「x⁴＋y⁴＝z² に解がない」が言えれば、「x⁴＋y⁴＝z⁴ にも解がない」も言える、ということですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。強いほうを証明すれば、弱いほうはおまけでついてくる。証明には2つの考え方を使う。1つ目は<strong>背理法</strong>だ。「解はない」と言いたいときに、わざと「解がある」と仮定して話を進める。そこから、どう考えてもありえないこと（矛盾）が出てきたら、最初の仮定がまちがっていた、つまり「解はない」と結論できる。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">わざと逆を仮定するんですね。2つ目は何ですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">2つ目が、フェルマーが<strong>無限降下法</strong>と名づけた方法だ。こういう筋書きになる。「もし解 (x, y, z) が1つあったら、それを材料にして、<strong>z がもっと小さい別の解</strong>が必ず作れる」。これが証明できたとしよう。すると何が起きるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">解が1つあれば、もっと小さい解ができて、その解からさらに小さい解ができて……どこまでも続きます。z は自然数なので、z₁＞z₂＞z₃＞… と小さくなり続けても、1 より下には行けません。自然数が無限に小さくなり続けることはできないので、矛盾です。だから最初の「解がある」がまちがっていた、ということですか？</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<svg viewBox="0 0 400 210" role="img" aria-label="無限降下法の階段。解があると仮定すると、zがより小さい解が次々に作れて階段を下りていくが、自然数には1という底があるので、無限に下り続けることはできない">
+          <defs><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9a6a1c"/></marker></defs>
+          <rect x="16" y="182" width="368" height="14" fill="#e6e0d6"/>
+          <text x="200" y="193" text-anchor="middle" font-size="10.5" font-weight="800" fill="#6b837a">自然数の底（1 より小さい自然数はない）</text>
+          <g font-size="12" font-weight="900">
+            <rect x="24" y="30" width="62" height="152" fill="#cfe7dc" stroke="#41846b"/><text x="55" y="22" text-anchor="middle" fill="#2e5f4d">解 z₁</text>
+            <rect x="104" y="66" width="62" height="116" fill="#cfe7dc" stroke="#41846b"/><text x="135" y="58" text-anchor="middle" fill="#2e5f4d">解 z₂</text>
+            <rect x="184" y="100" width="62" height="82" fill="#cfe7dc" stroke="#41846b"/><text x="215" y="92" text-anchor="middle" fill="#2e5f4d">解 z₃</text>
+            <rect x="264" y="130" width="62" height="52" fill="#cfe7dc" stroke="#41846b"/><text x="295" y="122" text-anchor="middle" fill="#2e5f4d">解 z₄</text>
+            <text x="356" y="160" text-anchor="middle" fill="#c8433f" font-size="20">…?</text>
+          </g>
+          <path d="M88 44 Q100 46 106 62" fill="none" stroke="#9a6a1c" stroke-width="2" marker-end="url(#ar2)"/>
+          <path d="M168 80 Q180 82 186 96" fill="none" stroke="#9a6a1c" stroke-width="2" marker-end="url(#ar2)"/>
+          <path d="M248 114 Q260 116 266 126" fill="none" stroke="#9a6a1c" stroke-width="2" marker-end="url(#ar2)"/>
+          <path d="M328 142 Q338 144 342 152" fill="none" stroke="#9a6a1c" stroke-width="2" marker-end="url(#ar2)"/>
+        </svg>
+        <div class="diagram-caption"><strong>無限降下法</strong>。解が1つあれば、z がより小さい解を作る「降下の手順」を何度でも使える。けれど自然数には底があるので、無限に下り続けることはできない。だから最初の解は存在しない</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。あとは「もっと小さい解を作る手順」を実際に組み立てればいい。そのために道具を2つ用意しよう。1つ目は言葉だ。2つの自然数が、1 以外に共通の約数をもたないとき、<strong>互いに素</strong>という。たとえば 8 と 15 は互いに素、6 と 15 は 3 で割れるから互いに素ではない。STAGE1 の公式は、互いに素まで気にして言い直すと、こうなる。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">a²＋b²＝c² で、a と b が互いに素なら、a と b のどちらか一方だけが偶数</span>
+        <span class="step">偶数のほうを b とすると、互いに素で、片方が偶数・片方が奇数の自然数 m, n（n＞m）を使って<br class="wbr"><span class="nw">a＝n²−m²</span>、<span class="nw">b＝2mn</span>、<span class="nw">c＝n²＋m²</span> と書ける</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">後半は STAGE1 の公式で、t＝m/n を約分した分数にしておくということですね。前半の「どちらか一方だけが偶数」はなぜですか？ 両方偶数なら 2 が共通の約数になるので、互いに素ではありません。でも、両方奇数の場合は……？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">奇数は 2k＋1 と書けるね。その2乗を展開して、4 で割った余りを調べてごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">(2k＋1)²＝4k²＋4k＋1 なので、4 で割ると 1 余ります。両方奇数なら a²＋b² は 4 で割って 2 余る数です。一方、a²＋b² は偶数なので c も偶数で、c＝2j なら c²＝4j² は 4 で割り切れます。4 で割って 2 余る数と、4 で割り切れる数が等しいはずはないので、両方奇数にはなれません。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。残りの細かい確認（公式の m, n が互いに素で、片方が偶数になること）は、同じような約数の議論でできるから省こう。2つ目の道具は、<strong>素因数分解</strong>を使った事実だ。自然数は、素数の掛け算にただ1通りに分解できる。12＝2×2×3 のようにね。では、<strong>平方数</strong>（ある自然数の2乗）を素因数分解すると、どんな特徴があるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">k² は k×k だから、k の素因数分解を2回並べたものになります。たとえば 12²＝(2×2×3)×(2×2×3) で、2 が4個、3 が2個。どの素数も<strong>偶数個ずつ</strong>現れます。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そこから、次のことが言える。<strong>互いに素な自然数 p と q を掛けて平方数になったら、p も q もそれぞれ平方数</strong>。理由を説明できるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">p×q は平方数なので、素因数分解すると、どの素数も偶数個ずつです。p と q は互いに素なので、共通の素数をもちません。だから、ある素数は p か q のどちらか一方にしか入っていなくて、その素数の偶数個は全部その片方に入っています。すると p も q も、どの素数も偶数個ずつの数になるので、どちらも平方数です。3つの数でも、どの2つも互いに素なら同じことが言えます。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">これで道具がそろった。いよいよ降下の手順だ。x⁴＋y⁴＝z² をみたす自然数があると仮定する。まず、x と y に共通の素因数 d があったら、両辺を d⁴ で割って小さい解に取りかえられるから、はじめから <strong>x と y は互いに素</strong>としてよい。式を (x²)²＋(y²)²＝z² と書き直すと、何に見えるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">3辺が x², y², z の直角三角形です。x² と y² も互いに素なので、さっきの公式が使えます。どちらか一方だけが偶数なので、y² のほうを偶数とすると、<br>x²＝n²−m²、y²＝2mn、z＝n²＋m²<br>と書けます（m, n は互いに素で、片方が偶数）。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">1つ目の式 x²＝n²−m² を、移項してごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">x²＋m²＝n²。……また直角三角形です！ 3辺が x, m, n の。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。ここで公式をもう一度使う。m と n は互いに素だから、x と m も互いに素だ。どちらが偶数かを決めるために、x の偶奇を考えよう。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">y² が偶数で x と y は互いに素なので、x は奇数です。x²＋m²＝n² で、x と m のどちらか一方だけが偶数なので、m が偶数です。公式から、互いに素な r, s を使って<br>x＝s²−r²、m＝2rs、n＝s²＋r²<br>と書けます。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">材料がそろった。y²＝2mn に、m＝2rs と n＝s²＋r² を入れてごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">y²＝2×2rs×(r²＋s²)＝4rs(r²＋s²) です。y² が 4 の倍数なので、y は偶数。両辺を 4 で割ると <strong>(y/2)²＝r × s × (r²＋s²)</strong>。左辺は平方数です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">右辺の3つの数 r, s, r²＋s² は、どの2つも互いに素なんだ。r と s は互いに素。r²＋s² は n のことで、n は m＝2rs と互いに素だったから、r とも s とも共通の約数をもたない。さあ、2つ目の道具が使えるね。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">互いに素な3つの数を掛けて平方数になったので、3つともそれぞれ平方数です。r＝u²、s＝v²、r²＋s²＝w² と書けます。r²＋s²＝w² に入れると、(u²)²＋(v²)²＝w²、つまり<br><strong>u⁴＋v⁴＝w²</strong>。<br>最初と同じ形の式の、新しい解 (u, v, w) が出てきました！</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">最後に大きさを比べよう。新しい解の w は、元の解の z と比べてどうかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">w は自然数なので w≦w² です。w²＝r²＋s²＝n で、n≦n²＜n²＋m²＝z。だから <strong>w＜z</strong>。新しい解は、元の解より必ず小さくなります。これで「解が1つあれば、もっと小さい解が作れる」が言えたので、無限降下法で、x⁴＋y⁴＝z² に自然数の解はありません。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">仮定：x⁴＋y⁴＝z²（x, y は互いに素）</span>
+        <span class="step">(x²)²＋(y²)²＝z² → <span class="nw">x²＝n²−m²</span>、<span class="nw">y²＝2mn</span>、<span class="nw">z＝n²＋m²</span></span>
+        <span class="step">x²＋m²＝n² → <span class="nw">x＝s²−r²</span>、<span class="nw">m＝2rs</span>、<span class="nw">n＝s²＋r²</span></span>
+        <span class="step"><span class="nw">(y/2)²＝r·s·(r²＋s²)</span>、3つは互いに素 → <span class="nw">r＝u²</span>、<span class="nw">s＝v²</span>、<span class="nw">r²＋s²＝w²</span></span>
+        <span class="step"><span class="nw">u⁴＋v⁴＝w²</span> で <span class="nw">w≦n＜z</span>。より小さい解ができる → 無限降下 → 矛盾</span>
+      </div>
+
+      <div class="diagram-box">
+<div class="sim-controls">
+          <label>x, y を <input type="number" id="in-max" min="10" max="1000" step="10" value="300"> まで調べる</label>
+          <button class="btn btn-primary" id="btn-search" type="button">探す</button>
+        </div>
+        <div class="readout" id="ro-search"></div>
+        <div class="diagram-caption"><strong>x⁴＋y⁴ が平方数になる組を探すツール</strong>。x≦y の組をすべて調べ、x⁴＋y⁴ がちょうど平方数になる組を数える（巨大な数も BigInt で正確に計算する）。証明のとおり、ちょうど平方数になる組は1つも見つからない</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">n＝4 が言えたら、n＝8 もすぐです。x⁸＝(x²)⁴ だから、もし x⁸＋y⁸＝z⁸ に解があったら、(x², y², z²) が n＝4 の解になってしまいます。n＝12 も n＝400 も、4 の倍数なら全部同じです。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。<strong>n が 4 の倍数なら、フェルマーの最終定理は成り立つ</strong>。同じ考え方で、n が 6 なら x⁶＝(x²)³ だから n＝3 に帰着する。一般に、n が奇数の素数 p で割り切れるなら、n＝p の場合に帰着できる。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">3 以上の数は、2 を何回か掛けた数なら 4, 8, 16, … で 4 の倍数ですし、そうでなければ奇数の素因数をもちます。ということは、残っているのは n が<strong>奇数の素数</strong>（3, 5, 7, 11, …）の場合だけ、ということですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。ところが、素数は無限にある。1つずつ片づけていては終わらない。次のステージでは、19世紀の数学者たちが、素数の指数にまとめて挑んだ話をしよう。ここで、きみが学んだ<strong>複素数</strong>が登場する。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">背理法：「解がある」と仮定して矛盾を導き、「解はない」と結論する</span>
+        <span class="step">無限降下法：解が1つあれば、より小さい解が必ず作れる → 自然数は無限に小さくなれない → 解はない</span>
+        <span class="step">互いに素＝1 以外に共通の約数をもたない。平方数はどの素数も偶数個ずつ現れる → <span class="nw">互いに素な数の積が平方数</span>なら、それぞれ平方数</span>
+        <span class="step">x⁴＋y⁴＝z² に直角三角形の公式を2回使うと、新しい解 <span class="nw">u⁴＋v⁴＝w²</span>（w＜z）ができる → n＝4 は解なし</span>
+        <span class="step">n が 4 の倍数なら n＝4 に、奇数の素数 p で割り切れるなら n＝p に帰着。残るのは<strong>奇数の素数の指数</strong>だけ</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. 無限降下法の筋書きとして正しいものは？</p>
+        <div class="choice-list">
+          <button class="choice-btn">解が1つあれば、より大きい解が必ず作れる。だから解は無限にある</button>
+          <button class="choice-btn">小さい数から順に全部調べて、解が見つからなければ解はない</button>
+          <button class="choice-btn">解が1つあれば、より小さい解が必ず作れる。自然数は無限に小さくなれないので、解はない</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 「より小さい解を作る手順」を何度でも使えると、自然数が無限に小さくなり続けることになってしまう。この矛盾から、最初の解がなかったと結論する。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. 互いに素な自然数 p, q の積 p×q が平方数のとき、言えることは？</p>
+        <div class="choice-list">
+          <button class="choice-btn">p も q もそれぞれ平方数</button>
+          <button class="choice-btn">p か q のどちらかが 1</button>
+          <button class="choice-btn">p と q は等しい</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 平方数はどの素数も偶数個ずつ含む。p と q は共通の素数をもたないので、それぞれの素数の偶数個がまるごと p か q の片方に入り、どちらも平方数になる。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. n＝4 の場合が証明できたことで、フェルマーの最終定理が成り立つと分かる n は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">5, 6, 7 など、4 より大きい数すべて</button>
+          <button class="choice-btn">8, 12, 400 など、4 の倍数すべて</button>
+          <button class="choice-btn">3 と 4 だけ</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ n＝4k なら xⁿ＝(xᵏ)⁴ なので、解があれば n＝4 の解ができてしまう。残るのは奇数の素数の指数で、それが次のステージの主題。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← トップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="js/progress.js?v=20261003a"></script>
+<script src="js/fermat.js?v=20261003a"></script>
+<script>FQ.initStagePage(2);</script>
+<script>
+/* x^4+y^4 が平方数になる組を探す */
+(function(){
+  var inMax=document.getElementById('in-max'), btn=document.getElementById('btn-search'), ro=document.getElementById('ro-search');
+  function isqrt(n){ if(n<2n) return n; var x=BigInt(Math.floor(Math.sqrt(Number(n)))); while(x*x>n) x--; while((x+1n)*(x+1n)<=n) x++; return x; }
+  function run(){
+    var M=Math.max(10,Math.min(1000,parseInt(inMax.value,10)||300)); inMax.value=M;
+    var hits=0, pairs=0;
+    for(var x=1;x<=M;x++){
+      var x4=BigInt(x)**4n;
+      for(var y=x;y<=M;y++){
+        var s=x4+BigInt(y)**4n, r=isqrt(s); pairs++;
+        if(r*r===s) hits++;
+          }
+    }
+    ro.innerHTML='<span>調べた組 <b>'+pairs.toLocaleString()+'</b></span><span>ちょうど平方数になった組 <b class="'+(hits?'ok':'ng')+'">'+hits+'</b></span>';
+  }
+  btn.addEventListener('click',run);
+  run();
+})();
+</script>
+</body>
+</html>

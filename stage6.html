@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>STAGE6 曲線の指紋（楕円曲線を mod p で数える） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="楕円曲線 y²＋y＝x³−x² を mod p で見て、解の個数を数える。期待される個数 p とのずれ aₚ＝p−Nₚ が、楕円曲線の「指紋」になる。p＝2, 3, 5 を手で数え、シミュレータで 97 までの aₚ の列を作る。ハッセの定理と悪い素数・導手も中学生向けに解説。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/stage6">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="STAGE6 曲線の指紋（楕円曲線を mod p で数える） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="楕円曲線を素数 p ごとに mod p で見て、点を数える。その数のずれ aₚ の列が、曲線の指紋になる。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/stage6">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE6 曲線の指紋",
+      "description": "楕円曲線 y²＋y＝x³−x² を mod p で見て、解の個数を数える。期待される個数 p とのずれ aₚ＝p−Nₚ が、楕円曲線の「指紋」になる。p＝2, 3, 5 を手で数え、シミュレータで 97 までの aₚ の列を作る。ハッセの定理と悪い素数・導手も中学生向けに解説。",
+      "url": "https://fermat.habatakijuku.com/stage6",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 6,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "フェルマーの最終定理、証明への道",
+        "url": "https://fermat.habatakijuku.com/"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "STAGE6 曲線の指紋",
+          "item": "https://fermat.habatakijuku.com/stage6"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="design-system.css?v=20261003a">
+<style>
+#tb-ap td.bad{background:#fbf2df;color:#9a6a1c}
+  #tb-ap td.cur{outline:2px solid #41846b;outline-offset:-2px}
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="index.html" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">STAGE 6 ― 曲線の指紋 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 9</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">STAGE 6</span><h1 class="chapter-title">曲線の指紋</h1>
+        <div class="chapter-sub">mod p で点を数えて aₚ をつくる</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">楕円曲線 y²＋y＝x³−x² の mod p での解の個数 Nₚ を p＝2, 3, 5 で数え、ずれ aₚ＝p−Nₚ を求めよう。シミュレータで 97 までの aₚ の列を作れば合格。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">STAGE4 の最後に、「式を素数 p ごとに mod p で見て、解の個数を数えると、その式の指紋ができる」と話したね。今日は、それを楕円曲線でやってみる。使うのは、この曲線だ。<br><strong>y²＋y＝x³−x²</strong></div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">y²＋y になっていて、STAGE5 の y²＝x³＋ax＋b の形とは少し違います。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">中身は同じ仲間なんだ。y＋1/2 を Y とおくと、Y²＝y²＋y＋1/4 だから、式は Y²＝x³−x²＋1/4 になる。x² の項も、x を少しずらせば消せる。ただ、そうすると分数が出てくるね。mod 2 で見たいときに 1/2 は困るから、はじめから y²＋y の形で書いておく習慣があるんだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">mod 2 では 2 が 0 と同じなので、1/2 は「0 で割る」ことになってしまう、ということですね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。では始めよう。素数 p を1つ決めて、0〜p−1 の x と y の組 (x, y) のうち、<strong>y²＋y≡x³−x² (mod p)</strong> をみたすものを数える。その個数を <strong>Nₚ</strong> と書く。まず p＝5 で数えてごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">左辺と右辺を別々に表にします。<br>右辺 x³−x²：x＝0→0、x＝1→0、x＝2→8−4＝4、x＝3→27−9＝18≡3、x＝4→64−16＝48≡3。<br>左辺 y²＋y：y＝0→0、y＝1→2、y＝2→6≡1、y＝3→12≡2、y＝4→20≡0。<br>x＝0 と x＝1 では右辺が 0 なので、左辺が 0 になる y＝0, 4 の2個ずつ。x＝2 の 4 と、x＝3, 4 の 3 は、左辺に出てこないので 0 個。合計で <strong>N₅＝4</strong> です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">よくできたね。ここで、Nₚ がだいたいどのくらいになるか考えてみよう。x を1つ決めるごとに、y はおよそ何個見つかると期待できるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">p＝5 では、左辺 y²＋y の値は 0 が2回、2 が2回、1 が1回で、3 と 4 は0回でした。値ごとに 0〜2 回とばらつきますが、5 個の y で 5 回分なので、ならすと1つの値につき1回です。右辺の値に対して y が平均1個なら、x が p 通りなので、Nₚ はだいたい <strong>p 個</strong>、ということですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。だから、実際の個数が目安の p からどれだけずれたかを、次のように測る。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step"><strong>aₚ＝p−Nₚ</strong>（Nₚ は mod p での解 (x, y) の個数）</span>
+        <span class="step">目安の p より点が少なければ aₚ は正、多ければ負</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">p＝5 なら a₅＝5−4＝<strong>1</strong> です。p＝2 と p＝3 もやってみます。<br>p＝2：右辺は x＝0→0、x＝1→0。左辺は y＝0→0、y＝1→2≡0。どの x でも y が2個なので N₂＝4、a₂＝2−4＝<strong>−2</strong>。<br>p＝3：右辺は x＝0→0、x＝1→0、x＝2→8−4＝4≡1。左辺は y＝0→0、y＝1→2、y＝2→6≡0。x＝0, 1 で2個ずつ、x＝2 は左辺に 1 が出てこないので 0 個。N₃＝4、a₃＝3−4＝<strong>−1</strong>。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">ここからは計算をコンピュータに任せよう。97 までの素数について aₚ を計算すると、こうなる。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">p：　2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, …, 97</span>
+        <span class="step">aₚ：−2, −1, 1, −2, 1, 4, −2, 0, −1, 0, 7, 3, −8, −6, 8, …, −7</span>
+      </div>
+
+      <div class="diagram-box">
+<div class="cv-wrap"><canvas id="cv-grid" aria-label="mod p の格子。横がx、縦がyで、y²＋y≡x³−x² (mod p) をみたす点を強調している"></canvas></div>
+        <div class="sim-controls">
+          <label>p＝<select id="sel-p6"></select></label>
+          <button class="btn" type="button" id="btn-all6">97 まで全部計算する</button>
+        </div>
+        <div class="readout" id="ro-grid"></div>
+        <div class="table-scroll"><table class="num-table" id="tb-ap"></table></div>
+        <div class="diagram-caption"><strong>mod p で点を数えるシミュレータ</strong>（曲線 y²＋y＝x³−x²）。0〜p−1 の格子の上で、式をみたす (x, y) を緑の点で示す。点の数が Nₚ、ずれが aₚ＝p−Nₚ。点は y＝(p−1)/2 の高さを軸に上下対称に並ぶ（y を p−1−y に変えても y²＋y の余りは変わらない）</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">正になったり負になったり、規則が見えません。でも、どれも p に比べると小さいです。p＝97 でも −7 です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">ずれが小さいことには理由がある。1933年にドイツのハッセが、どんな楕円曲線でも <strong>|aₚ|≦2√p</strong>、つまりずれは p の平方根の2倍を超えないことを証明した。p＝97 なら 2√97≒19.7 だから、aₚ は −19 から 19 の間に収まる。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">ずれが p の平方根くらいに収まるなら、Nₚ はどの素数でも p に近いんですね。どの素数でも、同じように数えていいんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">ほとんどの素数ではそうだ。ただ、この曲線には特別な素数が1つある。<strong>11</strong> だ。mod 11 で見ると、この曲線は<strong>自分自身と交わる点</strong>をもってしまう。STAGE5 で、そういう形は楕円曲線に含めないと言ったね。普通の数の世界ではきれいな楕円曲線なのに、mod 11 の世界でだけ形がこわれるんだ。こういう素数を、その曲線の<strong>悪い素数</strong>という。この曲線の悪い素数は 11 だけだ。悪い素数からは、<strong>導手（どうしゅ）</strong>と呼ばれる数が決まる。悪い素数の掛け算でできた数で、この曲線の導手は <strong>11</strong>。導手は、次のステージで大事な役をする。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">曲線ごとに、悪い素数と導手と、aₚ の列が決まるんですね。この列は、曲線の式を知っていれば計算できます。逆に、列から曲線について何か分かるんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">いい質問だね。じつは、aₚ の列には、その曲線の有理点がどれくらいたくさんあるかといった、深い情報まで詰まっていると考えられている。けれど、今日いちばん見てほしいのは別のことだ。この一見でたらめな列 −2, −1, 1, −2, 1, 4, −2, 0, … を、<strong>楕円曲線とはまったく関係のない世界から取り出す方法</strong>がある。次のステージで、その世界をのぞいてみよう。この表は、そこでもう一度使う。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">y²＋y＝x³−x² は y＋1/2 を Y とおくと Y²＝x³−x²＋1/4 の形。mod 2 でも扱えるよう y²＋y の形で書く</span>
+        <span class="step">Nₚ＝mod p で y²＋y≡x³−x² をみたす (x, y) の個数。目安は p 個</span>
+        <span class="step"><strong>aₚ＝p−Nₚ</strong>：a₂＝−2、a₃＝−1、a₅＝1、a₇＝−2、a₁₁＝1、a₁₃＝4、…</span>
+        <span class="step">ハッセの定理（1933年）：<span class="nw">|aₚ|≦2√p</span></span>
+        <span class="step">悪い素数＝mod p で曲線の形がこわれる素数（この曲線では 11 だけ）。悪い素数から決まる導手は 11</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. aₚ の定義として正しいものは？</p>
+        <div class="choice-list">
+          <button class="choice-btn">p から、mod p での解 (x, y) の個数を引いた数</button>
+          <button class="choice-btn">mod p での解 (x, y) の個数そのもの</button>
+          <button class="choice-btn">曲線の式の係数を p で割った余り</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ x を1つ決めると y は平均1個見つかるので、解の個数の目安は p 個。実際の個数 Nₚ とのずれ aₚ＝p−Nₚ が、曲線の指紋になる。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. ある素数 p で、ある楕円曲線の mod p での解がちょうど p＋3 個あった。aₚ は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">3</button>
+          <button class="choice-btn">−3</button>
+          <button class="choice-btn">p＋3</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ aₚ＝p−Nₚ＝p−(p＋3)＝−3。点が目安より多いと aₚ は負になる。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. ハッセの定理によると、p＝97 のとき aₚ が取りうる範囲は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">−97 から 97 の間</button>
+          <button class="choice-btn">0 から 97 の間</button>
+          <button class="choice-btn">およそ −19.7 から 19.7 の間</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ |aₚ|≦2√p で、2√97≒19.7。p が大きくなっても、ずれは p に比べてずっと小さい。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← トップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="js/progress.js?v=20261003a"></script>
+<script src="js/fermat.js?v=20261003a"></script>
+<script>FQ.initStagePage(6);</script>
+<script>
+/* mod p で点を数える */
+(function(){
+  var sel=document.getElementById('sel-p6'), all=document.getElementById('btn-all6'), ro=document.getElementById('ro-grid'), tb=document.getElementById('tb-ap');
+  var PR=FL.primes(97), done={};
+  PR.forEach(function(p){var o=document.createElement('option');o.textContent=p;if(p===5)o.selected=true;sel.appendChild(o);});
+  function count(p){ var N=0, pts=[]; for(var x=0;x<p;x++){ var r=FL.mod(x*x*x-x*x,p); for(var y=0;y<p;y++){ if(FL.mod(y*y+y,p)===r){N++;pts.push([x,y]);} } } return {N:N,pts:pts}; }
+  function table(cur){
+    var h1='<tr><th>p</th>', h2='<tr><th>aₚ</th>';
+    PR.forEach(function(p){ var c=(p===cur?' cur':'')+(p===11?' bad':''); h1+='<td class="'+c+'">'+p+(p===11?'*':'')+'</td>'; h2+='<td class="'+c+'">'+(done[p]===undefined?'':FL.signed(done[p]))+'</td>'; });
+    tb.innerHTML=h1+'</tr>'+h2+'</tr>';
+  }
+  var st=FL.canvas('cv-grid',1,draw);
+  function draw(st){
+    var ctx=st.ctx, p=+sel.value, res=count(p); done[p]=p-res.N;
+    ctx.clearRect(0,0,st.W,st.H); ctx.fillStyle=FL.C.paper; ctx.fillRect(0,0,st.W,st.H);
+    var pad=26, cell=(st.W-pad-8)/p, X=function(x){return pad+(x+0.5)*cell;}, Y=function(y){return st.H-pad-(y+0.5)*cell;};
+    if(p<=31){ ctx.strokeStyle=FL.C.grid; ctx.lineWidth=1; for(var i=0;i<=p;i++){ ctx.beginPath(); ctx.moveTo(pad+i*cell,st.H-pad); ctx.lineTo(pad+i*cell,st.H-pad-p*cell); ctx.stroke(); ctx.beginPath(); ctx.moveTo(pad,st.H-pad-i*cell); ctx.lineTo(pad+p*cell,st.H-pad-i*cell); ctx.stroke(); } }
+    else { ctx.strokeStyle=FL.C.axis; ctx.strokeRect(pad,st.H-pad-p*cell,p*cell,p*cell); }
+    var step=p<=13?1:(p<=31?5:10);
+    for(var t=0;t<p;t+=step){ FL.text(ctx,String(t),X(t),st.H-pad+14,{size:10,color:FL.C.muted,align:'center'}); FL.text(ctx,String(t),pad-5,Y(t)+4,{size:10,color:FL.C.muted,align:'right'}); }
+    FL.text(ctx,'x',st.W-6,st.H-6,{color:FL.C.muted,align:'right'}); FL.text(ctx,'y',6,14,{color:FL.C.muted});
+    var r=Math.max(2,Math.min(7,cell*0.36));
+    res.pts.forEach(function(q){ FL.dot(ctx,X(q[0]),Y(q[1]),r,FL.C.theme,p<=31?'#fff':null); });
+    var a=p-res.N, bound=2*Math.sqrt(p);
+    ro.innerHTML='<span>Nₚ＝<b>'+res.N+'</b></span><span>aₚ＝'+p+'−'+res.N+'＝<b>'+FL.signed(a)+'</b></span><span>2√p≒'+bound.toFixed(1)+'</span>'+(p===11?'<span class="ng">11 はこの曲線の悪い素数</span>':'');
+    table(p);
+  }
+  sel.addEventListener('change',function(){st.redraw();});
+  all.addEventListener('click',function(){ PR.forEach(function(p){ done[p]=p-count(p).N; }); table(+sel.value); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>フェルマーの最終定理、証明への道 ― 中学数学からたどるフェルマーの最終定理の証明、全9ステージの無料学習ゲーム</title>
+<meta name="description" content="フェルマーの最終定理の証明を、中学数学から一歩ずつ理解する全9ステージの無料学習サイト。整数の直角三角形、無限降下法、素因数分解の一意性、mod、楕円曲線、モジュラー形式と谷山–志村予想、フライ曲線、ワイルズの証明まで。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="フェルマーの最終定理、証明への道 ― 中学数学からたどるフェルマーの最終定理の証明、全9ステージの無料学習ゲーム">
+<meta property="og:description" content="n＝2 なら解は無数にあるのに、n＝3 からは1つもない。358年かかった証明への道を、中学数学から自分の手で計算しながらたどる。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="design-system.css?v=20261003a">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "フェルマーの最終定理、証明への道",
+  "alternateName": "FERMAT QUEST",
+  "description": "フェルマーの最終定理（n≧3 のとき xⁿ＋yⁿ＝zⁿ に自然数の解はない）の証明への道を、中学数学から一歩ずつたどる全9ステージの無料学習サイト。整数の直角三角形、無限降下法による n＝4 の証明、ラメとクンマー、mod の計算、楕円曲線、モジュラー形式と谷山–志村予想、フライ曲線とリベットの定理、そしてワイルズの証明まで。",
+  "url": "https://fermat.habatakijuku.com/",
+  "inLanguage": "ja",
+  "learningResourceType": "learning activity",
+  "educationalLevel": "中学生以上",
+  "teaches": "フェルマーの最終定理の証明の筋道（ピタゴラス数・無限降下法・1のp乗根と素因数分解の一意性・mod の計算・楕円曲線と有理点・mod p での点の数え上げ・モジュラー形式・谷山–志村予想・フライ曲線・リベットの定理・ワイルズの証明）",
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Person",
+    "name": "ruglerugle"
+  },
+  "hasPart": [
+    {
+      "@type": "LearningResource",
+      "position": 1,
+      "name": "STAGE1 余白の書き込み",
+      "url": "https://fermat.habatakijuku.com/stage1"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 2,
+      "name": "STAGE2 どこまでも小さくなる解",
+      "url": "https://fermat.habatakijuku.com/stage2"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 3,
+      "name": "STAGE3 こわれた素因数分解",
+      "url": "https://fermat.habatakijuku.com/stage3"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 4,
+      "name": "STAGE4 時計の算術",
+      "url": "https://fermat.habatakijuku.com/stage4"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 5,
+      "name": "STAGE5 点を足す曲線",
+      "url": "https://fermat.habatakijuku.com/stage5"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 6,
+      "name": "STAGE6 曲線の指紋",
+      "url": "https://fermat.habatakijuku.com/stage6"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 7,
+      "name": "STAGE7 もうひとつの数列",
+      "url": "https://fermat.habatakijuku.com/stage7"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 8,
+      "name": "STAGE8 ありえない曲線",
+      "url": "https://fermat.habatakijuku.com/stage8"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 9,
+      "name": "STAGE9 屋根裏の7年間",
+      "url": "https://fermat.habatakijuku.com/stage9"
+    }
+  ]
+}
+</script>
+<style>
+  .hero-curves{width:min(100%,420px);height:auto;display:block;margin:0 auto 6px}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="サイト情報">
+    <span class="brand-badge" aria-hidden="true">📜</span>
+    <span class="brand-copy">
+      <strong>フェルマーの最終定理、証明への道</strong>
+      <small>FERMAT QUEST</small>
+    </span>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <svg class="hero-curves" id="hero-svg" viewBox="0 0 420 210" role="img" aria-label="左は x²＋y²＝1 の円で、分数の座標をもつ点が無数に並ぶ。右は x³＋y³＝1 の曲線で、分数の座標をもつ点は座標に0を含む2点しかない"></svg>
+      <h1><span class="line">余白に書けなかった証明を、</span><span class="line accent">358年後から読みにいく。</span></h1>
+      <p>xⁿ＋yⁿ＝zⁿ。n が 2 なら 3²＋4²＝5² のように解は無数にあるのに、n が 3 以上になると、自然数の解は<span class="nowrap">1組もない</span>。1637年ごろ、フェルマーが本の余白に書き残したこの主張は、1995年にワイルズが証明を完成させるまで、358年間だれにも解けなかった。このクエストでは、前半で整数の直角三角形やフェルマー自身の証明（無限降下法）を中学数学で実際に証明し、後半では楕円曲線とモジュラー形式という2つの世界の不思議な一致を、自分の手で計算して確かめながら、証明の筋道をたどる。</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="board" aria-labelledby="quest-heading">
+      <div class="board-head">
+        <div><h2 id="quest-heading">クエストを選ぼう！</h2></div>
+        <p>ステージ1から順番にクリアしよう（前のステージをクリアすると次が解放されます）。必要な数学は中学レベル。複素数は『本当はおもしろい複素数の世界』で学んだものを思い出しながら使います</p>
+      </div>
+
+      <div class="quest-grid">
+        <a class="quest-card" href="stage1.html" data-stage="1" style="--accent:#2f6f8f;--accent-bg:#e6f0f6">
+          <div class="q-top"><span class="q-num">1</span><span class="q-suit" aria-hidden="true">📜</span></div>
+          <div class="q-meta"><span class="q-tag">ピタゴラス数</span><span class="q-time">⏱ 約12分</span></div>
+          <div class="q-title">余白の書き込み</div>
+          <p class="q-desc">フェルマーが本の余白に残した主張と、358年の歴史の入口。n＝2 の解（整数の直角三角形）を、円の上の分数の点と直線の傾きから、すべて作る公式を導く。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage2.html" data-stage="2" style="--accent:#b5504a;--accent-bg:#fdefed">
+          <div class="q-top"><span class="q-num">2</span><span class="q-suit" aria-hidden="true">🪜</span></div>
+          <div class="q-meta"><span class="q-tag">無限降下法</span><span class="q-time">⏱ 約15分</span></div>
+          <div class="q-title">どこまでも小さくなる解</div>
+          <p class="q-desc">「解があれば、もっと小さい解が作れる」。フェルマー自身が残した唯一の証明で、x⁴＋y⁴＝z² に解がないことを中学数学で証明する。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage3.html" data-stage="3" style="--accent:#5b3fa6;--accent-bg:#efe9f9">
+          <div class="q-top"><span class="q-num">3</span><span class="q-suit" aria-hidden="true">🧩</span></div>
+          <div class="q-meta"><span class="q-tag">複素数と素因数分解</span><span class="q-time">⏱ 約15分</span></div>
+          <div class="q-title">こわれた素因数分解</div>
+          <p class="q-desc">1 の p 乗根で xᵖ＋yᵖ を因数分解したラメの証明と、その落とし穴。6＝2×3＝(1＋√−5)(1−√−5) が示す、分解が1通りに決まらない世界。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage4.html" data-stage="4" style="--accent:#9a6a1c;--accent-bg:#fbf2df">
+          <div class="q-top"><span class="q-num">4</span><span class="q-suit" aria-hidden="true">🕰️</span></div>
+          <div class="q-meta"><span class="q-tag">mod・合同式</span><span class="q-time">⏱ 約12分</span></div>
+          <div class="q-title">時計の算術</div>
+          <p class="q-desc">割った余りだけで計算する mod の世界。平方数の余りから「ありえない」を示し、x³＋y³＝z³ を mod 7 で調べる。その力と限界。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage5.html" data-stage="5" style="--accent:#2f8f65;--accent-bg:#eaf7ef">
+          <div class="q-top"><span class="q-num">5</span><span class="q-suit" aria-hidden="true">➰</span></div>
+          <div class="q-meta"><span class="q-tag">楕円曲線</span><span class="q-time">⏱ 約14分</span></div>
+          <div class="q-title">点を足す曲線</div>
+          <p class="q-desc">後半の主役、楕円曲線 y²＝x³＋ax＋b。2つの有理点を結ぶ直線から3つ目の有理点が生まれる仕組みと、曲線の上の「足し算」。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage6.html" data-stage="6" style="--accent:#3f5fa6;--accent-bg:#e9eef9">
+          <div class="q-top"><span class="q-num">6</span><span class="q-suit" aria-hidden="true">🔍</span></div>
+          <div class="q-meta"><span class="q-tag">mod p で点を数える</span><span class="q-time">⏱ 約12分</span></div>
+          <div class="q-title">曲線の指紋</div>
+          <p class="q-desc">楕円曲線を素数 p ごとに mod p で見て点を数える。目安の p からのずれ aₚ の列が、曲線の指紋になる。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage7.html" data-stage="7" style="--accent:#a63f6f;--accent-bg:#fbe9f1">
+          <div class="q-top"><span class="q-num">7</span><span class="q-suit" aria-hidden="true">🌀</span></div>
+          <div class="q-meta"><span class="q-tag">モジュラー形式</span><span class="q-time">⏱ 約15分</span></div>
+          <div class="q-title">もうひとつの数列</div>
+          <p class="q-desc">無限に続く掛け算を展開すると、楕円曲線の指紋がそのまま現れる。隠れた対称性をもつモジュラー形式と、谷山–志村予想。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage8.html" data-stage="8" style="--accent:#7a6a2f;--accent-bg:#f7f3e2">
+          <div class="q-top"><span class="q-num">8</span><span class="q-suit" aria-hidden="true">⚡</span></div>
+          <div class="q-meta"><span class="q-tag">フライ曲線</span><span class="q-time">⏱ 約13分</span></div>
+          <div class="q-title">ありえない曲線</div>
+          <p class="q-desc">もしフェルマーの式に解があったら、整いすぎた楕円曲線が作れてしまう。フライ曲線とリベットの定理が、2つの大問題を1本につなぐ。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage9.html" data-stage="9" style="--accent:#8a4a2a;--accent-bg:#f8ece4">
+          <div class="q-top"><span class="q-num">9</span><span class="q-suit" aria-hidden="true">🏛️</span></div>
+          <div class="q-meta"><span class="q-tag">ワイルズの証明</span><span class="q-time">⏱ 約12分</span></div>
+          <div class="q-title">屋根裏の7年間</div>
+          <p class="q-desc">10歳で出会った問題に、屋根裏で7年。mod 3 から持ち上げる作戦、1993年の講演、見つかった穴と1994年の修正。358年の旅の終わり。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="board" aria-labelledby="next-heading" style="margin-top:16px">
+      <div class="board-head">
+        <div><h2 id="next-heading">バックナンバー</h2></div>
+        <p>同じねこ博士とうさ美が案内する、姉妹サイトの学習クエスト</p>
+      </div>
+      <div class="quest-grid">
+        <a class="quest-card" href="https://complex-number.habatakijuku.com/" target="_blank" rel="noopener" style="--accent:#5b3fa6;--accent-bg:#efe9f9">
+          <div class="q-top"><span class="q-num">i</span><span class="q-suit" aria-hidden="true">🌀</span></div>
+          <div class="q-meta"><span class="q-tag">複素数</span><span class="q-time">全8ステージ</span></div>
+          <div class="q-title">本当はおもしろい複素数の世界</div>
+          <p class="q-desc">この旅の STAGE3 と STAGE7 で使った複素数の出どころ。数直線から i の誕生、回転としての掛け算、極形式、そしてオイラーの等式まで。</p>
+          <span class="q-cta">読む →</span>
+        </a>
+        <a class="quest-card" href="https://quantum-mechanics.habatakijuku.com/" target="_blank" rel="noopener" style="--accent:#1f7488;--accent-bg:#e4f2f5">
+          <div class="q-top"><span class="q-num">⚛</span><span class="q-suit" aria-hidden="true">🌌</span></div>
+          <div class="q-meta"><span class="q-tag">量子力学</span><span class="q-time">全9クエスト</span></div>
+          <div class="q-title">量子力学、冒険の書</div>
+          <p class="q-desc">二重スリットから量子コンピュータの回路作りまで、9つのクエストでたどる量子力学のシリーズマップ。ショアのアルゴリズムでは、余りの計算が活躍する。</p>
+          <span class="q-cta">読む →</span>
+        </a>
+        <a class="quest-card" href="https://rotary-engine.habatakijuku.com/" target="_blank" rel="noopener" style="--accent:#3d5f88;--accent-bg:#e9eef6">
+          <div class="q-top"><span class="q-num">⚙</span><span class="q-suit" aria-hidden="true">🍙</span></div>
+          <div class="q-meta"><span class="q-tag">作図</span><span class="q-time">全8ステージ</span></div>
+          <div class="q-title">ロータリーエンジンを作図する</div>
+          <p class="q-desc">三角おむすびのローターと繭形のハウジングを、2つの数から中学数学の式だけで描く。曲線を式で描く楽しさを味わえる。</p>
+          <span class="q-cta">読む →</span>
+        </a>
+      </div>
+    </section>
+
+    <div id="book-recommend"></div>
+  </main>
+
+  <footer>
+    <p>NO DOWNLOAD. NO REGISTRATION. JUST LEARN. &nbsp;© <span id="year"></span> ruglerugle</p>
+    <div class="footer-suits" aria-hidden="true"><span>📜</span><span>➰</span><span>🌀</span><span>🏛️</span></div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script src="js/progress.js?v=20261003a"></script>
+<script>FQ.initCoverPage();</script>
+<script>
+/* ヒーロー図 */
+(function(){
+  var svg=document.getElementById('hero-svg'), NS='http://www.w3.org/2000/svg';
+  function el(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e;}
+  function gcd(a,b){while(b){var t=a%b;a=b;b=t;}return a;}
+  var R=72, c1=[105,98], c2=[315,98], s2=R/1.1;
+  [c1,c2].forEach(function(c){ el('line',{x1:c[0]-R-14,y1:c[1],x2:c[0]+R+14,y2:c[1],stroke:'rgba(255,255,255,.25)','stroke-width':1}); el('line',{x1:c[0],y1:c[1]-R-14,x2:c[0],y2:c[1]+R+14,stroke:'rgba(255,255,255,.25)','stroke-width':1}); });
+  el('circle',{cx:c1[0],cy:c1[1],r:R,fill:'none',stroke:'#7fc0a8','stroke-width':2.2});
+  // x^3+y^3=1 の曲線（x を動かして y を求める）
+  var d='', first=true;
+  for(var i=0;i<=400;i++){ var x=-1.25+i*2.5/400, y=Math.cbrt(1-x*x*x); if(Math.abs(y)>1.25) continue; d+=(first?'M':'L')+(c2[0]+x*s2).toFixed(1)+' '+(c2[1]-y*s2).toFixed(1)+' '; first=false; }
+  el('path',{d:d,fill:'none',stroke:'#7fc0a8','stroke-width':2.2});
+  for(var n=2;n<=14;n++) for(var m=-n+1;m<n;m++){ if(gcd(Math.abs(m),n)!==1) continue; var t=m/n, x=(1-t*t)/(1+t*t), y=2*t/(1+t*t); [[x,y],[-x,y],[y,x]].forEach(function(p){ el('circle',{cx:(c1[0]+p[0]*R).toFixed(1),cy:(c1[1]-p[1]*R).toFixed(1),r:2.4,fill:'#e3bd6a'}); }); }
+  [[1,0],[0,1]].forEach(function(p){ el('circle',{cx:c2[0]+p[0]*s2,cy:c2[1]-p[1]*s2,r:3.6,fill:'#e3bd6a'}); });
+  el('text',{x:c1[0],y:202,'text-anchor':'middle','font-size':14,'font-weight':900,fill:'#fff'},'x²＋y²＝1');
+  el('text',{x:c2[0],y:202,'text-anchor':'middle','font-size':14,'font-weight':900,fill:'#fff'},'x³＋y³＝1');
+})();
+</script>
+</body>
+</html>

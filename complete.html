@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<meta name="robots" content="noindex">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>旅の記録 ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="フェルマーの最終定理の証明への道、全9ステージのクリア画面。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/complete">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="旅の記録 ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="358年の旅を振り返る。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/complete">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="design-system.css?v=20261003a">
+
+<style>
+  .hero-curves{width:min(100%,420px);height:auto;display:block;margin:0 auto 6px}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="サイト情報">
+    <a class="brand-badge" href="index.html" title="トップへ" aria-label="トップへ" style="text-decoration:none">📜</a>
+    <span class="brand-copy">
+      <strong>フェルマーの最終定理、証明への道</strong>
+      <small>FERMAT QUEST</small>
+    </span>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <h1><span class="line">余白の向こう側まで、たどりついた。</span></h1>
+      <p>円の上の分数の点、どこまでも小さくなる解、こわれた素因数分解、時計の算術、点を足す曲線、曲線の指紋、隠れた対称性をもつ関数、ありえない曲線、そして屋根裏の7年間。きみは、フェルマーの短い主張から、楕円曲線とモジュラー形式をつなぐ橋まで、358年の道を自分の手で計算しながら歩いてきた。旅の記録で振り返ろう。</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="board" aria-labelledby="recap-heading">
+      <div class="board-head">
+        <div><h2 id="recap-heading">ここまでの旅を振り返ろう</h2></div>
+      </div>
+
+      <div class="recap-list">
+        <div class="recap-item">
+          <span class="recap-num">1</span>
+          <div class="recap-body"><span class="recap-title">余白の書き込み。</span> <span class="recap-desc">フェルマーの主張：n≧3 なら xⁿ＋yⁿ＝zⁿ に自然数の解はない。整数の直角三角形＝単位円の上の有理点。(−1, 0) から傾き m/n の直線を引くと (n²−m², 2mn, n²＋m²) がすべて得られる。</span></div>
+        </div>
+        <div class="recap-item">
+          <span class="recap-num">2</span>
+          <div class="recap-body"><span class="recap-title">どこまでも小さくなる解。</span> <span class="recap-desc">背理法と無限降下法。互いに素な数の積が平方数なら、それぞれ平方数。直角三角形の公式を2回使うと、x⁴＋y⁴＝z² の解からより小さい解ができる → n＝4 は解なし。残るのは奇数の素数の指数。</span></div>
+        </div>
+        <div class="recap-item">
+          <span class="recap-num">3</span>
+          <div class="recap-body"><span class="recap-title">こわれた素因数分解。</span> <span class="recap-desc">1 の p 乗根 ζ で xᵖ＋yᵖ＝(x＋y)(x＋ζy)…。ラメの証明は、新しい数の世界で素因数分解が1通りだと仮定していた。6＝2×3＝(1＋√−5)(1−√−5)。クンマーの理想数と正則素数。</span></div>
+        </div>
+        <div class="recap-item">
+          <span class="recap-num">4</span>
+          <div class="recap-body"><span class="recap-title">時計の算術。</span> <span class="recap-desc">a≡b (mod p)。余りだけで足し算・掛け算ができる。平方数は mod 4 で 0 か 1。x³＋y³＝z³ を mod 7 で見ると x, y, z のどれかは 7 の倍数。mod だけでは証明しきれない。</span></div>
+        </div>
+        <div class="recap-item">
+          <span class="recap-num">5</span>
+          <div class="recap-body"><span class="recap-title">点を足す曲線。</span> <span class="recap-desc">楕円曲線 y²＝x³＋ax＋b。交点の x 座標の和は m² なので、2つの有理点を結ぶ直線は3つ目の有理点を通る。折り返して P＋Q。(−2, 3)＋(−1, 4)＝(4, −9)。モーデルの定理。</span></div>
+        </div>
+        <div class="recap-item">
+          <span class="recap-num">6</span>
+          <div class="recap-body"><span class="recap-title">曲線の指紋。</span> <span class="recap-desc">y²＋y＝x³−x² を mod p で数えて aₚ＝p−Nₚ：−2, −1, 1, −2, 1, 4, … ハッセの定理 |aₚ|≦2√p。悪い素数は 11、導手は 11。</span></div>
+        </div>
+        <div class="recap-item">
+          <span class="recap-num">7</span>
+          <div class="recap-body"><span class="recap-title">もうひとつの数列。</span> <span class="recap-desc">q(1−q)²(1−q¹¹)²(1−q²)²(1−q²²)²… を展開すると q<sup>p</sup> の係数が aₚ と一致。q＝e<sup>2πiτ</sup> で、重さ2・レベル11 のモジュラー形式。谷山–志村予想：すべての楕円曲線はモジュラー。</span></div>
+        </div>
+        <div class="recap-item">
+          <span class="recap-num">8</span>
+          <div class="recap-body"><span class="recap-title">ありえない曲線。</span> <span class="recap-desc">解があればフライ曲線 y²＝x(x−aᵖ)(x＋bᵖ) が作れ、判別式は 16(abc)²ᵖ。リベットの定理でレベルは 2 まで下がるが、重さ2・レベル2 のモジュラー形式は存在しない。</span></div>
+        </div>
+        <div class="recap-item">
+          <span class="recap-num">9</span>
+          <div class="recap-body"><span class="recap-title">屋根裏の7年間。</span> <span class="recap-desc">ワイルズは mod 3 の一致から mod 9, 27, … と持ち上げ、半安定な楕円曲線の谷山–志村予想を証明。1993年の講演、穴、テイラーとの修正を経て1995年に完成。2001年にモジュラリティ定理。</span></div>
+        </div>
+      </div>
+
+      <div class="complete-actions">
+        <a class="btn btn-primary" id="btn-share" href="#" target="_blank" rel="noopener">𝕏 クリアをシェアする</a>
+        <a class="btn" href="index.html">トップに戻る →</a>
+        <button class="btn" id="btn-reset-all">🔄 進捗をリセットして最初から</button>
+      </div>
+    </section>
+
+    <section class="board" aria-labelledby="next-heading" style="margin-top:16px">
+      <div class="board-head">
+        <div><h2 id="next-heading">バックナンバー</h2></div>
+        <p>同じねこ博士とうさ美が案内する、姉妹サイトの学習クエスト</p>
+      </div>
+      <div class="quest-grid">
+        <a class="quest-card" href="https://complex-number.habatakijuku.com/" target="_blank" rel="noopener" style="--accent:#5b3fa6;--accent-bg:#efe9f9">
+          <div class="q-top"><span class="q-num">i</span><span class="q-suit" aria-hidden="true">🌀</span></div>
+          <div class="q-meta"><span class="q-tag">複素数</span><span class="q-time">全8ステージ</span></div>
+          <div class="q-title">本当はおもしろい複素数の世界</div>
+          <p class="q-desc">この旅の STAGE3 と STAGE7 で使った複素数の出どころ。数直線から i の誕生、回転としての掛け算、極形式、そしてオイラーの等式まで。</p>
+          <span class="q-cta">読む →</span>
+        </a>
+        <a class="quest-card" href="https://quantum-mechanics.habatakijuku.com/" target="_blank" rel="noopener" style="--accent:#1f7488;--accent-bg:#e4f2f5">
+          <div class="q-top"><span class="q-num">⚛</span><span class="q-suit" aria-hidden="true">🌌</span></div>
+          <div class="q-meta"><span class="q-tag">量子力学</span><span class="q-time">全9クエスト</span></div>
+          <div class="q-title">量子力学、冒険の書</div>
+          <p class="q-desc">二重スリットから量子コンピュータの回路作りまで、9つのクエストでたどる量子力学のシリーズマップ。ショアのアルゴリズムでは、余りの計算が活躍する。</p>
+          <span class="q-cta">読む →</span>
+        </a>
+        <a class="quest-card" href="https://rotary-engine.habatakijuku.com/" target="_blank" rel="noopener" style="--accent:#3d5f88;--accent-bg:#e9eef6">
+          <div class="q-top"><span class="q-num">⚙</span><span class="q-suit" aria-hidden="true">🍙</span></div>
+          <div class="q-meta"><span class="q-tag">作図</span><span class="q-time">全8ステージ</span></div>
+          <div class="q-title">ロータリーエンジンを作図する</div>
+          <p class="q-desc">三角おむすびのローターと繭形のハウジングを、2つの数から中学数学の式だけで描く。曲線を式で描く楽しさを味わえる。</p>
+          <span class="q-cta">読む →</span>
+        </a>
+      </div>
+    </section>
+
+    <div id="book-recommend"></div>
+  </main>
+
+  <footer>
+    <p>NO DOWNLOAD. NO REGISTRATION. JUST LEARN. &nbsp;© <span id="year"></span> ruglerugle</p>
+    <div class="footer-suits" aria-hidden="true"><span>📜</span><span>➰</span><span>🌀</span><span>🏛️</span></div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("btn-share").href =
+    "https://twitter.com/intent/tweet?text=" +
+    encodeURIComponent("フェルマーの最終定理の証明への道、全9ステージをクリア！ 無限降下法から楕円曲線とモジュラー形式、ワイルズの証明まで358年をたどりました📜") +
+    "&url=" + encodeURIComponent("https://fermat.habatakijuku.com/");
+</script>
+<script src="js/progress.js?v=20261003a"></script>
+<script>FQ.initCompletePage();</script>
+</body>
+</html>

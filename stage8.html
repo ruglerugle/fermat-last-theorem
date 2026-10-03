@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>STAGE8 ありえない曲線（フライ曲線とリベットの定理） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="フェルマーの最終定理と谷山–志村予想をつないだフライ曲線 y²＝x(x−aᵖ)(x＋bᵖ) を中学生向けに解説。判別式が 16(abc)²ᵖ という整いすぎた形になること、セールの予想とリベットの定理（レベルを下げる）、重さ2・レベル2 のモジュラー形式が存在しないことから、谷山–志村予想がフェルマーの最終定理を導く筋道をたどる。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/stage8">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="STAGE8 ありえない曲線（フライ曲線とリベットの定理） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="もし aᵖ＋bᵖ＝cᵖ の解があったら、それを材料に「整いすぎた」楕円曲線が作れてしまう。フライ曲線とリベットの定理が、2つの大問題を1本につないだ。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/stage8">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE8 ありえない曲線",
+      "description": "フェルマーの最終定理と谷山–志村予想をつないだフライ曲線 y²＝x(x−aᵖ)(x＋bᵖ) を中学生向けに解説。判別式が 16(abc)²ᵖ という整いすぎた形になること、セールの予想とリベットの定理（レベルを下げる）、重さ2・レベル2 のモジュラー形式が存在しないことから、谷山–志村予想がフェルマーの最終定理を導く筋道をたどる。",
+      "url": "https://fermat.habatakijuku.com/stage8",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 8,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "フェルマーの最終定理、証明への道",
+        "url": "https://fermat.habatakijuku.com/"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "STAGE8 ありえない曲線",
+          "item": "https://fermat.habatakijuku.com/stage8"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="design-system.css?v=20261003a">
+<style>
+
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="index.html" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">STAGE 8 ― ありえない曲線 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 9</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">STAGE 8</span><h1 class="chapter-title">ありえない曲線</h1>
+        <div class="chapter-sub">フライ曲線とリベットの定理</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">フライ曲線 y²＝x(x−aᵖ)(x＋bᵖ) の判別式が 16(abc)²ᵖ になることを計算し、「フェルマーの解 → フライ曲線 → モジュラーではありえない」という筋道と、谷山–志村予想が証明できればフェルマーの最終定理が従う理由を説明しよう。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">前のステージの最後に、フェルマーの最終定理と谷山–志村予想は、別の話だと思われていたと言ったね。その2つを結びつけたのが、ドイツの数学者<strong>ゲルハルト・フライ</strong>だ。1984年、彼はこんなことを考えた。背理法で、フェルマーの式に解があると仮定する。p を 5 以上の素数として、<strong>aᵖ＋bᵖ＝cᵖ</strong> をみたす自然数 a, b, c があったとしよう（共通の約数はないとしておく）。この a, b を使って、楕円曲線を1本作るんだ。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step"><strong>フライ曲線</strong>：<span class="nw">y²＝x(x−aᵖ)(x＋bᵖ)</span></span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">右辺を展開すると、x(x²＋(bᵖ−aᵖ)x−aᵖbᵖ)＝x³＋(bᵖ−aᵖ)x²−aᵖbᵖx。x² の項がありますが、STAGE6 で「x² の項は x をずらせば消せる」と聞いたので、これも楕円曲線の仲間ですね。でも、c が式のどこにも出てきません。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">c は隠れているんだ。この曲線が x 軸と交わる点を考えてごらん。y＝0 になる x は？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">x(x−aᵖ)(x＋bᵖ)＝0 なので、x＝0, aᵖ, −bᵖ の3つです。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">楕円曲線には、<strong>判別式</strong>と呼ばれる大事な数がある。x 軸との3つの交点 r₁, r₂, r₃ から、Δ＝16×(r₁−r₂)²(r₂−r₃)²(r₁−r₃)² で計算する数だ。2つの交点が重なると Δ＝0 になる。STAGE5 で、曲線が自分自身と交わったり、とがったりするものは楕円曲線に含めないと言ったね。あれは、ちょうど交点が重なる場合なんだ。そして、Δ を割り切る素数では、その素数で割った余りの世界で見ると、交点が重なってしまう。だから、<strong>悪い素数は Δ を割り切る素数</strong>の中から出てくる。では、フライ曲線の Δ を計算してごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">3つの交点どうしの差は、aᵖ−0＝aᵖ、0−(−bᵖ)＝bᵖ、aᵖ−(−bᵖ)＝aᵖ＋bᵖ。……aᵖ＋bᵖ は cᵖ です！ c はここに隠れていました。だから<br>Δ＝16×(aᵖ)²×(bᵖ)²×(cᵖ)²＝<strong>16(abc)²ᵖ</strong>。<br>16 を除くと、全体が abc の 2p 乗です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。判別式が、こんなにきれいな「何かの 2p 乗」になる楕円曲線は、普通は考えられない。判別式はふつう、いろいろな素数がばらばらの指数で混ざった数になるからね。フライは、この曲線は<strong>整いすぎていて、ありえない</strong>のではないか、もっと正確に言うと、<strong>この曲線はモジュラーではありえない</strong>のではないか、と考えたんだ。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<div class="cv-wrap"><canvas id="cv-frey" aria-label="y²＝x(x−A)(x＋B) のグラフ。x軸との交点が −B、0、A の3つ"></canvas></div>
+        <div class="sim-controls">
+          <label>a <input type="number" id="in-fa" min="1" max="20" value="1"></label>
+          <label>b <input type="number" id="in-fb" min="1" max="20" value="2"></label>
+          <label>p＝<select id="sel-fp"><option>3</option><option selected>5</option><option>7</option></select></label>
+        </div>
+        <div class="readout" id="ro-frey"></div>
+        <div class="diagram-caption"><strong>フライ曲線の判別式を調べるツール</strong>。a, b, p を選ぶと、A＝aᵖ、B＝bᵖ、C＝A＋B として曲線 y²＝x(x−A)(x＋B) を作り（グラフは横方向を縮めて描く）、判別式 Δ＝16A²B²C² を素因数分解する。指数が 2p の倍数の素数は緑、そうでない素数は赤（2 は本物のフライ曲線では式を少し調整して扱うので色をつけない）。本物の解なら C＝cᵖ なので、すべてが緑になるはずだが、C が p 乗の数になることはなく、赤い素数が必ず残る</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">「モジュラーではありえない」というのは、どういうことですか？ この曲線の aₚ を係数にもつモジュラー形式がない、という意味ですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そういう意味だ。ここで1つ思い出してほしい。谷山–志村予想が正しいなら、<strong>すべての</strong>楕円曲線はモジュラーだった。だから、もしフライの考えが正しくて、しかも谷山–志村予想も正しいなら……。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">フェルマーの式に解があると、フライ曲線が作れます。谷山–志村予想が正しいなら、フライ曲線もモジュラーです。でもフライ曲線はモジュラーではありえない。矛盾します。だから、解は存在しない……。谷山–志村予想が証明できれば、フェルマーの最終定理も証明できる、ということですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。ただし、フライの「モジュラーではありえない」は、まだ予想にすぎなかった。それを証明するために、フランスの<strong>セール</strong>がより詳しい予想を立て、1986年、アメリカの<strong>ケン・リベット</strong>がその必要な部分を証明した。リベットの定理の中身を、少しだけのぞいてみよう。鍵になるのは、STAGE6 で作った指紋を、<strong>mod p でぼかして見る</strong>ことだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">指紋の aₚ を、さらに p で割った余りだけで見る、ということですか？ p はフェルマーの式の指数の p ですね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。素数を区別するために、曲線の指紋のほうは a<sub>ℓ</sub>（ℓ は素数を表すもう1つの文字）と書こう。フライ曲線の悪い素数は、判別式 16(abc)²ᵖ を割り切る素数、つまり 2 と、a, b, c の素因数だ。導手は、それらを掛け合わせた数（2 のところだけ少し調整がいる）になる。もしフライ曲線がモジュラーなら、レベルがこの導手のモジュラー形式があって、q<sup>ℓ</sup> の係数が a<sub>ℓ</sub> に一致する。リベットが示したのは、こういうことだ。<strong>判別式の中で指数が p の倍数になっている悪い素数は、mod p でぼかした指紋には映らない</strong>。だから、mod p で見る限り、その素数をレベルから取り除いてよい。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">フライ曲線の判別式は 16(abc)²ᵖ なので、a, b, c の素因数は全部、指数が 2p の倍数です。つまり全部、取り除けます。残るのは……2 だけです。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。リベットの定理によると、フライ曲線がモジュラーなら、<strong>重さ2・レベル2 のモジュラー形式</strong>で、係数を mod p で見るとフライ曲線の a<sub>ℓ</sub> と一致するものが存在しなければならない。ところが、<strong>重さ2・レベル2 のモジュラー形式は、1つも存在しない</strong>。これは昔から分かっていたことなんだ。STAGE7 で、レベル 11 では対称性が強すぎて F ただ1つしかなかったね。レベル 2 では、対称性の条件がさらにきつく効いて、条件をみたすのは 0 だけになってしまう。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<svg viewBox="50 0 430 300" role="img" aria-label="証明の筋道。フェルマーの式に解があると仮定すると、フライ曲線が作れる。谷山–志村予想が正しければフライ曲線はモジュラー。リベットの定理により、重さ2レベル2のモジュラー形式が存在することになる。しかしそれは存在しないので矛盾。">
+          <defs><marker id="ar8" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#41846b"/></marker></defs>
+          <g font-size="12.5" font-weight="900" text-anchor="middle">
+            <rect x="110" y="8" width="200" height="40" rx="8" fill="#fbe9e8" stroke="#c8433f"/>
+            <text x="210" y="26" fill="#c8433f">仮定：aᵖ＋bᵖ＝cᵖ に解がある</text><text x="210" y="41" fill="#c8433f" font-size="10.5">（p は 5 以上の素数）</text>
+            <rect x="110" y="72" width="200" height="40" rx="8" fill="#eef7f2" stroke="#41846b"/>
+            <text x="210" y="90" fill="#2e5f4d">フライ曲線が作れる</text><text x="210" y="105" fill="#2e5f4d" font-size="10.5">y²＝x(x−aᵖ)(x＋bᵖ)、Δ＝16(abc)²ᵖ</text>
+            <rect x="110" y="136" width="200" height="40" rx="8" fill="#eef7f2" stroke="#41846b"/>
+            <text x="210" y="154" fill="#2e5f4d">フライ曲線はモジュラー</text><text x="210" y="169" fill="#2e5f4d" font-size="10.5">（谷山–志村予想が正しければ）</text>
+            <rect x="110" y="200" width="200" height="40" rx="8" fill="#eef7f2" stroke="#41846b"/>
+            <text x="210" y="218" fill="#2e5f4d">重さ2・レベル2 の</text><text x="210" y="233" fill="#2e5f4d">モジュラー形式がある</text>
+            <rect x="110" y="258" width="200" height="34" rx="8" fill="#fbe9e8" stroke="#c8433f"/>
+            <text x="210" y="280" fill="#c8433f">そんな形式は存在しない → 矛盾</text>
+          </g>
+          <g stroke="#41846b" stroke-width="2" marker-end="url(#ar8)">
+            <line x1="210" y1="48" x2="210" y2="70"/><line x1="210" y1="112" x2="210" y2="134"/><line x1="210" y1="176" x2="210" y2="198"/><line x1="210" y1="240" x2="210" y2="256"/>
+          </g>
+          <g font-size="10.5" font-weight="800" fill="#9a6a1c">
+            <text x="318" y="64">フライ（1984）</text>
+            <text x="318" y="128">谷山–志村予想</text><text x="318" y="142">（未証明だった）</text>
+            <text x="318" y="192">リベットの定理</text><text x="318" y="206">（1986、レベルを下げる）</text>
+          </g>
+        </svg>
+        <div class="diagram-caption"><strong>証明の筋道</strong>。フェルマーの式の解からフライ曲線を作り、谷山–志村予想とリベットの定理を通すと、存在しないはずのモジュラー形式にたどりつく。リベットの定理によって、空いているのは「谷山–志村予想」の一段だけになった</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">空いているのは、谷山–志村予想のところだけですね。でも、その予想は、誰にも手がかりがなかったはずです。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そうなんだ。リベットの証明を聞いた多くの数学者は、「これでフェルマーの最終定理は、谷山–志村予想と同じくらい難しい問題になった。つまり、当分は解けない」と受け止めた。しかも、全部の楕円曲線について証明する必要はない。フライ曲線は<strong>半安定</strong>と呼ばれる種類で、悪い素数でのこわれ方がおだやか（とがらずに、自分と交わるだけ）だ。だから、<strong>半安定な楕円曲線について</strong>谷山–志村予想を示せば足りる。それでも、とてつもなく難しい問題であることに変わりはなかった。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">誰か、挑んだ人はいたんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">1986年の夏、リベットの結果を聞いて、「これは自分の問題だ」と心を決めた人がいた。子どものころからフェルマーの最終定理に憧れていた、イギリス出身の数学者だ。次の最終ステージで、その人の7年間を追いかけよう。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">フライ曲線（1984年）：aᵖ＋bᵖ＝cᵖ の解から作る楕円曲線 <span class="nw">y²＝x(x−aᵖ)(x＋bᵖ)</span></span>
+        <span class="step">判別式 <span class="nw">Δ＝16(r₁−r₂)²(r₂−r₃)²(r₁−r₃)²</span>。交点の差は aᵖ, bᵖ, aᵖ＋bᵖ＝cᵖ なので <span class="nw">Δ＝16(abc)²ᵖ</span>（整いすぎている）</span>
+        <span class="step">谷山–志村予想が正しく、フライ曲線がモジュラーでないなら → 解はない（谷山–志村予想 ⇒ フェルマーの最終定理）</span>
+        <span class="step">リベットの定理（1986年）：判別式の指数が p の倍数の素数は、mod p の指紋に映らず、レベルから取り除ける → フライ曲線ならレベル2 まで下がる</span>
+        <span class="step">重さ2・レベル2 のモジュラー形式は存在しない → 矛盾。残る課題は「半安定な楕円曲線の谷山–志村予想」</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. フライ曲線 y²＝x(x−aᵖ)(x＋bᵖ) の x 軸との交点の差に、cᵖ が現れる理由は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">曲線の式に c がそのまま書かれているから</button>
+          <button class="choice-btn">交点の1つが x＝c だから</button>
+          <button class="choice-btn">交点 aᵖ と −bᵖ の差が aᵖ＋bᵖ で、仮定からそれが cᵖ に等しいから</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 交点は x＝0, aᵖ, −bᵖ。差は aᵖ, bᵖ, aᵖ＋bᵖ で、最後のものが仮定により cᵖ。だから判別式は 16(abc)²ᵖ という、整いすぎた形になる。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. リベットの定理によって分かったことは？</p>
+        <div class="choice-list">
+          <button class="choice-btn">谷山–志村予想（半安定の場合）が証明できれば、フェルマーの最終定理が従う</button>
+          <button class="choice-btn">フェルマーの最終定理は誤りである</button>
+          <button class="choice-btn">谷山–志村予想は誤りである</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ フライ曲線がモジュラーなら、存在しない「重さ2・レベル2 のモジュラー形式」が必要になる。だから、半安定な楕円曲線がすべてモジュラーだと示せば、フェルマーの式の解はありえない。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. フライ曲線がモジュラーだとすると矛盾が出る、最後の決め手は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">判別式が負になること</button>
+          <button class="choice-btn">重さ2・レベル2 のモジュラー形式が1つも存在しないこと</button>
+          <button class="choice-btn">フライ曲線が有理点を1つももたないこと</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ リベットの定理でレベルを 2 まで下げると、重さ2・レベル2 のモジュラー形式が必要になる。しかし、そのようなものは 0 しかない。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← トップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="js/progress.js?v=20261003a"></script>
+<script src="js/fermat.js?v=20261003a"></script>
+<script>FQ.initStagePage(8);</script>
+<script>
+/* フライ曲線の判別式 */
+(function(){
+  var inA=document.getElementById('in-fa'), inB=document.getElementById('in-fb'), selP=document.getElementById('sel-fp'), ro=document.getElementById('ro-frey');
+  function factor(n){ var f={}; for(var d=2;d*d<=n;d++){ while(n%d===0){ f[d]=(f[d]||0)+1; n/=d; } } if(n>1) f[n]=(f[n]||0)+1; return f; }
+  function addTo(T,f,k){ for(var q in f) T[q]=(T[q]||0)+f[q]*k; }
+  function isPow(n,p){ var r=Math.round(Math.pow(n,1/p)); for(var t=r-1;t<=r+1;t++) if(t>0&&Math.pow(t,p)===n) return t; return 0; }
+  var st=FL.canvas('cv-frey',0.62,draw);
+  function draw(st){
+    var a=Math.max(1,Math.min(20,parseInt(inA.value,10)||1)), b=Math.max(1,Math.min(20,parseInt(inB.value,10)||1)), p=+selP.value;
+    var A=Math.pow(a,p), B=Math.pow(b,p), C=A+B;
+    var ctx=st.ctx; ctx.clearRect(0,0,st.W,st.H); ctx.fillStyle=FL.C.paper; ctx.fillRect(0,0,st.W,st.H);
+    // 横は −B〜A を収める。縦は形が見えるよう、y を x の範囲に合わせて縮める
+    var L=-B*1.25, R=A*1.6+B*0.1, pad=16;
+    var X=function(x){return pad+(x-L)/(R-L)*(st.W-2*pad);};
+    var fx=function(x){return x*(x-A)*(x+B);};
+    var ymax=0; for(var i=0;i<=400;i++){ var x=L+i*(R-L)/400, v=fx(x); if(v>0) ymax=Math.max(ymax,Math.sqrt(v)); }
+    var Y=function(y){return st.H/2-y/ymax*(st.H/2-pad);};
+    FL.line(ctx,0,st.H/2,st.W,st.H/2,FL.C.axis,1.3); FL.line(ctx,X(0),0,X(0),st.H,FL.C.axis,1.3);
+    ctx.strokeStyle=FL.C.theme; ctx.lineWidth=2.4;
+    FL.plotY2(ctx,fx,L,R,X,Y,1500);
+    var close=X(A)-X(0)<26;
+    [[-B,'−B',0],[0,'0',close?-8:0],[A,'A',close?8:0]].forEach(function(r){ FL.dot(ctx,X(r[0]),st.H/2,4.5,FL.C.gold,'#fff'); FL.text(ctx,r[1],X(r[0])+r[2],st.H/2+16,{color:FL.C.gold,align:r[2]<0?'right':(r[2]>0?'left':'center'),halo:true}); });
+    // 判別式の素因数分解
+    var T={2:4}; addTo(T,factor(a),2*p); addTo(T,factor(b),2*p); addTo(T,factor(C),2);
+    var keys=Object.keys(T).map(Number).sort(function(x,y){return x-y;});
+    var parts=keys.map(function(q){ var e=T[q], cls=q===2?'':(e%(2*p)===0?'ok':'ng'); return '<b class="'+cls+'">'+q+'<sup>'+e+'</sup></b>'; });
+    var c=isPow(C,p);
+    ro.innerHTML='<span>A＝'+a+'<sup>'+p+'</sup>＝'+A.toLocaleString()+'</span><span>B＝'+b+'<sup>'+p+'</sup>＝'+B.toLocaleString()+'</span><span>C＝A＋B＝'+C.toLocaleString()+'（'+(c?c+' の '+p+' 乗':p+' 乗の数ではない')+'）</span><span>Δ＝16A²B²C²＝'+parts.join('×')+'</span>';
+  }
+  [inA,inB].forEach(function(el){ el.addEventListener('input',function(){ st.redraw(); }); });
+  selP.addEventListener('change',function(){ st.redraw(); });
+})();
+</script>
+</body>
+</html>

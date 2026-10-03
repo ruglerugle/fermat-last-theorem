@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>STAGE9 屋根裏の7年間（ワイルズの証明と358年の歴史） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="アンドリュー・ワイルズがフェルマーの最終定理を証明するまでの7年間を、中学生向けに解説。mod 3 の指紋から始めて mod 9、mod 27 と持ち上げる作戦、1993年のケンブリッジの講演、見つかった穴とリチャード・テイラーとの修正、1995年の論文発表、2001年のモジュラリティ定理まで。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/stage9">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="STAGE9 屋根裏の7年間（ワイルズの証明と358年の歴史） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="10歳で出会った問題に、屋根裏の書斎で7年。発表、致命的な穴、そして修正。ワイルズがフェルマーの最終定理を証明するまで。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/stage9">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE9 屋根裏の7年間",
+      "description": "アンドリュー・ワイルズがフェルマーの最終定理を証明するまでの7年間を、中学生向けに解説。mod 3 の指紋から始めて mod 9、mod 27 と持ち上げる作戦、1993年のケンブリッジの講演、見つかった穴とリチャード・テイラーとの修正、1995年の論文発表、2001年のモジュラリティ定理まで。",
+      "url": "https://fermat.habatakijuku.com/stage9",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 9,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "フェルマーの最終定理、証明への道",
+        "url": "https://fermat.habatakijuku.com/"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "STAGE9 屋根裏の7年間",
+          "item": "https://fermat.habatakijuku.com/stage9"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="design-system.css?v=20261003a">
+<style>
+#svg-time{display:block;margin:0 auto}
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="index.html" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">STAGE 9 ― 屋根裏の7年間 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 9</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">STAGE 9</span><h1 class="chapter-title">屋根裏の7年間</h1>
+        <div class="chapter-sub">ワイルズの証明</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">ワイルズの作戦（mod 3 の指紋の一致から出発し、mod 9、mod 27、… と一致を持ち上げる）と、ハッセの定理によって「十分大きな 3 のべき乗で一致すれば完全に一致する」理由を説明しよう。1993年の発表から1995年の完成までの流れをたどれば合格。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">最終ステージだ。主人公は<strong>アンドリュー・ワイルズ</strong>。1953年にイギリスのケンブリッジで生まれた。10歳のとき、町の図書館で、フェルマーの最終定理について書かれた本を見つけたんだ。10歳の自分にも意味が分かる問題なのに、300年以上誰も解けていない。彼はそのとき、いつか自分が解くと決めたという。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">STAGE1 の私と同じです。式の意味は分かるのに、解けないなんて不思議でした。ワイルズは、そのまま研究を始めたんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">大学で数学者になる訓練を受けるうちに、彼はいったんフェルマーの問題から離れた。プロの数学者には、手がかりのない問題に人生をかけるのは危険すぎたからだ。かわりに研究したのが<strong>楕円曲線</strong>だった。のちにアメリカのプリンストン大学の教授になる。そして1986年の夏、リベットの定理の知らせを聞く。前のステージで見た、「半安定な楕円曲線の谷山–志村予想を証明すれば、フェルマーの最終定理が従う」という結果だ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">ずっと研究してきた楕円曲線が、子どものころの夢の問題につながったんですね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">ワイルズは、ほかの仕事を整理して、この問題だけに取り組むことにした。しかも、誰にも言わずにね。注目されると落ち着いて考えられないし、途中の成果を小出しにすると、他人に先を越されるかもしれない。自宅の屋根裏の書斎で、妻のほかには誰にも明かさず、<strong>7年間</strong>考え続けた。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">7年間、1人で……。どうやって攻めたんですか？ STAGE7 では、谷山–志村予想は「証明の手がかりがまったくなかった」と聞きました。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">作戦の中心は、STAGE8 で使った「<strong>指紋を mod p でぼかして見る</strong>」考え方だ。楕円曲線がモジュラーだと示すには、すべての素数 ℓ で a<sub>ℓ</sub> がモジュラー形式の係数と一致することを示したい。ワイルズは、まず <strong>mod 3 で見た一致</strong>から出発した。じつは、どんな楕円曲線でも、a<sub>ℓ</sub> を mod 3 で見た指紋が、あるモジュラー形式の係数と一致することは、ラングランズとタネルの定理（1980年ごろ）ですでに分かっていたんだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">mod 3 で一致しているだけでは、本当の a<sub>ℓ</sub> が一致するとは言えません。−2 と 1 は、mod 3 で見ると同じですから。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。だから、mod 3 の一致を、<strong>mod 9 の一致、mod 27 の一致、mod 81 の一致……</strong>と、3 のべき乗で一段ずつ持ち上げていく。これがワイルズの作戦だった。すべての段で一致すると言えたら、本当の a<sub>ℓ</sub> も一致する。なぜだか分かるかな？ STAGE6 のハッセの定理を思い出してごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">ハッセの定理で、|a<sub>ℓ</sub>|≦2√ℓ でした。モジュラー形式の係数も同じ範囲に入るとすると、2つの数の差は 4√ℓ 以下です。2つの数が mod 3ᵏ で一致するということは、差が 3ᵏ の倍数ということです。3ᵏ が 4√ℓ より大きくなれば、4√ℓ 以下の 3ᵏ の倍数は 0 しかないので、差は 0。つまり、本当に一致します。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通りだ。ℓ ごとに、十分大きな k まで一致を持ち上げれば、完全な一致になる。ワイルズの仕事の大部分は、この「持ち上げ」の階段を作ることに費やされた。くわしく言うと、「mod 3 の指紋を持ち上げる方法」を、楕円曲線の側と、モジュラー形式の側で、それぞれ全部数え上げて、<strong>2つの側で数がぴったり同じになる</strong>ことを示す、という形をとった。モジュラー形式の側の持ち上げは、どれも楕円曲線の側の持ち上げにもなっている。数が同じなら、楕円曲線の側の持ち上げは全部、モジュラー形式から来ていることになる。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<div class="sim-controls">
+          <label>ℓ＝<select id="sel-l"></select></label>
+          <label>k＝<input type="range" id="in-k9" min="1" max="5" value="1"><output id="out-k9">1</output></label>
+        </div>
+        <div class="readout" id="ro-lift"></div>
+        <div class="table-scroll"><table class="num-table" id="tb-lift"></table></div>
+        <div class="diagram-caption"><strong>3ᵏ で持ち上げると、どこで完全に決まるか</strong>。曲線 y²＋y＝x³−x² で、素数 ℓ を選ぶ。表は、ハッセの範囲（−2√ℓ〜2√ℓ）に入る整数のうち、a<sub>ℓ</sub> と mod 3ᵏ で一致するものの一覧。k＝1（mod 3）では候補がいくつも残るが、3ᵏ が 4√ℓ を超えると、候補は本物の a<sub>ℓ</sub> ただ1つに絞られる</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">mod 3 で一致することは分かっている、というのが1段目で、そこから1段ずつ上っていくんですね。それで、証明はできたんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">1993年6月、ワイルズは生まれ故郷ケンブリッジのアイザック・ニュートン研究所で、3日続きの講演をした。題目は「モジュラー形式、楕円曲線、ガロア表現」。フェルマーの名前は出さなかった。けれど、話が進むにつれて、聞いている数学者たちには行き先が分かってきた。6月23日の最終日、黒板に半安定な楕円曲線の谷山–志村予想の証明を書き終え、最後にフェルマーの最終定理がその結果として従うことを示して、こう言って講演を終えた。「ここで終わりにしようと思います」。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">358年の問題が、その日に解けたんですね！</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">世界中で大ニュースになった。ところが、話はそこで終わらなかった。200ページにおよぶ論文を、何人もの専門家が1行ずつ確かめていく。その途中で、ワイルズの友人でもある審査役のニック・カッツが、<strong>持ち上げの階段の一部に、穴</strong>があることに気づいたんだ。2つの側の数がぴったり同じだと示す議論の中の、ある道具の作り方がうまくいっていなかった。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbitThink.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">穴……。直せなかったら、証明は全部くずれてしまうんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。ワイルズは数か月かけて直そうとしたけれど、うまくいかない。1993年12月、彼は証明に問題があることを公表した。そして1994年の初め、かつての教え子で、ケンブリッジの若い数学者<strong>リチャード・テイラー</strong>を呼んで、2人で取り組んだ。それでも穴はふさがらなかった。1994年の夏が終わるころには、ワイルズはあきらめかけていたという。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">7年かけて、最後の最後で……。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">1994年9月19日の朝、ワイルズは「なぜうまくいかないのか」だけでも確かめておこうと、もう一度机に向かった。そのとき、ひらめいたんだ。3年前に自分で試して捨てた古い方法（岩澤理論と呼ばれる道具）と、いま行き詰まっている方法は、片方だけではどちらも足りない。けれど、<strong>2つを組み合わせると、ちょうどお互いの足りないところを補い合う</strong>。穴は、それでふさがった。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">捨てた方法が、最後に役に立ったんですね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">1994年10月、2本の論文が提出された。ワイルズの「モジュラー楕円曲線とフェルマーの最終定理」と、テイラーとワイルズの共著で、修正の要の部分を担う論文だ。厳しい審査を経て、<strong>1995年5月</strong>、数学の専門誌『アナルズ・オブ・マセマティクス』に掲載された。フェルマーの書き込みから、358年後のことだ。さらに2001年には、ブルイユ、コンラッド、ダイアモンド、テイラーの4人が、半安定に限らず<strong>すべての楕円曲線</strong>について谷山–志村予想を証明した。いまでは<strong>モジュラリティ定理</strong>と呼ばれている。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<div class="table-scroll"><svg id="svg-time" viewBox="0 0 760 244" style="min-width:640px;max-width:none" role="img" aria-label="フェルマーの最終定理の年表。1637年ごろの書き込みから、1770年オイラー、1847年ラメとクンマー、1955年谷山、1984年フライ、1986年リベット、1993年ワイルズの講演、1994年の修正、1995年の論文掲載、2001年のモジュラリティ定理まで"></svg></div>
+        <div class="diagram-caption"><strong>358年の年表</strong>。前半（1637〜1847年）は xⁿ＋yⁿ＝zⁿ そのものと向き合う時代、後半（1955年〜）は楕円曲線とモジュラー形式という別の世界から攻める時代</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">結局、フェルマーは「驚くべき証明」を本当に見つけていたんでしょうか。ワイルズの証明は、楕円曲線もモジュラー形式も使っていて、17世紀にはなかった道具ばかりです。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">本当のところは誰にも分からない。けれど、フェルマーはその後の手紙で n＝3 と n＝4 の場合のことしか書いていない。だから、多くの数学者は、彼がのちに自分の証明の誤りに気づいたのではないか、と考えている。STAGE3 のラメのように、素因数分解がただ1通りだと思い込んだ証明だったのかもしれないね。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">でも、もしフェルマーの証明が正しかったら、楕円曲線とモジュラー形式の橋は、ずっと見つからなかったかもしれません。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">いいところに気づいたね。358年の間に、この問題は、クンマーの理想数を生み、楕円曲線とモジュラー形式の研究を育て、最後には2つの世界をつなぐ橋を完成させた。フェルマーの最終定理そのものより、その途中で生まれた数学のほうが、ずっと大きいとも言える。そして、その橋は今も、数学者たちが「ラングランズ・プログラム」と呼ぶ、もっと大きな地図の一部として広がり続けているんだ。きみが最初の日に見た短い式から、ここまで来たんだよ。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">ワイルズ（1953年生まれ）：10歳で問題に出会い、1986年のリベットの定理を聞いて、屋根裏で7年間ひそかに取り組んだ</span>
+        <span class="step">作戦：どんな楕円曲線も mod 3 の指紋はモジュラー（ラングランズ–タネル）→ mod 9, 27, … と一致を持ち上げる</span>
+        <span class="step">ハッセの定理 <span class="nw">|a<sub>ℓ</sub>|≦2√ℓ</span> から、<span class="nw">3ᵏ＞4√ℓ</span> で mod 3ᵏ の一致は完全な一致になる</span>
+        <span class="step">1993年6月の講演 → 審査で穴が見つかる → テイラーと修正、1994年9月19日に解決 → 1995年5月に論文掲載</span>
+        <span class="step">2001年、すべての楕円曲線について谷山–志村予想が証明され、モジュラリティ定理となった</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. ワイルズの作戦の出発点として正しいものは？</p>
+        <div class="choice-list">
+          <button class="choice-btn">mod 3 で見た指紋がモジュラー形式と一致することから出発し、mod 9、mod 27、… と持ち上げた</button>
+          <button class="choice-btn">フライ曲線の有理点をすべて書き出した</button>
+          <button class="choice-btn">コンピュータで 400万 より大きい素数をすべて調べた</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ mod 3 の一致はラングランズとタネルの定理で分かっていた。そこから 3 のべき乗で一致を持ち上げる階段を作ることが、証明の中心だった。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. ℓ＝13 のとき、mod 3ᵏ での一致から完全な一致が言えるのは、3ᵏ がおよそいくつを超えたとき？（ハッセの定理 |a_ℓ|≦2√ℓ を使う）</p>
+        <div class="choice-list">
+          <button class="choice-btn">13 を超えたとき</button>
+          <button class="choice-btn">ℓ²＝169 を超えたとき</button>
+          <button class="choice-btn">4√13≒14.4 を超えたとき（k＝3 の 27 から）</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 2つの数がどちらも −2√13 から 2√13 の間にあれば、差は 4√13≒14.4 以下。差が 3ᵏ の倍数で 3ᵏ＞14.4 なら、差は 0 しかない。3²＝9 では足りず、3³＝27 で決まる。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. 1993年の講演のあとに起きたことは？</p>
+        <div class="choice-list">
+          <button class="choice-btn">すぐに論文が掲載され、問題なく認められた</button>
+          <button class="choice-btn">証明に穴が見つかり、ワイルズはテイラーと取り組んで1994年9月に修正した</button>
+          <button class="choice-btn">証明は誤りと分かり、フェルマーの最終定理は今も未解決である</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 審査の中で持ち上げの議論の一部に穴が見つかった。1994年9月19日、以前に捨てた岩澤理論の方法と組み合わせることで解決し、1995年5月に論文が掲載された。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← トップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="js/progress.js?v=20261003a"></script>
+<script src="js/fermat.js?v=20261003a"></script>
+<script>FQ.initStagePage(9);</script>
+<script>
+/* 3^k で持ち上げると候補がどう絞られるか */
+(function(){
+  var sel=document.getElementById('sel-l'), inK=document.getElementById('in-k9'), outK=document.getElementById('out-k9'), ro=document.getElementById('ro-lift'), tb=document.getElementById('tb-lift');
+  FL.primes(97).filter(function(l){return l!==11;}).forEach(function(l){var o=document.createElement('option');o.textContent=l;if(l===13)o.selected=true;sel.appendChild(o);});
+  function ap(p){ var N=0; for(var x=0;x<p;x++){ var r=FL.mod(x*x*x-x*x,p); for(var y=0;y<p;y++) if(FL.mod(y*y+y,p)===r) N++; } return p-N; }
+  function run(){
+    var l=+sel.value, k=+inK.value, m=Math.pow(3,k), a=ap(l), B=2*Math.sqrt(l); outK.textContent=k;
+    var cands=[]; for(var t=Math.ceil(-B);t<=Math.floor(B);t++) if(FL.mod(t-a,m)===0) cands.push(t);
+    var h='<tr><th>候補</th>'+cands.map(function(t){return '<td class="'+(t===a?'hit':'')+'">'+FL.signed(t)+'</td>';}).join('')+'</tr>';
+    tb.innerHTML=h;
+    ro.innerHTML='<span>a<sub>'+l+'</sub>＝<b>'+FL.signed(a)+'</b></span><span>ハッセの範囲 ±'+B.toFixed(2)+'</span><span>3<sup>'+k+'</sup>＝'+m+(m>2*B?' ＞ ':' ≦ ')+'4√'+l+'≒'+(2*B).toFixed(1)+'</span><span>候補 <b class="'+(cands.length===1?'ok':'')+'">'+cands.length+'</b> 個'+(cands.length===1?'（完全に決まった）':'')+'</span>';
+  }
+  sel.addEventListener('change',run); inK.addEventListener('input',run);
+  run();
+})();
+
+/* 年表 */
+(function(){
+  var svg=document.getElementById('svg-time'), NS='http://www.w3.org/2000/svg';
+  function el(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e;}
+  // 前半は縮めて描く（1637〜1850 と 1950〜2005 を別の縮尺に）
+  function X(y){ return y<=1860 ? 30+(y-1637)/(1860-1637)*250 : 330+(y-1950)/(2005-1950)*410; }
+  var AY=118;
+  el('line',{x1:20,y1:AY,x2:290,y2:AY,stroke:'#41846b','stroke-width':3});
+  el('line',{x1:290,y1:AY,x2:320,y2:AY,stroke:'#41846b','stroke-width':3,'stroke-dasharray':'4 4'});
+  el('line',{x1:320,y1:AY,x2:748,y2:AY,stroke:'#41846b','stroke-width':3});
+  // [年, 出来事, 段（負は上・正は下、絶対値が大きいほど遠く）, 文字の横ずらし, 色]
+  var ev=[[1637,'フェルマーの書き込み',-1,14,'#9a6a1c'],[1670,'息子が出版',1,0],[1770,'オイラー n＝3',-1,0],[1825,'n＝5',1,0],[1847,'ラメ・クンマー',-1,0],
+          [1955,'谷山の問題',1,0],[1984,'フライ曲線',-1,-6],[1986,'リベット',1,-6],[1993,'ワイルズの講演',-2,-10],[1994,'穴を修正',1,4],[1995,'論文掲載',-1,14,'#c8433f'],[2001,'モジュラリティ定理',2,-14]];
+  ev.forEach(function(e){
+    var x=X(e[0]), lv=e[2], up=lv<0, d=Math.abs(lv), col=e[4]||'#2e5f4d';
+    var yy=up?AY-14-34*d:AY+28+34*(d-1), yl=up?yy-15:yy+15, tip=up?yy+5:yy-13;
+    el('circle',{cx:x,cy:AY,r:5.5,fill:col,stroke:'#fff','stroke-width':1.5});
+    el('line',{x1:x,y1:up?AY-6:AY+6,x2:x,y2:tip,stroke:col,'stroke-width':1.2});
+    el('text',{x:x+e[3],y:yy,'text-anchor':'middle','font-size':12,'font-weight':900,fill:col},String(e[0]));
+    el('text',{x:x+e[3],y:yl,'text-anchor':'middle','font-size':11,'font-weight':800,fill:'#1c2b26'},e[1]);
+  });
+  el('text',{x:155,y:236,'text-anchor':'middle','font-size':10.5,'font-weight':800,fill:'#6b837a'},'xⁿ＋yⁿ＝zⁿ と直接向き合う時代');
+  el('text',{x:540,y:236,'text-anchor':'middle','font-size':10.5,'font-weight':800,fill:'#6b837a'},'楕円曲線とモジュラー形式の時代（縮尺は前半と別）');
+})();
+</script>
+</body>
+</html>
