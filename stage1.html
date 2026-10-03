@@ -343,6 +343,59 @@
             <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
             <div class="dialog-name student">うさ美</div>
           </div>
+          <div class="dialog-bubble">出発点は (−1, 0) でないといけないんですか？ (−1, 0) から引いたときは、x＝−1 が解の1つだと分かっていたので (x＋1) でくくれました。ほかの有理点から引いても、その点の x 座標が解の1つだと分かっているので、同じようにくくれるはずです。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">試してみよう。単位円の上の有理点 (3/5, 4/5) から、傾き 3/2 の直線を引いてごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">直線は y−4/5＝(3/2)(x−3/5) で、y＝(3/2)x−1/10。x²＋y²＝1 に入れて、分母をはらうために100倍すると 325x²−30x−99＝0。x＝3/5 が解なので (5x−3) でくくれるはずで、(5x−3)(65x＋33)＝0。もう1つの解は x＝−33/65、y＝−56/65 です。33²＋56²＝1089＋3136＝4225＝65² なので、<strong>33, 56, 65</strong> の直角三角形が出てきました。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">(3/5, 4/5) を通る傾き 3/2 の直線：<br class="wbr"><span class="nw">y−4/5＝(3/2)(x−3/5)</span> → <span class="nw">y＝(3/2)x−1/10</span></span>
+        <span class="step">x²＋y²＝1 に代入：<br class="wbr"><span class="nw">x²＋(9/4)x²−(3/10)x＋1/100＝1</span>（((3/2)x−1/10)² を展開）</span>
+        <span class="step">両辺を100倍：<span class="nw">100x²＋225x²−30x＋1＝100</span><br>まとめて <span class="nw">325x²−30x−99＝0</span></span>
+        <span class="step">x＝3/5 が解なので (5x−3) でくくる：<br class="wbr"><span class="nw">(5x−3)(65x＋33)＝0</span><br>（展開すると <span class="nw">325x²＋165x−195x−99</span> で元に戻る）</span>
+        <span class="step">もう1つの解 <span class="nw">x＝−33/65</span><br><span class="nw">y＝(3/2)×(−33/65)−1/10</span><br><span class="nw">＝−99/130−13/130</span><br><span class="nw">＝−112/130＝−56/65</span></span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。一般に、係数が有理数の2次方程式で、解の1つが有理数なら、その解でくくった残りのかっこも有理数の係数の1次式になる。だから、もう1つの解も有理数だ。つまり、単位円の上の<strong>どの有理点から始めても</strong>、有理数の傾きの直線は、必ずもう1つの有理点に当たる。例外は2つだけ。接線を引くと自分自身にしか当たらないし、縦の直線（傾きが決まらない）だと、その点を x 軸で折り返した点に当たる。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">それなら、どうして (−1, 0) を選んだんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">式がいちばん簡単になるからだよ。(−1, 0) から始めると x＝(1−t²)/(1＋t²)、y＝2t/(1＋t²) ときれいにまとまって、t＝m/n から公式がすぐ出てくる。どの有理点から始めても、ほかの有理点は全部その点からの有理数の傾きで出てくるから、たどり着く有理点の集まりは同じなんだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
           <div class="dialog-bubble">ということは、整数の直角三角形は、どれもこの公式で作った三角形か、それを何倍かしたもの、ということですか？</div>
         </div>
         <div class="dialog-row">
