@@ -28,44 +28,35 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<link rel="stylesheet" href="design-system.css?v=20261005a">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LearningResource",
+  "@type": "ItemList",
   "name": "フェルマーの最終定理、証明への道",
-  "alternateName": "FERMAT QUEST",
-  "description": "フェルマーの最終定理の証明への道を、中学数学から一歩ずつたどる全4章・15ステージの無料学習サイト。整数の直角三角形と無限降下法、環論の入り口（単数・既約元・素因数分解の一意性・ガウス整数・理想数）、mod と楕円曲線、モジュラー形式と谷山–志村予想、フライ曲線とリベットの定理、ワイルズの証明まで。",
+  "description": "フェルマーの最終定理の証明への道を、中学数学から一歩ずつたどる全4章・15ステージの無料学習シリーズ。",
   "url": "https://fermat.habatakijuku.com/",
   "inLanguage": "ja",
-  "learningResourceType": "learning activity",
-  "educationalLevel": "中学生以上",
-  "isAccessibleForFree": true,
-  "author": {
-    "@type": "Person",
-    "name": "ruglerugle"
-  },
-  "hasPart": [
+  "itemListElement": [
     {
-      "@type": "LearningResource",
+      "@type": "ListItem",
       "position": 1,
       "name": "第1章 余白の書き込み",
       "url": "https://fermat.habatakijuku.com/margin/"
     },
     {
-      "@type": "LearningResource",
+      "@type": "ListItem",
       "position": 2,
       "name": "第2章 数の世界をひろげる",
       "url": "https://fermat.habatakijuku.com/number-worlds/"
     },
     {
-      "@type": "LearningResource",
+      "@type": "ListItem",
       "position": 3,
       "name": "第3章 時計の算術と楕円曲線",
       "url": "https://fermat.habatakijuku.com/elliptic-curves/"
     },
     {
-      "@type": "LearningResource",
+      "@type": "ListItem",
       "position": 4,
       "name": "第4章 橋をかける",
       "url": "https://fermat.habatakijuku.com/modularity/"
@@ -74,20 +65,182 @@
 }
 </script>
 <style>
-  .hero-curves{width:min(100%,420px);height:auto;display:block;margin:0 auto 6px}
-  .road{list-style:none;margin:0;padding:0;position:relative}
-  .road::before{content:"";position:absolute;left:27px;top:24px;bottom:24px;border-left:3px dashed #c9bfa9}
-  .road li{position:relative;display:flex;gap:16px;align-items:stretch;margin-bottom:16px}
-  .road li:last-child{margin-bottom:0}
-  .road .ch-no{flex-shrink:0;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:950;color:#fff;background:var(--accent);box-shadow:0 0 0 5px var(--paper),0 4px 10px rgba(0,0,0,.18);position:relative;z-index:1}
-  .road .quest-card{flex:1;min-width:0}
-  .road .cleared .ch-no{background:#2f9e5c}
-  .ch-progress{font-size:11.5px;font-weight:900;color:var(--muted)}
-  .chapter-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+  :root{
+    --felt:#14281f;
+    --felt2:#1d352c;
+    --paper:#f6f1e2;
+    --paper2:#fffdf6;
+    --ink:#241d12;
+    --muted:#8a7a5c;
+    --gold:#d9a441;
+    --gold-dark:#a6742a;
+    --line:#ddd0ad;
+    --tp:#f4f2ec;
+    --ts:#c9dccf;
+    --tm:#8fb0a0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(217,164,65,.08), transparent 60%),
+      radial-gradient(800px 480px at 90% 4%, rgba(127,192,168,.10), transparent 60%),
+      linear-gradient(180deg,var(--felt),var(--felt2) 45%,var(--felt));
+    color:var(--tp);
+    font-family:"Hiragino Sans","Yu Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    min-height:100vh;line-height:1.7;overflow-x:hidden;
+  }
+  .stars{
+    position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20px 30px, rgba(255,255,255,.35), transparent),
+      radial-gradient(1px 1px at 140px 90px, rgba(255,255,255,.25), transparent),
+      radial-gradient(1px 1px at 260px 40px, rgba(255,255,255,.3), transparent),
+      radial-gradient(1.5px 1.5px at 340px 160px, rgba(255,255,255,.2), transparent),
+      radial-gradient(1px 1px at 90px 200px, rgba(255,255,255,.22), transparent);
+    background-repeat:repeat;background-size:480px 240px;opacity:.45;
+  }
+  .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:20px 20px 40px}
+
+  .topbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:#fff;padding:12px 18px;margin-bottom:20px;
+    background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(0,0,0,.14));border-radius:14px;border:1px solid rgba(255,255,255,.15)}
+  .brand-badge{width:44px;height:44px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;
+    background:radial-gradient(circle at 35% 30%,rgba(217,164,65,.55),rgba(10,24,18,1) 75%);border:1.5px solid var(--gold);
+    box-shadow:0 0 0 3px rgba(0,0,0,.25),0 0 10px -2px var(--gold)}
+  .brand-copy strong{display:block;font-size:15px;letter-spacing:.03em}
+  .brand-copy small{display:block;font-size:10.5px;color:var(--gold);letter-spacing:.18em;font-weight:700}
+
+  .hero{text-align:center;margin:26px 0 20px}
+  .hero .eq{font:italic 700 clamp(20px,3.4vw,28px) Georgia,"Times New Roman",serif;color:var(--gold);letter-spacing:.04em;margin-bottom:6px;opacity:.95}
+  .hero h1{font-size:clamp(28px,5vw,44px);margin:0 0 10px;font-weight:900;letter-spacing:.06em;color:var(--paper);
+    text-shadow:0 2px 0 rgba(0,0,0,.35), 0 0 34px rgba(217,164,65,.3)}
+  .hero h1 .qmark{color:var(--gold)}
+  .hero .tag{color:var(--ts);font-size:clamp(13.5px,1.9vw,15.5px);max-width:660px;margin:0 auto}
+  .stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 20px}
+  .stat{font-size:12.5px;font-weight:700;color:var(--ts);letter-spacing:.05em;border:1px solid rgba(217,164,65,.4);border-radius:999px;padding:5px 14px;background:rgba(0,0,0,.22)}
+  .stat b{color:var(--gold);font-size:14px}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:800;text-decoration:none;letter-spacing:.03em;border-radius:10px;padding:12px 24px;transition:transform .16s ease, box-shadow .16s ease, filter .16s ease}
+  .btn-primary{color:#fff;background:linear-gradient(180deg,#7ec0a8,#41846b);border:1px solid #306b55;box-shadow:0 3px 0 #1a4032, 0 8px 18px -8px rgba(0,0,0,.6)}
+  .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.05)}
+  .btn-ghost{color:var(--tp);border:1.5px solid rgba(255,255,255,.4);background:rgba(0,0,0,.2)}
+  .btn-ghost:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 0 16px -6px var(--gold)}
+
+  .map-frame{position:relative;margin-top:26px;border-radius:18px;padding:10px;background:linear-gradient(180deg,#8a6a34,#6d5228);
+    box-shadow:0 0 0 1px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.25), 0 24px 50px -24px rgba(0,0,0,.8)}
+  .map{position:relative;width:100%;aspect-ratio:5/3.1;border-radius:10px;overflow:hidden;
+    background:
+      radial-gradient(220px 160px at 13% 30%, rgba(94,150,200,.16), transparent 70%),
+      radial-gradient(220px 170px at 40% 68%, rgba(140,110,220,.15), transparent 70%),
+      radial-gradient(220px 170px at 64% 30%, rgba(60,170,120,.16), transparent 70%),
+      radial-gradient(220px 170px at 87% 66%, rgba(200,90,140,.15), transparent 70%),
+      repeating-radial-gradient(circle at 30% 40%, transparent 0 7px, rgba(138,106,52,.035) 7px 8px),
+      linear-gradient(160deg,#f7f0da,#efe4c3 55%,#f4ecd4);
+    box-shadow:inset 0 0 60px rgba(122,90,42,.35), inset 0 0 14px rgba(122,90,42,.25)}
+  .map svg.terrain{position:absolute;inset:0;width:100%;height:100%}
+  .grid-lines{position:absolute;inset:0;opacity:.5;background-image:linear-gradient(rgba(138,122,92,.14) 1px, transparent 1px),linear-gradient(90deg, rgba(138,122,92,.14) 1px, transparent 1px);background-size:8.333% 12.5%}
+  .vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%, transparent 62%, rgba(122,90,42,.22) 100%)}
+  .deco{position:absolute;font:italic 700 20px Georgia,"Times New Roman",serif;color:#a6742a;opacity:.45;user-select:none;pointer-events:none}
+
+  .trail-glow{fill:none;stroke:var(--gold-dark);stroke-width:1.4;opacity:.22;filter:blur(1.6px)}
+  .trail{fill:none;stroke:var(--gold-dark);stroke-width:.5;stroke-linecap:round;stroke-dasharray:1.3 2;opacity:.95}
+  @media (prefers-reduced-motion: no-preference){ .trail{animation:flow 1.6s linear infinite} @keyframes flow{to{stroke-dashoffset:-3.8}} }
+  .mobile-only{display:none}
+
+  .flag{position:absolute;left:4%;top:20%;transform:translate(-50%,-100%);filter:drop-shadow(0 3px 3px rgba(120,90,40,.5))}
+  .flag .label{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;color:var(--gold-dark);letter-spacing:.12em;font-weight:800;margin-top:2px}
+  .goal{position:absolute;left:96%;top:84%;transform:translate(-50%,-50%);font-size:22px;filter:drop-shadow(0 3px 3px rgba(120,90,40,.5))}
+
+  .node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:inherit;z-index:2}
+  .node .badge{width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 35% 30%, #fffdf6, #f1e6c8 78%);border:2.5px solid var(--accent);
+    box-shadow:0 0 0 3px rgba(255,253,246,.7), 0 4px 0 rgba(122,90,42,.28), 0 8px 16px -6px rgba(90,60,20,.45);transition:transform .18s ease, box-shadow .18s ease;position:relative}
+  .node .badge::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1.5px dashed color-mix(in srgb, var(--accent) 60%, transparent);opacity:.5}
+  @media (prefers-reduced-motion: no-preference){ .node .badge::after{animation:orbit 16s linear infinite} @keyframes orbit{to{transform:rotate(360deg)}} }
+  .node .badge .ic{width:32px;height:32px;color:var(--accent);filter:drop-shadow(0 1px 0 rgba(255,255,255,.8))}
+  .questlog .qi .ic{width:30px;height:30px;color:var(--accent,#d9a441)}
+  .node .num{position:absolute;top:-5px;right:-5px;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:11.5px;font-weight:900;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2.5px #fffdf6, 0 2px 4px rgba(90,60,20,.4)}
+  .node.cleared .num{background:#2f9e5c}
+  .node .label{background:#fffdf6;border:1.5px solid color-mix(in srgb, var(--accent) 60%, #d9c9a0);border-radius:999px;padding:3px 11px;font-size:11.5px;font-weight:800;color:var(--ink);white-space:nowrap;letter-spacing:.02em;box-shadow:0 2px 6px -2px rgba(90,60,20,.35)}
+  .node .prog{font-size:10px;font-weight:800;color:var(--gold-dark);background:rgba(255,253,246,.85);border-radius:999px;padding:0 8px}
+  .node:hover .badge, .node:focus-visible .badge, .node.active .badge{transform:translateY(-5px) scale(1.08);
+    box-shadow:0 0 0 3px rgba(255,253,246,.9), 0 0 20px 0 color-mix(in srgb, var(--accent) 65%, transparent), 0 10px 18px -6px rgba(90,60,20,.5)}
+  .node:hover .badge::after, .node:focus-visible .badge::after, .node.active .badge::after{opacity:1}
+  .node:focus-visible{outline:none}
+  .node .start-tip{position:absolute;top:-32px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:900;color:var(--ink);background:var(--gold);border-radius:999px;padding:3px 10px;white-space:nowrap;letter-spacing:.06em;box-shadow:0 2px 0 var(--gold-dark), 0 4px 10px -3px rgba(90,60,20,.5)}
+  @media (prefers-reduced-motion: no-preference){ .node .start-tip{animation:bob 2s ease-in-out infinite} @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-4px)}} }
+
+  .n1{left:13%; top:30%}
+  .n2{left:39%; top:68%}
+  .n3{left:63%; top:30%}
+  .n4{left:86%; top:66%}
+
+  .questlog{margin-top:16px;background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;gap:16px;align-items:flex-start;min-height:96px;color:var(--ink);box-shadow:0 8px 22px -12px rgba(0,0,0,.55)}
+  .questlog .qi{flex:0 0 auto;width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    background:color-mix(in srgb, var(--accent,#d9a441) 16%, #fffdf6);border:1.5px solid color-mix(in srgb, var(--accent,#d9a441) 55%, transparent)}
+  .questlog .qt{flex:1;min-width:0}
+  .questlog .qsub{font-size:11px;letter-spacing:.1em;color:var(--accent,var(--gold-dark));font-weight:800;margin-bottom:2px}
+  .questlog h3{margin:0 0 6px;font-size:16px;color:var(--ink)}
+  .questlog p{margin:0 0 10px;font-size:13px;color:#5c503a}
+  .questlog .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .questlog .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:2px 9px}
+  .questlog .go{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:800;color:#fff;background:linear-gradient(180deg,#7ec0a8,#41846b);
+    border:1px solid #306b55;border-radius:9px;padding:8px 16px;text-decoration:none;box-shadow:0 2px 0 #1a4032;transition:filter .15s ease, transform .15s ease}
+  .questlog .go:hover{filter:brightness(1.05);transform:translateY(-1px)}
+  .questlog .hint{color:var(--muted);font-size:13px;margin:auto}
+
+  .side{margin-top:40px}
+  .side h2{font-size:17px;margin:0 0 4px;color:var(--tp);letter-spacing:.04em}
+  .side .lead{margin:0 0 14px;font-size:13px;color:var(--tm)}
+  .side-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .side-card{display:block;text-decoration:none;color:var(--ink);background:var(--paper2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:transform .15s ease, box-shadow .15s ease;box-shadow:0 6px 16px -10px rgba(0,0,0,.55)}
+  .side-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px -10px rgba(0,0,0,.6), 0 0 0 2px var(--gold) inset}
+  .side-card .sc-sub{font-size:10.5px;letter-spacing:.12em;color:var(--gold-dark);font-weight:800;margin-bottom:4px}
+  .side-card .sc-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:4px}
+  .side-card .sc-desc{font-size:12px;color:#5c503a;line-height:1.6}
+
+  #book-recommend{color:var(--ink);margin-top:28px;background:var(--paper2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;box-shadow:0 2px 0 rgba(0,0,0,.04)}
+  #book-recommend:empty{display:none}
+  .book-recommend-label{display:inline-block;font-size:10px;font-weight:900;color:var(--muted);border:1px solid var(--muted);border-radius:4px;padding:0 4px;margin:0 0 6px}
+  .book-recommend-body{display:flex;align-items:center;gap:12px}
+  .book-recommend-lead{font-size:12px;color:var(--muted);margin:0 0 4px;font-weight:700}
+  #book-recommend a{font-size:13px;color:var(--gold-dark);font-weight:900;text-decoration:underline}
+  .book-recommend-note{margin-top:7px;font-size:10.5px;color:var(--muted);font-weight:700}
+
+  footer{margin-top:44px;text-align:center;color:var(--tm);font-size:12px;letter-spacing:.08em;position:relative;z-index:1;padding-bottom:26px}
+  .footer-suits{margin-top:6px;display:flex;gap:14px;justify-content:center;color:var(--gold);opacity:.7}
+
+  @media (max-width:640px){
+    .btn{padding:11px 18px;font-size:13.5px}
+    .map{aspect-ratio:4/5.4}
+    .trail-glow:not(.mobile-only), .trail:not(.mobile-only){display:none}
+    .mobile-only{display:block}
+    .deco, .flag, .goal{display:none}
+    .node .start-tip::before{content:"🚩 "}
+    .n1{left:27%; top:14%}
+    .n2{left:72%; top:38%}
+    .n3{left:28%; top:62%}
+    .n4{left:72%; top:86%}
+    .node .badge{width:52px;height:52px}
+    .node .badge .ic{width:26px;height:26px}
+    .node .label{font-size:10px;padding:2px 8px;white-space:normal;text-align:center;line-height:1.3;width:max-content;max-width:130px;border-radius:8px}
+    .node .start-tip{position:static;transform:none;animation:none}
+    .questlog{flex-direction:column}
+  }
 </style>
 </head>
 <body>
-<div class="shell">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h13V5z"/><path d="M14 20v-3h3"/><path d="M19.5 4.5l-1 1M20.5 8h-1.4"/></symbol>
+  <symbol id="ic-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="5" r="1.4" fill="currentColor" stroke="none"/><circle cx="19" cy="5" r="1.4" fill="currentColor" stroke="none"/><circle cx="5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="2.6"/><circle cx="19" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="5" cy="19" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.4" fill="currentColor" stroke="none"/><circle cx="19" cy="19" r="1.4" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 12c0-2 1.3-3.4 2.2-3.4S14 10 14 12s-1.4 3.4-2.3 3.4S9.5 14 9.5 12z"/><path d="M15.5 12c1.5 0 2.2-4 3.5-8M15.5 12c1.5 0 2.2 4 3.5 8"/><path d="M3 9.5l18 1.8" stroke-width="1.4" opacity=".55"/></symbol>
+  <symbol id="ic-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17h19"/><path d="M4 17c0-6 3.6-9 8-9s8 3 8 9"/><path d="M8 17v-6.3M12 17V8M16 17v-6.3"/></symbol>
+</svg>
+<div class="stars"></div>
+<div class="wrap">
+
   <nav class="topbar" aria-label="サイト情報">
     <span class="brand-badge" aria-hidden="true">📜</span>
     <span class="brand-copy">
@@ -97,125 +250,168 @@
   </nav>
 
   <header class="hero">
-    <div class="hero-copy">
-      <svg class="hero-curves" id="hero-svg" viewBox="0 0 420 210" role="img" aria-label="左は x²＋y²＝1 の円で、分数の座標をもつ点が無数に並ぶ。右は x³＋y³＝1 の曲線で、分数の座標をもつ点は座標に0を含む2点しかない"></svg>
-      <h1><span class="line">余白に書けなかった証明を、</span><span class="line accent">358年後から読みにいく。</span></h1>
-      <p>xⁿ＋yⁿ＝zⁿ。n が 2 なら 3²＋4²＝5² のように解は無数にあるのに、n が 3 以上になると、自然数の解は<span class="nowrap">1組もない</span>。1637年ごろ、フェルマーが本の余白に書き残したこの主張は、1995年にワイルズが証明を完成させるまで、358年間だれにも解けなかった。この旅は4つの章でできている。第1章で整数の直角三角形とフェルマー自身の証明を中学数学で実際に証明し、第2章で「数の世界」をひろげて19世紀の挑戦がなぜ崩れたのかを確かめる。第3章・第4章では楕円曲線とモジュラー形式という2つの世界の不思議な一致を、自分の手で計算しながらたどる。</p>
+    <div class="eq" aria-hidden="true">xⁿ + yⁿ = zⁿ</div>
+    <h1>358年の<span class="qmark">証明</span>への地図</h1>
+    <p class="tag">n が 2 なら解は無数にあるのに、3 以上では1つもない。<br>
+      ねこ博士とうさ美と一緒に、4つの章で余白の書き込みからワイルズの証明までを旅しよう。</p>
+    <div class="stats" aria-label="シリーズの規模">
+      <span class="stat"><b>4</b> 章</span>
+      <span class="stat"><b>15</b> ステージ</span>
+      <span class="stat">無料・登録不要</span>
+      <span class="stat">中学数学からOK</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="margin/">🚩 第1章へ出発</a>
+      <a class="btn btn-ghost" href="#map">🗺️ 地図から選ぶ</a>
     </div>
   </header>
 
-  <main>
-    <section class="board" aria-labelledby="road-heading">
-      <div class="board-head">
-        <div><h2 id="road-heading">旅の地図</h2></div>
-        <p>第1章から順に進もう。各章はいくつかのステージでできていて、章ごとに進み具合を記録する。必要な数学は中学レベル。複素数は『本当はおもしろい複素数の世界』で学んだものを思い出しながら使う</p>
-      </div>
-      <ol class="road">
-        <li data-chapter="margin" style="--accent:#2f6f8f;--accent-bg:#e6f0f6">
-          <span class="ch-no" aria-hidden="true">1</span>
-          <a class="quest-card" href="margin/" style="--accent:#2f6f8f;--accent-bg:#e6f0f6">
-            <div class="q-top"><span class="q-num">1</span><span class="q-suit" aria-hidden="true">📜</span></div>
-            <div class="q-meta"><span class="q-tag">ピタゴラス数・無限降下法</span><span class="q-time">全2ステージ</span><span class="ch-progress"></span></div>
-            <div class="q-title">第1章 余白の書き込み</div>
-            <p class="q-desc">フェルマーが本の余白に残した主張から旅を始める。n＝2 の解（整数の直角三角形）をすべて作る公式を導き、フェルマー自身が残した唯一の証明、無限降下法で n＝4 を証明する。</p>
-            <span class="q-cta">この章へ →</span>
-          </a>
-        </li>
-        <li data-chapter="number-worlds" style="--accent:#5b3fa6;--accent-bg:#efe9f9">
-          <span class="ch-no" aria-hidden="true">2</span>
-          <a class="quest-card" href="number-worlds/" style="--accent:#5b3fa6;--accent-bg:#efe9f9">
-            <div class="q-top"><span class="q-num">2</span><span class="q-suit" aria-hidden="true">🧩</span></div>
-            <div class="q-meta"><span class="q-tag">環論の入り口</span><span class="q-time">全7ステージ</span><span class="ch-progress"></span></div>
-            <div class="q-title">第2章 数の世界をひろげる</div>
-            <p class="q-desc">複素数を使って xᵖ＋yᵖ を分けたラメの証明は、なぜ崩れたのか。足し算・引き算・掛け算で閉じた「数の世界（環）」、単数と既約元、素因数分解がただ1通りになる理由とならない理由を、必要な分だけ組み立てる。</p>
-            <span class="q-cta">この章へ →</span>
-          </a>
-        </li>
-        <li data-chapter="elliptic-curves" style="--accent:#2f8f65;--accent-bg:#eaf7ef">
-          <span class="ch-no" aria-hidden="true">3</span>
-          <a class="quest-card" href="elliptic-curves/" style="--accent:#2f8f65;--accent-bg:#eaf7ef">
-            <div class="q-top"><span class="q-num">3</span><span class="q-suit" aria-hidden="true">➰</span></div>
-            <div class="q-meta"><span class="q-tag">mod・楕円曲線・aₚ</span><span class="q-time">全3ステージ</span><span class="ch-progress"></span></div>
-            <div class="q-title">第3章 時計の算術と楕円曲線</div>
-            <p class="q-desc">割った余りだけで計算する mod の世界、2つの有理点から3つ目の有理点を生む楕円曲線、そして素数ごとに点を数えて作る曲線の指紋 aₚ。証明の後半を支える道具をそろえる。</p>
-            <span class="q-cta">この章へ →</span>
-          </a>
-        </li>
-        <li data-chapter="modularity" style="--accent:#a63f6f;--accent-bg:#fbe9f1">
-          <span class="ch-no" aria-hidden="true">4</span>
-          <a class="quest-card" href="modularity/" style="--accent:#a63f6f;--accent-bg:#fbe9f1">
-            <div class="q-top"><span class="q-num">4</span><span class="q-suit" aria-hidden="true">🌉</span></div>
-            <div class="q-meta"><span class="q-tag">モジュラー形式・ワイルズ</span><span class="q-time">全3ステージ</span><span class="ch-progress"></span></div>
-            <div class="q-title">第4章 橋をかける</div>
-            <p class="q-desc">楕円曲線の指紋が、まったく別の世界の関数「モジュラー形式」の係数として現れる。谷山–志村予想、フェルマーの式から作るありえない曲線、そしてワイルズの7年間。2つの世界にかかる橋が、358年の問題を解く。</p>
-            <span class="q-cta">この章へ →</span>
-          </a>
-        </li>
-      </ol>
-    </section>
+  <div class="map-frame" id="map">
+    <div class="map">
+      <div class="grid-lines"></div>
+      <svg class="terrain" viewBox="0 0 100 60" preserveAspectRatio="none">
+        <path class="trail-glow" d="M8,12.6 C10,14 11,18 13,18 C22,18 28,40.8 39,40.8 C51,40.8 53,18 63,18 C73,18 76,39.6 86,39.6 C90,39.6 93,46 96,50.4"/>
+        <path class="trail" d="M8,12.6 C10,14 11,18 13,18 C22,18 28,40.8 39,40.8 C51,40.8 53,18 63,18 C73,18 76,39.6 86,39.6 C90,39.6 93,46 96,50.4"/>
+        <path class="trail-glow mobile-only" d="M27,8.4 C55,8.4 72,12 72,22.8 C72,34 28,26 28,37.2 C28,48 60,44 72,51.6"/>
+        <path class="trail mobile-only" d="M27,8.4 C55,8.4 72,12 72,22.8 C72,34 28,26 28,37.2 C28,48 60,44 72,51.6"/>
+      </svg>
+      <span class="deco" style="left:26%;top:12%">a²＋b²＝c²</span>
+      <span class="deco" style="left:52%;top:84%">ℤ[i]</span>
+      <span class="deco" style="left:44%;top:12%">ζᵖ＝1</span>
+      <span class="deco" style="left:74%;top:10%">y²＝x³＋ax＋b</span>
+      <span class="deco" style="left:8%;top:76%">∞</span>
+      <span class="deco" style="left:70%;top:86%">q＝e²ᵖⁱᵗ</span>
+      <div class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M5 22V3" stroke="#8a6a24" stroke-width="2" stroke-linecap="round"/><path d="M6 4h12l-3 4 3 4H6z" fill="#c8433f"/></svg><span class="label">START</span></div>
+      <div class="goal" aria-hidden="true">🏛️</div>
+      <div class="vignette"></div>
 
-    <section class="board" aria-labelledby="next-heading" style="margin-top:16px">
-      <div class="board-head">
-        <div><h2 id="next-heading">バックナンバー</h2></div>
-        <p>同じねこ博士とうさ美が案内する、姉妹サイトの学習クエスト</p>
-      </div>
-      <div class="quest-grid">
-        <a class="quest-card" href="https://complex-number.habatakijuku.com/" target="_blank" rel="noopener" style="--accent:#5b3fa6;--accent-bg:#efe9f9">
-          <div class="q-top"><span class="q-num">i</span><span class="q-suit" aria-hidden="true">🌀</span></div>
-          <div class="q-meta"><span class="q-tag">複素数</span><span class="q-time">全8ステージ</span></div>
-          <div class="q-title">本当はおもしろい複素数の世界</div>
-          <p class="q-desc">この旅の第2章と第4章で使う複素数の出どころ。数直線から i の誕生、回転としての掛け算、極形式、そしてオイラーの等式まで。</p>
-          <span class="q-cta">読む →</span>
-        </a>
-        <a class="quest-card" href="https://quantum-mechanics.habatakijuku.com/" target="_blank" rel="noopener" style="--accent:#1f7488;--accent-bg:#e4f2f5">
-          <div class="q-top"><span class="q-num">⚛</span><span class="q-suit" aria-hidden="true">🌌</span></div>
-          <div class="q-meta"><span class="q-tag">量子力学</span><span class="q-time">全9クエスト</span></div>
-          <div class="q-title">量子力学、冒険の書</div>
-          <p class="q-desc">二重スリットから量子コンピュータの回路作りまで、9つのクエストでたどる量子力学のシリーズマップ。ショアのアルゴリズムでは、余りの計算が活躍する。</p>
-          <span class="q-cta">読む →</span>
-        </a>
-        <a class="quest-card" href="https://rotary-engine.habatakijuku.com/" target="_blank" rel="noopener" style="--accent:#3d5f88;--accent-bg:#e9eef6">
-          <div class="q-top"><span class="q-num">⚙</span><span class="q-suit" aria-hidden="true">🍙</span></div>
-          <div class="q-meta"><span class="q-tag">作図</span><span class="q-time">全8ステージ</span></div>
-          <div class="q-title">ロータリーエンジンを作図する</div>
-          <p class="q-desc">三角おむすびのローターと繭形のハウジングを、2つの数から中学数学の式だけで描く。曲線を式で描く楽しさを味わえる。</p>
-          <span class="q-cta">読む →</span>
-        </a>
-      </div>
-    </section>
+      <a class="node n1" href="margin/" data-chapter="margin"
+         data-accent="#2f6f8f" data-icon="ic-1" data-sub="THE MARGIN" data-title="第1章 余白の書き込み"
+         data-desc="フェルマーが本の余白に残した主張から旅を始める。n＝2 の解（整数の直角三角形）をすべて作る公式を導き、フェルマー自身が残した唯一の証明、無限降下法で n＝4 を証明する。"
+         data-tags="ピタゴラス数,無限降下法,背理法" data-num="1" data-stages="全2ステージ" data-level="基礎" data-prereq="前提: なし">
+        <span class="start-tip">ここから！</span><div class="badge" style="--accent:#2f6f8f"><svg class="ic" aria-hidden="true"><use href="#ic-1"></use></svg><span class="num">1</span></div>
+        <div class="label">第1章 余白の書き込み</div>
+      </a>
 
-    <div id="book-recommend"></div>
-  </main>
+      <a class="node n2" href="number-worlds/" data-chapter="number-worlds"
+         data-accent="#5b3fa6" data-icon="ic-2" data-sub="NUMBER WORLDS" data-title="第2章 数の世界をひろげる"
+         data-desc="複素数で xᵖ＋yᵖ を分けたラメの証明は、なぜ崩れたのか。足し算・引き算・掛け算で閉じた「数の世界（環）」、単数と既約元、素因数分解がただ1通りになる世界とならない世界を、必要な分だけ組み立てる。環論の入り口。"
+         data-tags="環,ガウス整数,素因数分解の一意性,理想数" data-num="2" data-stages="全7ステージ" data-level="発展" data-prereq="前提: ①">
+        <div class="badge" style="--accent:#5b3fa6"><svg class="ic" aria-hidden="true"><use href="#ic-2"></use></svg><span class="num">2</span></div>
+        <div class="label">第2章 数の世界をひろげる</div>
+      </a>
+
+      <a class="node n3" href="elliptic-curves/" data-chapter="elliptic-curves"
+         data-accent="#2f8f65" data-icon="ic-3" data-sub="ELLIPTIC CURVES" data-title="第3章 時計の算術と楕円曲線"
+         data-desc="割った余りだけで計算する mod の世界、2つの有理点から3つ目の有理点を生む楕円曲線、そして素数ごとに点を数えて作る曲線の指紋 aₚ。証明の後半を支える道具をそろえる。"
+         data-tags="mod,楕円曲線,aₚ" data-num="3" data-stages="全3ステージ" data-level="基礎" data-prereq="前提: ①">
+        <div class="badge" style="--accent:#2f8f65"><svg class="ic" aria-hidden="true"><use href="#ic-3"></use></svg><span class="num">3</span></div>
+        <div class="label">第3章 時計の算術と楕円曲線</div>
+      </a>
+
+      <a class="node n4" href="modularity/" data-chapter="modularity"
+         data-accent="#a63f6f" data-icon="ic-4" data-sub="THE BRIDGE" data-title="第4章 橋をかける"
+         data-desc="楕円曲線の指紋が、まったく別の世界の関数「モジュラー形式」の係数として現れる。谷山–志村予想、フェルマーの式から作るありえない曲線、そしてワイルズの7年間。2つの世界にかかる橋が、358年の問題を解く。旅の終着点。"
+         data-tags="モジュラー形式,フライ曲線,ワイルズ" data-num="4" data-stages="全3ステージ" data-level="発展" data-prereq="前提: ③">
+        <div class="badge" style="--accent:#a63f6f"><svg class="ic" aria-hidden="true"><use href="#ic-4"></use></svg><span class="num">4</span></div>
+        <div class="label">第4章 橋をかける</div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="questlog" id="questlog">
+    <p class="hint">地図上の章にカーソルを合わせる（またはタップする）と、ここに詳細が表示されます。<br>番号順に進めば無理なく学べます。初めての方は <strong>第1章 余白の書き込み</strong>から！ 第2章は環論の入り口で歯ごたえがあるので、先に第3章へ進んでもかまいません。</p>
+  </div>
+
+  <div class="side">
+    <h2>📚 バックナンバー</h2>
+    <p class="lead">同じねこ博士とうさ美が案内する、姉妹サイトの学習クエストです。</p>
+    <div class="side-grid">
+      <a class="side-card" href="https://complex-number.habatakijuku.com/" target="_blank" rel="noopener">
+        <div class="sc-sub">準備編 ・ MATH</div>
+        <div class="sc-title">本当はおもしろい複素数の世界</div>
+        <div class="sc-desc">第2章と第4章で使う複素数を、ガウス平面からオイラーの等式まで基礎から。</div>
+      </a>
+      <a class="side-card" href="https://quantum-mechanics.habatakijuku.com/" target="_blank" rel="noopener">
+        <div class="sc-sub">シリーズ ・ QUANTUM</div>
+        <div class="sc-title">量子力学、冒険の書</div>
+        <div class="sc-desc">二重スリットから量子コンピュータの回路作りまで、9つのクエストでたどる量子力学のシリーズ。</div>
+      </a>
+      <a class="side-card" href="https://rotary-engine.habatakijuku.com/" target="_blank" rel="noopener">
+        <div class="sc-sub">作図 ・ ENGINEERING</div>
+        <div class="sc-title">ロータリーエンジンを作図する</div>
+        <div class="sc-desc">三角おむすびのローターと繭形のハウジングを、2つの数から中学数学の式だけで描く全8ステージ。</div>
+      </a>
+    </div>
+  </div>
+
+  <div id="book-recommend"></div>
 
   <footer>
-    <p>NO DOWNLOAD. NO REGISTRATION. JUST LEARN. &nbsp;© <span id="year"></span> ruglerugle</p>
-    <div class="footer-suits" aria-hidden="true"><span>📜</span><span>🧩</span><span>➰</span><span>🌉</span></div>
+    <p>NO DOWNLOAD. NO REGISTRATION. JUST LEARN. &nbsp;&copy; <span id="year"></span> ruglerugle</p>
+    <div class="footer-suits" aria-hidden="true"><span>∞</span><span>ζ</span><span>ℤ</span><span>∎</span></div>
   </footer>
+
 </div>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
 <script src="js/progress.js?v=20261005a"></script>
-<script>FQ.initSeriesPage();</script>
 <script>
-/* ヒーロー図 */
-(function(){
-  var svg=document.getElementById('hero-svg'), NS='http://www.w3.org/2000/svg';
-  function el(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e;}
-  function gcd(a,b){while(b){var t=a%b;a=b;b=t;}return a;}
-  var R=72, c1=[105,98], c2=[315,98], s2=R/1.1;
-  [c1,c2].forEach(function(c){ el('line',{x1:c[0]-R-14,y1:c[1],x2:c[0]+R+14,y2:c[1],stroke:'rgba(255,255,255,.25)','stroke-width':1}); el('line',{x1:c[0],y1:c[1]-R-14,x2:c[0],y2:c[1]+R+14,stroke:'rgba(255,255,255,.25)','stroke-width':1}); });
-  el('circle',{cx:c1[0],cy:c1[1],r:R,fill:'none',stroke:'#7fc0a8','stroke-width':2.2});
-  // x^3+y^3=1 の曲線（x を動かして y を求める）
-  var d='', first=true;
-  for(var i=0;i<=400;i++){ var x=-1.25+i*2.5/400, y=Math.cbrt(1-x*x*x); if(Math.abs(y)>1.25) continue; d+=(first?'M':'L')+(c2[0]+x*s2).toFixed(1)+' '+(c2[1]-y*s2).toFixed(1)+' '; first=false; }
-  el('path',{d:d,fill:'none',stroke:'#7fc0a8','stroke-width':2.2});
-  for(var n=2;n<=14;n++) for(var m=-n+1;m<n;m++){ if(gcd(Math.abs(m),n)!==1) continue; var t=m/n, x=(1-t*t)/(1+t*t), y=2*t/(1+t*t); [[x,y],[-x,y],[y,x]].forEach(function(p){ el('circle',{cx:(c1[0]+p[0]*R).toFixed(1),cy:(c1[1]-p[1]*R).toFixed(1),r:2.4,fill:'#e3bd6a'}); }); }
-  [[1,0],[0,1]].forEach(function(p){ el('circle',{cx:c2[0]+p[0]*s2,cy:c2[1]-p[1]*s2,r:3.6,fill:'#e3bd6a'}); });
-  el('text',{x:c1[0],y:202,'text-anchor':'middle','font-size':14,'font-weight':900,fill:'#fff'},'x²＋y²＝1');
-  el('text',{x:c2[0],y:202,'text-anchor':'middle','font-size':14,'font-weight':900,fill:'#fff'},'x³＋y³＝1');
-})();
+  FQ.initSeriesPage();
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var log = document.getElementById('questlog');
+  var nodes = document.querySelectorAll('.node');
+
+  // 各章の進み具合
+  function progress(chap){
+    var C = FQ.CHAPTERS[chap], done = FQ.getCleared(chap).filter(function(n){return n>=1 && n<=C.stages.length;}).length;
+    return { done: done, total: C.stages.length };
+  }
+  nodes.forEach(function(n){
+    var p = progress(n.dataset.chapter);
+    if (p.done === p.total) n.classList.add('cleared');
+    if (p.done > 0) {
+      var s = document.createElement('span'); s.className = 'prog';
+      s.textContent = p.done === p.total ? 'クリア済み ✓' : 'クリア ' + p.done + ' / ' + p.total;
+      n.appendChild(s);
+    }
+  });
+
+  function renderLog(n){
+    var accent = n.dataset.accent, p = progress(n.dataset.chapter);
+    var tags = n.dataset.tags.split(',').map(function(t){return '<span class="tag">'+t+'</span>'}).join('');
+    log.style.setProperty('--accent', accent);
+    log.innerHTML =
+      '<div class="qi" style="--accent:'+accent+'"><svg class="ic" aria-hidden="true"><use href="#'+n.dataset.icon+'"></use></svg></div>' +
+      '<div class="qt">' +
+        '<div class="qsub" style="color:'+accent+'">CHAPTER '+n.dataset.num+' ・ '+n.dataset.sub+' ・ '+n.dataset.stages+' ・ '+n.dataset.level+' ・ '+n.dataset.prereq+(p.done ? ' ・ クリア '+p.done+' / '+p.total : '')+'</div>' +
+        '<h3>'+n.dataset.title+'</h3>' +
+        '<p>'+n.dataset.desc+'</p>' +
+        '<div class="tags">'+tags+'</div>' +
+        '<a class="go" href="'+n.getAttribute('href')+'">この章へ出発する →</a>' +
+      '</div>';
+  }
+
+  nodes.forEach(function(n){
+    // スマホ：1回目のタップが詳細表示（hover相当）に消費されて遷移しないため、タップで即遷移する
+    var tStart = null;
+    n.addEventListener('touchstart', function(e){ var t = e.touches[0]; tStart = [t.clientX, t.clientY]; }, { passive: true });
+    n.addEventListener('touchend', function(e){
+      if (!tStart) return;
+      var t = e.changedTouches[0], dx = Math.abs(t.clientX - tStart[0]), dy = Math.abs(t.clientY - tStart[1]);
+      tStart = null;
+      if (dx < 10 && dy < 10) { e.preventDefault(); window.location.href = n.getAttribute('href'); }
+    });
+    n.addEventListener('touchcancel', function(){ tStart = null; });
+    ['mouseenter','focus'].forEach(function(ev){
+      n.addEventListener(ev, function(){
+        nodes.forEach(function(x){x.classList.remove('active')});
+        n.classList.add('active');
+        renderLog(n);
+      });
+    });
+  });
 </script>
 </body>
 </html>
