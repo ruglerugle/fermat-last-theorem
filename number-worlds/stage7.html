@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>第2章 STAGE7 見えない部品（クンマーの理想数とイデアル・正則素数） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="クンマーの理想数とイデアルを中学生向けに解説。a＋b√−5 の世界で崩れた素因数分解を、見えない部品の集まりで修理する考え方と、正則素数についてのフェルマーの最終定理の証明、届かなかった残りの素数まで。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/number-worlds/stage7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="第2章 STAGE7 見えない部品（クンマーの理想数とイデアル・正則素数） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="数の世界で崩れた素因数分解を、クンマーは「見えない部品」で修理した。理想数とイデアル、正則素数、そして届かなかった残り。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/number-worlds/stage7">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE7 見えない部品",
+      "description": "クンマーの理想数とイデアルを中学生向けに解説。a＋b√−5 の世界で崩れた素因数分解を、見えない部品の集まりで修理する考え方と、正則素数についてのフェルマーの最終定理の証明、届かなかった残りの素数まで。",
+      "url": "https://fermat.habatakijuku.com/number-worlds/stage7",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 7,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "第2章 数の世界をひろげる",
+        "url": "https://fermat.habatakijuku.com/number-worlds/",
+        "isPartOf": {
+          "@type": "LearningResource",
+          "name": "フェルマーの最終定理、証明への道",
+          "url": "https://fermat.habatakijuku.com/"
+        }
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "第2章 数の世界をひろげる",
+          "item": "https://fermat.habatakijuku.com/number-worlds/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "STAGE7 見えない部品",
+          "item": "https://fermat.habatakijuku.com/number-worlds/stage7"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="../design-system.css?v=20261005a">
+<style>
+.sim-controls .btn[aria-pressed="true"]{background:linear-gradient(#7fc0a8,#41846b);border-color:#2e5f4d;color:#fff}
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="../" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">第2章 数の世界をひろげる ／ STAGE 7 ― 見えない部品 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 7</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">第2章 STAGE 7</span><h1 class="chapter-title">見えない部品</h1>
+        <div class="chapter-sub">クンマーの理想数と正則素数</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">理想数（見えない部品）を「その部品で割り切れる数の集まり」として考える方法を理解し、a＋b√−5 の部品 A の集まりに 2 と 1＋√−5 が入り 3 が入らないことを確かめよう。クンマーが証明できた範囲（正則素数）を説明できれば合格。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">前のステージの最後に、クンマーはこの世界を修理した、と言ったね。分けられないはずの数を、さらに細かく分ける「<strong>理想数</strong>」という見えない部品を考え出して、その部品のレベルでは分解がまたただ1通りになるようにしたんだ。たとえば 6 の場合、2, 3, 1±√−5 はどれも理想数の2個の積になっていて、2通りに見えた分解は、同じ4つの部品の組み合わせ方の違いにすぎない。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+        <svg viewBox="0 0 420 250" role="img" aria-label="6の2通りの分解を、理想数の部品A、B、Cで表した図。2はA×A、3はB×C、1＋√−5はA×B、1−√−5はA×C。どちらの分解も、部品で見ると同じA×A×B×Cになる">
+          <text x="210" y="24" text-anchor="middle" font-size="18" font-weight="900" fill="#1c2b26">6</text>
+          <line x1="200" y1="30" x2="110" y2="56" stroke="#b9b0a3" stroke-width="1.5"/><line x1="220" y1="30" x2="310" y2="56" stroke="#b9b0a3" stroke-width="1.5"/>
+          <text x="110" y="76" text-anchor="middle" font-size="15" font-weight="900" fill="#1c2b26">2 × 3</text>
+          <text x="310" y="76" text-anchor="middle" font-size="15" font-weight="900" fill="#1c2b26">(1＋√−5) × (1−√−5)</text>
+          <line x1="88" y1="84" x2="70" y2="110" stroke="#b9b0a3"/><line x1="132" y1="84" x2="150" y2="110" stroke="#b9b0a3"/>
+          <line x1="270" y1="84" x2="262" y2="110" stroke="#b9b0a3"/><line x1="352" y1="84" x2="360" y2="110" stroke="#b9b0a3"/>
+          <text x="70" y="128" text-anchor="middle" font-size="12" font-weight="800" fill="#6b837a">2 は</text>
+          <text x="150" y="128" text-anchor="middle" font-size="12" font-weight="800" fill="#6b837a">3 は</text>
+          <text x="262" y="128" text-anchor="middle" font-size="12" font-weight="800" fill="#6b837a">1＋√−5 は</text>
+          <text x="360" y="128" text-anchor="middle" font-size="12" font-weight="800" fill="#6b837a">1−√−5 は</text>
+          <rect x="37" y="140" width="30" height="24" rx="6" fill="#41846b"/><text x="52" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">A</text><rect x="73" y="140" width="30" height="24" rx="6" fill="#41846b"/><text x="88" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">A</text>
+          <rect x="117" y="140" width="30" height="24" rx="6" fill="#9a6a1c"/><text x="132" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">B</text><rect x="153" y="140" width="30" height="24" rx="6" fill="#3f6fb5"/><text x="168" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">C</text>
+          <rect x="229" y="140" width="30" height="24" rx="6" fill="#41846b"/><text x="244" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">A</text><rect x="265" y="140" width="30" height="24" rx="6" fill="#9a6a1c"/><text x="280" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">B</text>
+          <rect x="327" y="140" width="30" height="24" rx="6" fill="#41846b"/><text x="342" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">A</text><rect x="363" y="140" width="30" height="24" rx="6" fill="#3f6fb5"/><text x="378" y="157" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">C</text>
+          <rect x="60" y="190" width="300" height="44" rx="10" fill="#eef7f2" stroke="#41846b"/>
+          <text x="210" y="210" text-anchor="middle" font-size="13" font-weight="900" fill="#2e5f4d">どちらの分け方も、部品で見ると</text>
+          <text x="210" y="227" text-anchor="middle" font-size="13" font-weight="900" fill="#2e5f4d">A × A × B × C</text>
+        </svg>
+        <div class="diagram-caption">クンマーの理想数の考え方（イメージ）。2, 3, 1＋√−5, 1−√−5 は、a＋b√−5 の世界ではこれ以上分けられないが、目に見えない部品 A, B, C の2個ずつの積だと考える。すると、2通りに見えた 6 の分解は、同じ4つの部品の組み合わせ方が違うだけになる</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">でも、部品 A は a＋b√−5 の世界の数ではないんですよね。この世界にない数を、どうやって扱うんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">いい質問だね。部品そのものを数として書くのではなく、<strong>その部品で割り切れる数を全部集めたもの</strong>を考えるんだ。のちにデデキントという数学者が、こういう集まりに<strong>イデアル</strong>という名前をつけた。部品 A で割り切れる数の集まりは、2x＋(1＋√−5)y（x, y はこの世界の数）の形の数を全部集めたものになる。そしてこれは、a＋b√−5 のうち <strong>a＋b が偶数</strong>の数全体とちょうど一致することが分かっている。2, 1＋√−5, 3 がこの集まりに入るか、確かめてごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">2＝2＋0√−5 は a＋b＝2 で偶数なので入ります。1＋√−5 は 1＋1＝2 で入ります。3 は 3＋0＝3 で奇数なので入りません。3 は部品 A で割り切れない、ということですね。それと、2 の倍数は a も b も偶数なので、2 の倍数の集まりは、A の集まりのさらに一部になっています。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。2 の倍数の集まりは、A の集まりどうしを掛け合わせた集まりにちょうどなっていて、これが「2＝A×A」の正体なんだ。こうして、数の代わりに「部品で割り切れる数の集まり」で掛け算や割り算を考えると、どの世界でも分解がただ1通りに戻る。数で書ける部品だけでは足りなかったところを、集まりで補ったんだね。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<div class="cv-wrap"><canvas id="cv-ideal" aria-label="a＋b√−5 の格子点のうち、部品Aで割り切れる数（a＋bが偶数）と、2の倍数（aもbも偶数）を色分けした図"></canvas></div>
+        <div class="sim-controls">
+          <span class="grp-label">表示</span>
+          <button class="btn" type="button" data-show="A" aria-pressed="true">部品 A で割り切れる数</button>
+          <button class="btn" type="button" data-show="2" aria-pressed="false">2 の倍数</button>
+          <button class="btn" type="button" data-show="B" aria-pressed="false">部品 B で割り切れる数</button>
+        </div>
+        <div class="readout" id="ro-ideal"></div>
+        <div class="diagram-caption"><strong>見えない部品を「数の集まり」として見る</strong>。a＋b√−5 の数を横 a・縦 b√5 の点として並べ、選んだ集まりに入る点を色で示した。部品 A で割り切れる数は a＋b が偶数の点（市松模様）で、2 も 1＋√−5 も入るが 3 は入らない。2 の倍数（a も b も偶数）は、その一部になっている。部品 B で割り切れる数は a＋2b が 3 の倍数になる点で、3 と 1＋√−5 は入るが 2 は入らない</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">数の世界では1通りでなくても、部品の集まりの世界では1通りに戻るんですね。それで、フェルマーの最終定理は全部解けたんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">全部ではないんだ。部品のレベルで1通りに戻っても、「数で書ける部品」と「数では書けない部品」が混ざっている。その乱れぐあいを表す数があって（類数という）、a＋b√−5 の世界ではそれが 2 だ。クンマーは、ζ の世界のこの乱れぐあいを表す数が p で割り切れない素数を<strong>正則素数</strong>と呼び、正則素数すべてについてフェルマーの最終定理を証明した。100 より小さい素数では、37, 59, 67 を除くすべてが正則素数だ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">では、37, 59, 67 のような正則でない素数が残るんですね。正則でない素数は、いくつあるんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">無限にあることが分かっている。だから、クンマーの方法でも全部の素数を片づけることはできなかった。その後、正則でない素数を1つずつ処理する工夫が重ねられ、コンピュータの助けを借りて、1993年には 400万 までのすべての素数で確かめられた。それでも、無限の残りには手が届かない。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">複素数を使って、新しい数の世界まで作ったのに、それでも届かなかったんですね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">けれど、無駄にはならなかった。クンマーの理想数とデデキントのイデアルは、<strong>代数的整数論</strong>という大きな分野の土台になった。この章で組み立てた環、単数、既約元、素元、一意性という言葉は、今もその入り口にある。最終的な証明は、まったく別の方向からやってくる。その方向へ進むために、次の章では、数を「割った余り」だけで計算する<strong>時計の算術</strong>から始めよう。後半の旅は、すべてこの言葉で書かれているんだ。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">クンマーの理想数：分けられない数をさらに分ける見えない部品。6 の2通りの分解は、同じ部品 A, A, B, C の組み合わせ方の違い</span>
+        <span class="step">イデアル：部品で割り切れる数を全部集めたもの。部品 A の集まりは 2x＋(1＋√−5)y の形の数＝a＋b が偶数の数（2 と 1＋√−5 は入り、3 は入らない）</span>
+        <span class="step">数の代わりに「部品で割り切れる数の集まり」で掛け算・割り算を考えると、分解がただ1通りに戻る</span>
+        <span class="step">類数（乱れぐあい）が p で割り切れない素数＝正則素数。クンマーは正則素数すべてで最終定理を証明（100未満では 37, 59, 67 以外）</span>
+        <span class="step">正則でない素数は無限にある。1993年に 400万 までの素数で確かめられたが、全部には届かなかった</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. クンマーの「見えない部品」（理想数）を、数学ではどう扱う？</p>
+        <div class="choice-list">
+          <button class="choice-btn">新しい記号の数として、普通の数と同じように足し算する</button>
+          <button class="choice-btn">その部品で割り切れる数を全部集めた集まり（イデアル）として扱う</button>
+          <button class="choice-btn">見えないので、計算には使わない</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 部品そのものはこの世界の数ではないので、「その部品で割り切れる数の集まり」で代わりに表す。デデキントはこれをイデアルと名づけた。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. a＋b√−5 の部品 A で割り切れる数（a＋b が偶数の数）に入らないものは？</p>
+        <div class="choice-list">
+          <button class="choice-btn">2</button>
+          <button class="choice-btn">1＋√−5</button>
+          <button class="choice-btn">3</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 3＝3＋0√−5 は a＋b＝3 で奇数なので入らない。2 は 2＋0＝2、1＋√−5 は 1＋1＝2 で、どちらも偶数なので入る。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. クンマーが証明できたフェルマーの最終定理の範囲は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">正則素数すべて（100 未満では 37, 59, 67 以外）</button>
+          <button class="choice-btn">すべての素数</button>
+          <button class="choice-btn">p＝3 と p＝5 だけ</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ ζ の世界の乱れぐあい（類数）が p で割り切れない素数が正則素数。正則でない素数は無限にあるので、全部には届かなかった。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← 章のトップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/progress.js?v=20261005a"></script>
+<script src="../js/fermat.js?v=20261005a"></script>
+<script>FQ.initStagePage("number-worlds", 7);</script>
+<script>
+/* イデアル（部品で割り切れる数の集まり）を格子で見る */
+(function(){
+  var btns=document.querySelectorAll('[data-show]'), ro=document.getElementById('ro-ideal'), mode='A';
+  var S5=Math.sqrt(5);
+  var IN={
+    A:function(a,b){return ((a+b)%2+2)%2===0;},
+    '2':function(a,b){return a%2===0&&b%2===0;},
+    B:function(a,b){return ((a+2*b)%3+3)%3===0;}
+  };
+  var NAME={A:'部品 A で割り切れる数（a＋b が偶数）',2:'2 の倍数（a も b も偶数）',B:'部品 B で割り切れる数（a＋2b が 3 の倍数）'};
+  var st=FL.canvas('cv-ideal',0.8,draw);
+  function draw(st){
+    var ctx=st.ctx; ctx.clearRect(0,0,st.W,st.H); ctx.fillStyle=FL.C.paper; ctx.fillRect(0,0,st.W,st.H);
+    var v=FL.view(st,12,1,0);
+    FL.axes(ctx,st,v,0,{labels:false});
+    for(var a=-8;a<=10;a++) for(var b=-3;b<=3;b++){
+      var x=v.X(a), y=v.Y(b*S5); if(x<-4||x>st.W+4||y<-4||y>st.H+4) continue;
+      var on=IN[mode](a,b);
+      FL.dot(ctx,x,y,on?5.5:2.6,on?(mode==='2'?FL.C.blue:mode==='B'?FL.C.gold:FL.C.theme):'#c9c2b4');
+    }
+    [[2,0,'2',-8],[3,0,'3',20],[1,1,'1＋√−5',-8],[1,-1,'1−√−5',-8]].forEach(function(t){
+      var on=IN[mode](t[0],t[1]);
+      FL.text(ctx,t[2]+(on?' ○':' ×'),v.X(t[0])+7,v.Y(t[1]*S5)+t[3],{color:on?FL.C.themeDark:FL.C.red,size:12,halo:true});
+    });
+    ro.innerHTML='<span>色つきの点：<b>'+NAME[mode]+'</b></span>';
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){mode=b.getAttribute('data-show');btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});st.redraw();});});
+})();
+</script>
+</body>
+</html>

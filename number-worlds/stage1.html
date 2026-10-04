@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>第2章 STAGE1 ラメの発表（1 の p 乗根と xᵖ＋yᵖ の因数分解） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="ラメの証明と1のp乗根を中学生向けに解説。1847年、ラメは複素数を使って xᵖ＋yᵖ を p 個の掛け算に分け、全素数で証明できたと発表した。p＝3 での確かめと、リウヴィルの疑問まで。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/number-worlds/stage1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="第2章 STAGE1 ラメの発表（1 の p 乗根と xᵖ＋yᵖ の因数分解） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="1847年、ラメは「すべての素数で証明できた」と発表した。複素数で xᵖ＋yᵖ を p 個の掛け算に分ける作戦と、その場で投げかけられた疑問。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/number-worlds/stage1">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE1 ラメの発表",
+      "description": "ラメの証明と1のp乗根を中学生向けに解説。1847年、ラメは複素数を使って xᵖ＋yᵖ を p 個の掛け算に分け、全素数で証明できたと発表した。p＝3 での確かめと、リウヴィルの疑問まで。",
+      "url": "https://fermat.habatakijuku.com/number-worlds/stage1",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 1,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "第2章 数の世界をひろげる",
+        "url": "https://fermat.habatakijuku.com/number-worlds/",
+        "isPartOf": {
+          "@type": "LearningResource",
+          "name": "フェルマーの最終定理、証明への道",
+          "url": "https://fermat.habatakijuku.com/"
+        }
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "第2章 数の世界をひろげる",
+          "item": "https://fermat.habatakijuku.com/number-worlds/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "STAGE1 ラメの発表",
+          "item": "https://fermat.habatakijuku.com/number-worlds/stage1"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="../design-system.css?v=20261005a">
+<style>
+#svg-roots{max-width:min(100%,300px)}
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="../" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">第2章 数の世界をひろげる ／ STAGE 1 ― ラメの発表 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 7</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">第2章 STAGE 1</span><h1 class="chapter-title">ラメの発表</h1>
+        <div class="chapter-sub">1 の p 乗根で xᵖ＋yᵖ を分ける</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">1 の p 乗根 ζ を使うと xᵖ＋yᵖ が p 個のかっこの掛け算に分けられることを、p＝3 で確かめよう。ラメの作戦と、それが何を前提にしていたかを説明できれば合格。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">第1章の最後で、残る課題は指数が<strong>奇数の素数 p</strong> の場合だけになった。18〜19世紀の数学者は、これを1つずつ片づけていった。1770年ごろにオイラーが n＝3 を、1825年にディリクレとルジャンドルが n＝5 を、1839年にラメが n＝7 を証明した。フランスのソフィー・ジェルマンは、x, y, z がどれも p で割り切れないという特別な場合を、たくさんの素数についてまとめて片づけた。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">3, 5, 7 と進むのに、何十年もかかっているんですね。でも、素数は無限にあるので、1つずつでは終わりません。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そこで 1847年3月、ラメがパリの科学アカデミーで「<strong>すべての素数 p について証明できた</strong>」と発表した。決め手は、きみが学んだ<strong>複素数</strong>だ。p を素数として、長さが1で、角度が 360°/p の複素数を <strong>ζ</strong>（ゼータ）と書く。この数を p 回掛けるとどうなるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble"><a href="https://complex-number.habatakijuku.com/" target="_blank" rel="noopener" style="color:var(--gold-dark);text-decoration:underline">『本当はおもしろい複素数の世界』</a>で、複素数の掛け算は「長さどうしを掛けて、角度どうしを足す」ことだと学びました。ζ を p 回掛けると、長さは 1 のまま、角度は 360°/p を p 回足して 360°。ちょうど1周して、実数の 1 に戻ります。<strong>ζᵖ＝1</strong> です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。ζ², ζ³, … も、p 乗すると角度が 360° の整数倍になるから、やはり 1 になる。1, ζ, ζ², …, ζ<sup>p−1</sup> の p 個の数は、単位円の上に、正 p 角形の頂点として等間隔に並ぶ。これらを <strong>1 の p 乗根</strong>と呼ぶ。そして、次の因数分解が成り立つ。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<svg id="svg-roots" viewBox="0 0 300 260" role="img" aria-label="単位円の上に等間隔に並んだ1のp乗根。pを3、5、7と切り替えると、正p角形の頂点として1、ζ、ζ²…が並ぶ"></svg>
+        <div class="sim-controls">
+          <span class="grp-label">p＝</span>
+          <button class="btn" type="button" data-p="3" aria-pressed="true">3</button>
+          <button class="btn" type="button" data-p="5" aria-pressed="false">5</button>
+          <button class="btn" type="button" data-p="7" aria-pressed="false">7</button>
+        </div>
+        <div class="diagram-caption"><strong>1 の p 乗根</strong>。長さ1・角度 360°/p の複素数 ζ と、その累乗 ζ², ζ³, … は単位円の上に正 p 角形の頂点として並び、どれも p 乗すると 1 になる</div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">p が奇数の素数のとき：<br class="wbr"><span class="nw">xᵖ＋yᵖ＝(x＋y)(x＋ζy)(x＋ζ²y)…(x＋ζ<sup>p−1</sup>y)</span></span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">本当に成り立つのか、p＝3 で確かめたいです。ζ は角度 120° の点ですよね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">p＝3 の ζ は、よく ω（オメガ）と書く。座標で言うと ω＝−1/2＋(√3/2)i、ω² は角度 240° の点で ω²＝−1/2−(√3/2)i だ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">右辺の後ろ2つを先に掛けます。(x＋ωy)(x＋ω²y)＝x²＋(ω＋ω²)xy＋ω³y²。ω³＝1 で、ω＋ω²＝(−1/2−1/2)＋(√3/2−√3/2)i＝−1 なので、<br>(x＋ωy)(x＋ω²y)＝x²−xy＋y²。<br>残りの (x＋y) を掛けると、(x＋y)(x²−xy＋y²)＝x³−x²y＋xy²＋x²y−xy²＋y³＝<strong>x³＋y³</strong>。本当に成り立ちました。i が消えて、普通の式になるんですね。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step"><span class="nw">(x＋ωy)(x＋ω²y)＝x²＋ω²xy＋ωxy＋ω³y²</span>（展開）<span class="nw">＝x²＋(ω＋ω²)xy＋ω³y²</span></span>
+        <span class="step"><span class="nw">ω³＝1</span>（角度 120° の3回分で 360°、1周して 1 に戻る）</span>
+        <span class="step"><span class="nw">ω＋ω²＝(−1/2＋(√3/2)i)＋(−1/2−(√3/2)i)＝−1</span>（i の部分は打ち消し合う）</span>
+        <span class="step">よって <span class="nw">(x＋ωy)(x＋ω²y)＝x²−xy＋y²</span></span>
+        <span class="step"><span class="nw">(x＋y)(x²−xy＋y²)＝x³−x²y＋xy²＋x²y−xy²＋y³</span><span class="nw">＝x³＋y³</span>（真ん中の4つの項が2つずつ打ち消し合う）</span>
+      </div>
+
+      <div class="diagram-box">
+        <svg viewBox="0 0 420 250" role="img" aria-label="ωとω²を矢印として足す図。原点からωとω²の矢印を引き、それぞれの先端からもう一方と平行な線を引くと、ひし形ができる。原点から向かいの頂点への対角線が ω＋ω² で、ちょうど −1 を指している">
+          <defs><marker id="aw1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#41846b"/></marker><marker id="aw2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3f6fb5"/></marker><marker id="aws" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c8433f"/></marker><marker id="aw0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9a6a1c"/></marker></defs>
+          <line x1="90" y1="125" x2="360" y2="125" stroke="#b9b0a3"/><line x1="230" y1="17" x2="230" y2="233" stroke="#b9b0a3"/>
+          <circle cx="230" cy="125" r="90" fill="none" stroke="#7fc0a8" stroke-width="1.4" stroke-dasharray="5 4"/>
+          <polygon points="230.0,125.0 185.0,47.1 140.0,125.0 185.0,202.9" fill="rgba(200,67,63,.07)"/>
+          <line x1="185.0" y1="47.1" x2="140.0" y2="125.0" stroke="#3f6fb5" stroke-width="1.6" stroke-dasharray="6 4"/>
+          <line x1="185.0" y1="202.9" x2="140.0" y2="125.0" stroke="#41846b" stroke-width="1.6" stroke-dasharray="6 4"/>
+          <line x1="230" y1="125" x2="320.0" y2="125.0" stroke="#9a6a1c" stroke-width="2.2" marker-end="url(#aw0)" opacity=".6"/>
+          <line x1="230" y1="125" x2="185.0" y2="47.1" stroke="#41846b" stroke-width="2.8" marker-end="url(#aw1)"/>
+          <line x1="230" y1="125" x2="185.0" y2="202.9" stroke="#3f6fb5" stroke-width="2.8" marker-end="url(#aw2)"/>
+          <line x1="230" y1="125" x2="142.0" y2="125.0" stroke="#c8433f" stroke-width="3.2" marker-end="url(#aws)"/>
+          <text x="177.0" y="41.1" text-anchor="end" font-size="15" font-weight="900" fill="#41846b">ω</text>
+          <text x="177.0" y="218.9" text-anchor="end" font-size="15" font-weight="900" fill="#3f6fb5">ω²</text>
+          <text x="328.0" y="130.0" text-anchor="start" font-size="14" font-weight="900" fill="#9a6a1c">1</text>
+          <text x="132.0" y="117.0" text-anchor="end" font-size="13.5" font-weight="900" fill="#c8433f">ω＋ω²＝−1</text>
+          <text x="236.0" y="141.0" text-anchor="start" font-size="11" font-weight="900" fill="#6b837a">0</text>
+        </svg>
+        <div class="diagram-caption">ω＋ω² を矢印の足し算で見る。原点から ω（緑）と ω²（青）の矢印を引き、それぞれの先端から、もう一方の矢印と平行な線（点線）を引くと、ひし形ができる。原点から向かいの頂点への対角線（赤）が ω＋ω²。ω と ω² は上下対称なので、縦の成分は打ち消し合い、横は −1/2 が2つで −1。対角線はちょうど −1 を指す</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">これで x³＋y³＝z³ は (x＋y)(x＋ωy)(x＋ω²y)＝z³ と、<strong>掛け算＝3乗</strong>の形に書ける。ラメの作戦は、第1章 STAGE2 の道具をここで使うことだった。「互いに素な数の積が平方数なら、それぞれ平方数」の3乗版、つまり「互いに素な数の積が p 乗の数なら、それぞれ p 乗の数」を使って、各かっこが p 乗の数だと言い、そこから矛盾を導くというものだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">第1章 STAGE2 の道具は、「自然数は素数の掛け算にただ1通りに分解できる」ことを使っていました。a＋bω のような、i の入った数でも、素因数分解はただ1通りに決まるんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">まさにその点を、同じ日の会場でリウヴィルという数学者が指摘した。ラメの証明は、新しい数でも素因数分解がただ1通りに決まることを、確かめずに使っていたんだ。そして数か月後、ドイツの<strong>クンマー</strong>から知らせが届く。「その性質は成り立たない。p＝23 のとき、分解の仕方が1通りに決まらない例を、私は3年前に見つけている」。ラメの証明はここで崩れた。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">でも、そもそも a＋bω のような数で「素因数分解」と言うとき、何を素数と呼ぶんですか？ 整数の素数 2, 3, 5, … とは違うものを考えないと、話が始まらない気がします。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。だからこの章では、そこから組み立て直す。どんな数の集まりなら「素因数分解」を考えられるのか。その中で「これ以上分けられない数」とは何か。「ただ1通り」とは正確には何を言っているのか。そして、ただ1通りになる世界とならない世界は、どこで分かれるのか。数学では<strong>環論（かんろん）</strong>と呼ばれる分野の入り口だ。ラメの失敗の正体を、自分の手で突き止めよう。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">オイラー（n＝3）、ディリクレとルジャンドル（n＝5）、ラメ（n＝7）。素数は無限にあるので、1つずつでは終わらない</span>
+        <span class="step">1 の p 乗根：長さ1・角度 360°/p の複素数 ζ。<span class="nw">ζᵖ＝1</span>、1, ζ, …, ζ<sup>p−1</sup> は正 p 角形の頂点</span>
+        <span class="step"><span class="nw">xᵖ＋yᵖ＝(x＋y)(x＋ζy)…(x＋ζ<sup>p−1</sup>y)</span>。p＝3 では <span class="nw">(x＋ωy)(x＋ω²y)＝x²−xy＋y²</span>（ω＋ω²＝−1）</span>
+        <span class="step">ラメ（1847年）の作戦：「互いに素な数の積が p 乗ならそれぞれ p 乗」を新しい数で使う。素因数分解がただ1通りかを確かめていなかった</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. 長さ1・角度 360°/p の複素数 ζ を p 回掛けると？</p>
+        <div class="choice-list">
+          <button class="choice-btn">0 になる</button>
+          <button class="choice-btn">1 になる</button>
+          <button class="choice-btn">長さが p になる</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 掛け算では長さどうしを掛け、角度どうしを足す。長さは 1 のまま、角度は 360° になってちょうど1周し、1 に戻る。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. p＝3 のとき (x＋ωy)(x＋ω²y) を計算すると？</p>
+        <div class="choice-list">
+          <button class="choice-btn">x²＋xy＋y²</button>
+          <button class="choice-btn">x²＋y²</button>
+          <button class="choice-btn">x²−xy＋y²</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 展開すると x²＋(ω＋ω²)xy＋ω³y²。ω³＝1、ω＋ω²＝−1 なので x²−xy＋y²。これに (x＋y) を掛けると x³＋y³。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. リウヴィルが指摘した、ラメの証明の問題点は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">新しい数でも素因数分解がただ1通りに決まることを、確かめずに使っていた</button>
+          <button class="choice-btn">1 の p 乗根の計算をまちがえていた</button>
+          <button class="choice-btn">p＝3 の場合を調べていなかった</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 「互いに素な数の積が p 乗ならそれぞれ p 乗」は、素因数分解がただ1通りであることに頼っている。それが新しい数でも成り立つかは、確かめられていなかった。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← 章のトップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/progress.js?v=20261005a"></script>
+<script src="../js/fermat.js?v=20261005a"></script>
+<script>FQ.initStagePage("number-worlds", 1);</script>
+<script>
+/* 1 の p 乗根（SVG） */
+(function(){
+  var svg=document.getElementById('svg-roots'), NS='http://www.w3.org/2000/svg';
+  var btns=document.querySelectorAll('[data-p]');
+  function el(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e;}
+  function draw(p){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var cx=150,cy=130,R=95;
+    el('line',{x1:30,y1:cy,x2:270,y2:cy,stroke:'#b9b0a3','stroke-width':1.2});
+    el('line',{x1:cx,y1:20,x2:cx,y2:240,stroke:'#b9b0a3','stroke-width':1.2});
+    el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'#7fc0a8','stroke-width':1.6,'stroke-dasharray':'5 4'});
+    var pts=[];
+    for(var k=0;k<p;k++){var a=2*Math.PI*k/p;pts.push([cx+R*Math.cos(a),cy-R*Math.sin(a)]);}
+    el('polygon',{points:pts.map(function(q){return q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' '),fill:'rgba(127,192,168,.18)',stroke:'#41846b','stroke-width':1.6});
+    // ζ の角度
+    var a1=2*Math.PI/p;
+    el('path',{d:'M'+(cx+30)+' '+cy+' A30 30 0 0 0 '+(cx+30*Math.cos(a1)).toFixed(1)+' '+(cy-30*Math.sin(a1)).toFixed(1),fill:'none',stroke:'#9a6a1c','stroke-width':1.6});
+    el('line',{x1:cx,y1:cy,x2:pts[1][0],y2:pts[1][1],stroke:'#9a6a1c','stroke-width':1.6});
+    var am=a1/2; el('text',{x:(cx+44*Math.cos(am)).toFixed(1),y:(cy-44*Math.sin(am)+4).toFixed(1),'font-size':11,'font-weight':900,fill:'#9a6a1c','text-anchor':'middle'},Math.round(360/p*10)/10+'°');
+    var sup=['','','²','³','⁴','⁵','⁶'];
+    pts.forEach(function(q,k){
+      el('circle',{cx:q[0],cy:q[1],r:5,fill:k===0?'#9a6a1c':'#2e5f4d',stroke:'#fff','stroke-width':1.3});
+      var a=2*Math.PI*k/p, lx=cx+(R+18)*Math.cos(a), ly=cy-(R+18)*Math.sin(a)+4;
+      el('text',{x:lx.toFixed(1),y:ly.toFixed(1),'font-size':13,'font-weight':900,fill:k===0?'#9a6a1c':'#2e5f4d','text-anchor':'middle'},k===0?'1':(k===1?'ζ':'ζ'+sup[k]));
+    });
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});draw(+b.getAttribute('data-p'));});});
+  draw(3);
+})();
+</script>
+</body>
+</html>

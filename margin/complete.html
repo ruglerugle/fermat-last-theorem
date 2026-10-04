@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<meta name="robots" content="noindex">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>第1章 旅の記録 ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="第1章「余白の書き込み」のクリア画面。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/margin/complete">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="第1章 旅の記録 ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="第1章「余白の書き込み」を振り返る。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/margin/complete">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<link rel="stylesheet" href="../design-system.css?v=20261005a">
+<style>
+  .hero-curves{width:min(100%,420px);height:auto;display:block;margin:0 auto 6px}
+  .road{list-style:none;margin:0;padding:0;position:relative}
+  .road::before{content:"";position:absolute;left:27px;top:24px;bottom:24px;border-left:3px dashed #c9bfa9}
+  .road li{position:relative;display:flex;gap:16px;align-items:stretch;margin-bottom:16px}
+  .road li:last-child{margin-bottom:0}
+  .road .ch-no{flex-shrink:0;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:950;color:#fff;background:var(--accent);box-shadow:0 0 0 5px var(--paper),0 4px 10px rgba(0,0,0,.18);position:relative;z-index:1}
+  .road .quest-card{flex:1;min-width:0}
+  .road .cleared .ch-no{background:#2f9e5c}
+  .ch-progress{font-size:11.5px;font-weight:900;color:var(--muted)}
+  .chapter-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="サイト情報">
+    <a class="brand-badge" href="../" title="シリーズのトップへ" aria-label="シリーズのトップへ" style="text-decoration:none">📜</a>
+    <span class="brand-copy">
+      <strong>フェルマーの最終定理、証明への道</strong>
+      <small>FERMAT QUEST</small>
+    </span>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p style="font-weight:900;color:var(--gold);letter-spacing:.08em;margin-bottom:4px">第1章 ／ THE MARGIN</p>
+      <h1><span class="line">第1章「余白の書き込み」をクリア！</span></h1>
+      <p>この章で手に入れた道具を振り返ろう。次は第2章「数の世界をひろげる」へ進む。</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="board" aria-labelledby="recap-heading">
+      <div class="board-head">
+        <div><h2 id="recap-heading">この章を振り返ろう</h2></div>
+      </div>
+      <div class="recap-list">
+        <div class="recap-item">
+          <span class="recap-num">1</span>
+          <div class="recap-body"><span class="recap-title">余白の書き込み。</span> <span class="recap-desc">フェルマーの主張：n≧3 なら xⁿ＋yⁿ＝zⁿ に自然数の解はない。整数の直角三角形＝単位円の上の有理点。(−1, 0) から傾き m/n の直線を引くと (n²−m², 2mn, n²＋m²) がすべて得られる。</span></div>
+        </div>
+        <div class="recap-item">
+          <span class="recap-num">2</span>
+          <div class="recap-body"><span class="recap-title">どこまでも小さくなる解。</span> <span class="recap-desc">背理法と無限降下法。互いに素でない組は互いに素な組の整数倍。互いに素な数の積が平方数なら、それぞれ平方数。x⁴＋y⁴＝z² の解からより小さい解ができる → n＝4 は解なし。残るのは奇数の素数の指数。</span></div>
+        </div>
+      </div>
+      <div class="complete-actions">
+        <a class="btn btn-primary" href="../number-worlds/">第2章「数の世界をひろげる」へ →</a>
+        <a class="btn" href="../">🗺️ 旅の地図に戻る</a>
+        <button class="btn" id="btn-reset-all">🔄 この章を最初から</button>
+      </div>
+    </section>
+
+
+    <div id="book-recommend"></div>
+  </main>
+
+  <footer>
+    <p>NO DOWNLOAD. NO REGISTRATION. JUST LEARN. &nbsp;© <span id="year"></span> ruglerugle</p>
+    <div class="footer-suits" aria-hidden="true"><span>📜</span><span>🧩</span><span>➰</span><span>🌉</span></div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+<script src="../js/progress.js?v=20261005a"></script>
+<script>FQ.initCompletePage("margin");</script>
+</body>
+</html>

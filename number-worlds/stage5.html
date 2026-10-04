@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>第2章 STAGE5 余りのある割り算（ユークリッドの互除法とガウス整数） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="ユークリッドの互除法から素因数分解の一意性を中学生向けに解説。余りのある割り算で 3×12−5×7＝1 のような式を作り、素数が素元であることを示す。ガウス整数でも余りを小さくできるので、分解はただ1通りになる。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/number-worlds/stage5">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="第2章 STAGE5 余りのある割り算（ユークリッドの互除法とガウス整数） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="小学校で習う「余りのある割り算」が、素因数分解がただ1通りである理由だった。ガウス整数でも同じ割り算ができるかを確かめる。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/number-worlds/stage5">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE5 余りのある割り算",
+      "description": "ユークリッドの互除法から素因数分解の一意性を中学生向けに解説。余りのある割り算で 3×12−5×7＝1 のような式を作り、素数が素元であることを示す。ガウス整数でも余りを小さくできるので、分解はただ1通りになる。",
+      "url": "https://fermat.habatakijuku.com/number-worlds/stage5",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 5,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "第2章 数の世界をひろげる",
+        "url": "https://fermat.habatakijuku.com/number-worlds/",
+        "isPartOf": {
+          "@type": "LearningResource",
+          "name": "フェルマーの最終定理、証明への道",
+          "url": "https://fermat.habatakijuku.com/"
+        }
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "第2章 数の世界をひろげる",
+          "item": "https://fermat.habatakijuku.com/number-worlds/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "STAGE5 余りのある割り算",
+          "item": "https://fermat.habatakijuku.com/number-worlds/stage5"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="../design-system.css?v=20261005a">
+<style>
+
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="../" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">第2章 数の世界をひろげる ／ STAGE 5 ― 余りのある割り算 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 7</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">第2章 STAGE 5</span><h1 class="chapter-title">余りのある割り算</h1>
+        <div class="chapter-sub">互除法とガウス整数</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">余りのある割り算と互除法から ax＋py＝1 を作り、素数が素元の性質をもつことを証明しよう。ガウス整数でも、余りのノルムを割る数のノルムより小さくできる理由（√2/2 の距離）を説明できれば合格。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">前のステージで、既約元がどれも素元なら素因数分解はただ1通りになる、と分かった。今日は、整数の素数が素元であることを証明する。道具は割り算だ。17 を 5 で割ると、どうなるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">17＝5×3＋2 です。商が 3、余りが 2。余りは、割る数の 5 より小さくなります。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。どんな整数 a と 0 でない整数 b でも、a＝qb＋r と書いて、余り r を 0 以上 |b| 未満にできる。これを<strong>余りのある割り算</strong>という。そして、割る数を余りで割り直すことをくり返すのが、<strong>ユークリッドの互除法</strong>だ。12 と 7 でやってみよう。12 を 7 で割り、次に 7 をその余りで割り…と、余りが 0 になるまで続けてごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">12＝7×1＋5、7＝5×1＋2、5＝2×2＋1、2＝1×2＋0。余りは 5, 2, 1, 0 とどんどん小さくなるので、必ずどこかで止まります。最後の 0 でない余りは 1 です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その 1 を、途中の式を逆にたどって、12 と 7 だけで書いてごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">5＝2×2＋1 から 1＝5−2×2。7＝5×1＋2 から 2＝7−5 なので、1＝5−2×(7−5)＝3×5−2×7。12＝7×1＋5 から 5＝12−7 なので、1＝3×(12−7)−2×7＝3×12−5×7。<strong>3×12−5×7＝1</strong>。12 と 7 に整数を掛けて足し引きしたら、1 が作れました。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">余りのある割り算をくり返す：<span class="nw">12＝7×1＋5</span>、<span class="nw">7＝5×1＋2</span>、<span class="nw">5＝2×2＋1</span>、<span class="nw">2＝1×2＋0</span></span>
+        <span class="step">最後の 0 でない余り 1 を、下から上へたどって書き直す：<br><span class="nw">1＝5−2×2</span><br><span class="nw">＝5−2×(7−5)＝3×5−2×7</span>（2＝7−5 を入れる）<br><span class="nw">＝3×(12−7)−2×7＝3×12−5×7</span>（5＝12−7 を入れる）</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">互除法の最後の 0 でない余りは、2つの数の<strong>最大公約数</strong>になることが知られている。途中の式を下からたどると、最後の余りが元の2つの数を割り切ることが分かるし、上からたどると、2つの数の公約数は途中の余りを全部割り切ることが分かるからだ。さあ、p を素数、a を p で割り切れない整数とする。何が言えるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">p の約数は 1 と p だけで、p は a を割り切らないので、p と a の最大公約数は 1 です。だから互除法の最後の余りは 1 で、さっきと同じように逆にたどれば、<strong>ax＋py＝1</strong> となる整数 x, y が作れます。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その式の両辺に b を掛けてごらん。そして、p が ab を割り切るとしよう。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">abx＋pby＝b。ab は p で割り切れるので abx も p で割り切れ、pby も p で割り切れます。だから左辺は p で割り切れて、右辺の b も p で割り切れます。つまり、p が ab を割り切るとき、p が a を割り切らなければ、b を割り切ります。<strong>素数は素元</strong>です！ 前のステージの話と合わせると、整数の素因数分解はただ1通りです。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。この証明で、本当に使った道具は何だったかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">余りのある割り算です。余りが割る数より小さくなるので、互除法が必ず止まって、ax＋py＝1 が作れました。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。では、ガウス整数でも余りのある割り算ができるか考えよう。複素数には大小がないから、「小さい」はノルムで測る。z を w で割って z＝qw＋r と書き、<strong>N(r)＜N(w)</strong> にできればいい。まず、複素数の割り算 z÷w を考えよう。掛け算は長さを掛けて角度を足したから、割り算は長さを割って角度を引けばいい。具体的に計算するには、分母の w＝2＋i に 2−i を掛けるのが便利だ。(2＋i)(2−i) を計算してごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">(2＋i)(2−i)＝4−i²＝5。実数になりました。だから、z＝7＋5i を w＝2＋i で割るなら、分母と分子に 2−i を掛けて、(7＋5i)(2−i)/5＝(14−7i＋10i−5i²)/5＝(19＋3i)/5＝3.8＋0.6i です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">z÷w＝3.8＋0.6i は、ガウス整数ではない。そこで、いちばん近いガウス整数を商 q に選ぶ。q＝4＋i だ。余りを r＝z−qw として計算してごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">qw＝(4＋i)(2＋i)＝8＋4i＋2i＋i²＝7＋6i。r＝(7＋5i)−(7＋6i)＝−i。N(r)＝1 で、N(w)＝5 より小さいです。これが、いつでもうまくいくんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">それを確かめよう。z÷w は平面のどこかの点で、ガウス整数の点は、1辺 1 の正方形の角に並んでいる。z÷w にいちばん近い角を q に選ぶと、z÷w と q の距離はどこまで大きくなりうるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">正方形の中で、いちばん近い角がいちばん遠くなるのは、真ん中の点のときです。真ん中から角までは、三平方の定理で √(1/4＋1/4)＝√2/2。だから z÷w と q の距離は √2/2 以下です。余り r＝z−qw＝w×(z÷w−q) の長さは、|w|×（√2/2 以下）。ノルムは長さの2乗なので、<strong>N(r)≦N(w)×1/2＜N(w)</strong>。余りは必ず小さくできます！</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<div class="cv-wrap"><canvas id="cv-div" aria-label="z÷w の点と、そのまわりのガウス整数の格子点。いちばん近い格子点 q を商に選び、z÷w と q の距離が √2/2 以下になる様子を示す"></canvas></div>
+        <div class="sim-controls">
+          <label>z＝ <input type="number" id="in-da" min="-20" max="20" value="7"> ＋ <input type="number" id="in-db" min="-20" max="20" value="5">i</label>
+          <label>w＝ <input type="number" id="in-dc" min="-6" max="6" value="2"> ＋ <input type="number" id="in-dd" min="-6" max="6" value="1">i</label>
+        </div>
+        <div class="readout" id="ro-div"></div>
+        <div class="diagram-caption"><strong>ガウス整数の余りのある割り算</strong>。z÷w（赤）を、まわりのガウス整数の格子点（1辺 1 の正方形の角）と一緒に描いた。いちばん近い格子点を商 q（緑）に選ぶと、z÷w と q の距離は、正方形の真ん中のときでも √2/2（点線の円の半径）以下になる。だから余り r＝z−qw のノルムは、いつでも N(w) の半分以下</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。ガウス整数でも余りのある割り算ができるから、互除法が使えて、既約元はどれも素元になり、<strong>素因数分解はただ1通り</strong>になる。この世界には、フェルマー自身も関わっている。1640年ごろ、フェルマーは手紙に「4 で割って 1 余る素数は、2つの平方数の和で書ける」と書いた。5＝1²＋2²、13＝2²＋3² のようにね。この事実は、ガウス整数の一意性を使ってきれいに証明できるんだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">13＝2²＋3² なら、ガウス整数では 13＝(3＋2i)(3−2i) と分けられるということですね。整数の素数が、ガウス整数の世界で2つの部品に分かれるときが、2つの平方数の和になるときなんですね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。では最後に、この割り算が a＋b√−5 の世界でもできるのか。次のステージで、ついにラメの証明が崩れた理由にたどり着く。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">余りのある割り算：<span class="nw">a＝qb＋r</span>、余りは割る数より小さい。これをくり返すのがユークリッドの互除法</span>
+        <span class="step">互除法を逆にたどると <span class="nw">3×12−5×7＝1</span> のような式ができる。p が素数で a を割り切らなければ <span class="nw">ax＋py＝1</span></span>
+        <span class="step">両辺に b を掛けて <span class="nw">abx＋pby＝b</span> → p が ab を割り切れば b を割り切る → 素数は素元 → 整数の素因数分解はただ1通り</span>
+        <span class="step">ガウス整数の割り算：z÷w にいちばん近い格子点を q にすると、距離は √2/2 以下 → <span class="nw">N(r)≦N(w)/2</span></span>
+        <span class="step">ガウス整数でも互除法が使え、素因数分解はただ1通り。4 で割って 1 余る素数は2つの平方数の和（フェルマー）</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. 12 と 7 の互除法を逆にたどって得られる式は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">12−7＝5</button>
+          <button class="choice-btn">2×12−3×7＝3</button>
+          <button class="choice-btn">3×12−5×7＝1</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 1＝5−2×2＝3×5−2×7＝3×12−5×7。互除法の最後の 0 でない余り（最大公約数）は、元の2つの数に整数を掛けて足し引きした形で書ける。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. 素数 p が ab を割り切り、a を割り切らないとき、p が b を割り切る理由は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">b が素数だから</button>
+          <button class="choice-btn">ax＋py＝1 の両辺に b を掛けた abx＋pby＝b の左辺が p で割り切れるから</button>
+          <button class="choice-btn">ab が p より大きいから</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ p と a の最大公約数は 1 なので ax＋py＝1 と書ける。b を掛けると abx＋pby＝b。ab も p も p で割り切れるので、b も p で割り切れる。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. ガウス整数の割り算で、余り r のノルムが必ず N(w) より小さくなる理由は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">z÷w にいちばん近い格子点までの距離が √2/2 以下なので、N(r)≦N(w)/2 になるから</button>
+          <button class="choice-btn">ガウス整数は実数だから</button>
+          <button class="choice-btn">w のノルムがいつも 1 だから</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 格子は1辺 1 の正方形。いちばん遠いのは真ん中で、角まで √2/2。r＝w×(z÷w−q) の長さは |w|×√2/2 以下なので、ノルムは N(w)/2 以下。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← 章のトップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/progress.js?v=20261005a"></script>
+<script src="../js/fermat.js?v=20261005a"></script>
+<script>FQ.initStagePage("number-worlds", 5);</script>
+<script>
+/* ガウス整数の余りのある割り算 */
+(function(){
+  var ids=['in-da','in-db','in-dc','in-dd'].map(function(id){return document.getElementById(id);}), ro=document.getElementById('ro-div');
+  function name(a,b){ if(b===0) return FL.signed(a); var s=(a!==0?FL.signed(a):''); var bb=Math.abs(b); return s+(b>0?(a!==0?'＋':''):'−')+(bb===1?'':bb)+'i'; }
+  function f2(x){ return (Math.round(x*100)/100).toString().replace('-','−'); }
+  var st=FL.canvas('cv-div',0.8,draw);
+  function draw(st){
+    var v=ids.map(function(el){return parseInt(el.value,10)||0;});
+    var a=v[0],b=v[1],c=v[2],d=v[3];
+    var ctx=st.ctx; ctx.clearRect(0,0,st.W,st.H); ctx.fillStyle=FL.C.paper; ctx.fillRect(0,0,st.W,st.H);
+    var nw=c*c+d*d;
+    if(nw===0){ ro.innerHTML='<span class="ng">w に 0 は選べない</span>'; return; }
+    // z÷w ＝ z×(c−di)/(c²＋d²)
+    var re=(a*c+b*d)/nw, im=(b*c-a*d)/nw;
+    var qa=Math.round(re), qb=Math.round(im);
+    var ra=a-(qa*c-qb*d), rb=b-(qa*d+qb*c);
+    var vw=FL.view(st,4.2,re,im);
+    // 格子
+    for(var x=Math.floor(re)-3;x<=Math.ceil(re)+3;x++) for(var y=Math.floor(im)-3;y<=Math.ceil(im)+3;y++){
+      FL.line(ctx,vw.X(x),vw.Y(y),vw.X(x+1),vw.Y(y),FL.C.grid,1); FL.line(ctx,vw.X(x),vw.Y(y),vw.X(x),vw.Y(y+1),FL.C.grid,1);
+    }
+    for(x=Math.floor(re)-3;x<=Math.ceil(re)+3;x++) for(y=Math.floor(im)-3;y<=Math.ceil(im)+3;y++){
+      FL.dot(ctx,vw.X(x),vw.Y(y),3.2,'#9fb8ad');
+      FL.text(ctx,name(x,y),vw.X(x)+5,vw.Y(y)-5,{size:10,color:FL.C.muted});
+    }
+    ctx.strokeStyle=FL.C.theme; ctx.setLineDash([5,4]); ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.arc(vw.X(qa),vw.Y(qb),Math.SQRT1_2*vw.s,0,Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
+    FL.line(ctx,vw.X(re),vw.Y(im),vw.X(qa),vw.Y(qb),FL.C.gold,2);
+    FL.dot(ctx,vw.X(qa),vw.Y(qb),6.5,FL.C.theme,'#fff');
+    FL.dot(ctx,vw.X(re),vw.Y(im),6,FL.C.red,'#fff');
+    FL.text(ctx,'z÷w',vw.X(re)+9,vw.Y(im)+16,{color:FL.C.red,size:13,halo:true});
+    FL.text(ctx,'q',vw.X(qa)-12,vw.Y(qb)+16,{color:FL.C.theme,size:13,halo:true});
+    var nr=ra*ra+rb*rb;
+    ro.innerHTML='<span>z÷w＝'+f2(re)+(im<0?'−':'＋')+f2(Math.abs(im))+'i</span><span>q＝<b>'+name(qa,qb)+'</b></span><span>r＝z−qw＝<b>'+name(ra,rb)+'</b></span><span>N(r)＝'+nr+' ＜ N(w)＝'+nw+'</span>';
+  }
+  ids.forEach(function(el){el.addEventListener('input',function(){st.redraw();});});
+})();
+</script>
+</body>
+</html>

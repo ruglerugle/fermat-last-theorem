@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>第4章 橋をかける（モジュラー形式・ワイルズ） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="第4章「橋をかける」。楕円曲線の指紋が、まったく別の世界の関数「モジュラー形式」の係数として現れる。谷山–志村予想、フェルマーの式から作るありえない曲線、そしてワイルズの7年間。2つの世界にかかる橋が、358年の問題を解">
+<link rel="canonical" href="https://fermat.habatakijuku.com/modularity/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="第4章 橋をかける（モジュラー形式・ワイルズ） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="方程式の世界と関数の世界をつなぐ橋。それがフェルマーの最終定理の決め手になった。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/modularity/">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<link rel="stylesheet" href="../design-system.css?v=20261005a">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "第4章 橋をかける",
+  "description": "楕円曲線の指紋が、まったく別の世界の関数「モジュラー形式」の係数として現れる。谷山–志村予想、フェルマーの式から作るありえない曲線、そしてワイルズの7年間。2つの世界にかかる橋が、358年の問題を解く。",
+  "url": "https://fermat.habatakijuku.com/modularity/",
+  "inLanguage": "ja",
+  "learningResourceType": "learning activity",
+  "educationalLevel": "中学生以上",
+  "isAccessibleForFree": true,
+  "isPartOf": {
+    "@type": "LearningResource",
+    "name": "フェルマーの最終定理、証明への道",
+    "url": "https://fermat.habatakijuku.com/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "ruglerugle"
+  },
+  "hasPart": [
+    {
+      "@type": "LearningResource",
+      "position": 1,
+      "name": "STAGE1 もうひとつの数列",
+      "url": "https://fermat.habatakijuku.com/modularity/stage1"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 2,
+      "name": "STAGE2 ありえない曲線",
+      "url": "https://fermat.habatakijuku.com/modularity/stage2"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 3,
+      "name": "STAGE3 屋根裏の7年間",
+      "url": "https://fermat.habatakijuku.com/modularity/stage3"
+    }
+  ]
+}
+</script>
+<style>
+  .hero-curves{width:min(100%,420px);height:auto;display:block;margin:0 auto 6px}
+  .road{list-style:none;margin:0;padding:0;position:relative}
+  .road::before{content:"";position:absolute;left:27px;top:24px;bottom:24px;border-left:3px dashed #c9bfa9}
+  .road li{position:relative;display:flex;gap:16px;align-items:stretch;margin-bottom:16px}
+  .road li:last-child{margin-bottom:0}
+  .road .ch-no{flex-shrink:0;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:950;color:#fff;background:var(--accent);box-shadow:0 0 0 5px var(--paper),0 4px 10px rgba(0,0,0,.18);position:relative;z-index:1}
+  .road .quest-card{flex:1;min-width:0}
+  .road .cleared .ch-no{background:#2f9e5c}
+  .ch-progress{font-size:11.5px;font-weight:900;color:var(--muted)}
+  .chapter-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="サイト情報">
+    <a class="brand-badge" href="../" title="シリーズのトップへ" aria-label="シリーズのトップへ" style="text-decoration:none">📜</a>
+    <span class="brand-copy">
+      <strong>フェルマーの最終定理、証明への道</strong>
+      <small>FERMAT QUEST</small>
+    </span>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p style="font-weight:900;color:var(--gold);letter-spacing:.08em;margin-bottom:4px">第4章 ／ THE BRIDGE</p>
+      <h1><span class="line">橋をかける</span></h1>
+      <p>方程式の世界と関数の世界をつなぐ橋。それがフェルマーの最終定理の決め手になった。楕円曲線の指紋が、まったく別の世界の関数「モジュラー形式」の係数として現れる。谷山–志村予想、フェルマーの式から作るありえない曲線、そしてワイルズの7年間。2つの世界にかかる橋が、358年の問題を解く。</p>
+      <div class="chapter-nav"><a class="btn" href="../">🗺️ 旅の地図に戻る</a></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="board" aria-labelledby="quest-heading">
+      <div class="board-head">
+        <div><h2 id="quest-heading">ステージを選ぼう！</h2></div>
+        <p>STAGE1 から順番にクリアしよう（前のステージをクリアすると次が解放されます）</p>
+      </div>
+      <div class="quest-grid">
+        <a class="quest-card" href="stage1.html" data-stage="1" style="--accent:#a63f6f;--accent-bg:#fbe9f1">
+          <div class="q-top"><span class="q-num">1</span><span class="q-suit" aria-hidden="true">🌀</span></div>
+          <div class="q-meta"><span class="q-tag">モジュラー形式</span><span class="q-time">⏱ 約18分</span></div>
+          <div class="q-title">もうひとつの数列</div>
+          <p class="q-desc">無限に続く掛け算を展開すると、楕円曲線の指紋がそのまま現れる。隠れた対称性をもつモジュラー形式と、谷山–志村予想。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage2.html" data-stage="2" style="--accent:#7a6a2f;--accent-bg:#f7f3e2">
+          <div class="q-top"><span class="q-num">2</span><span class="q-suit" aria-hidden="true">⚡</span></div>
+          <div class="q-meta"><span class="q-tag">フライ曲線</span><span class="q-time">⏱ 約15分</span></div>
+          <div class="q-title">ありえない曲線</div>
+          <p class="q-desc">もしフェルマーの式に解があったら、整いすぎた楕円曲線が作れてしまう。フライ曲線とリベットの定理が、2つの大問題を1本につなぐ。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage3.html" data-stage="3" style="--accent:#8a4a2a;--accent-bg:#f8ece4">
+          <div class="q-top"><span class="q-num">3</span><span class="q-suit" aria-hidden="true">🏛️</span></div>
+          <div class="q-meta"><span class="q-tag">ワイルズの証明</span><span class="q-time">⏱ 約15分</span></div>
+          <div class="q-title">屋根裏の7年間</div>
+          <p class="q-desc">10歳で出会った問題に、屋根裏で7年。mod 3 から持ち上げる作戦、1993年の講演、見つかった穴と1994年の修正。358年の旅の終わり。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+      </div>
+    </section>
+
+    <div id="book-recommend"></div>
+  </main>
+
+  <footer>
+    <p>NO DOWNLOAD. NO REGISTRATION. JUST LEARN. &nbsp;© <span id="year"></span> ruglerugle</p>
+    <div class="footer-suits" aria-hidden="true"><span>📜</span><span>🧩</span><span>➰</span><span>🌉</span></div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script src="../js/progress.js?v=20261005a"></script>
+<script>FQ.initCoverPage("modularity");</script>
+</body>
+</html>

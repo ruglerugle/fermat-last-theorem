@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://fermat.habatakijuku.com/</loc><lastmod>2026-10-04</lastmod></url>
-  <url><loc>https://fermat.habatakijuku.com/stage1</loc><lastmod>2026-10-04</lastmod></url>
-  <url><loc>https://fermat.habatakijuku.com/stage2</loc><lastmod>2026-10-04</lastmod></url>
-  <url><loc>https://fermat.habatakijuku.com/stage3</loc><lastmod>2026-10-04</lastmod></url>
-  <url><loc>https://fermat.habatakijuku.com/stage4</loc><lastmod>2026-10-04</lastmod></url>
-  <url><loc>https://fermat.habatakijuku.com/stage5</loc><lastmod>2026-10-04</lastmod></url>
-  <url><loc>https://fermat.habatakijuku.com/stage6</loc><lastmod>2026-10-04</lastmod></url>
-  <url><loc>https://fermat.habatakijuku.com/stage7</loc><lastmod>2026-10-04</lastmod></url>
-  <url><loc>https://fermat.habatakijuku.com/stage8</loc><lastmod>2026-10-04</lastmod></url>
-  <url><loc>https://fermat.habatakijuku.com/stage9</loc><lastmod>2026-10-04</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/margin/</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/margin/stage1</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/margin/stage2</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/number-worlds/</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/number-worlds/stage1</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/number-worlds/stage2</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/number-worlds/stage3</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/number-worlds/stage4</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/number-worlds/stage5</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/number-worlds/stage6</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/number-worlds/stage7</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/elliptic-curves/</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/elliptic-curves/stage1</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/elliptic-curves/stage2</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/elliptic-curves/stage3</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/modularity/</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/modularity/stage1</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/modularity/stage2</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://fermat.habatakijuku.com/modularity/stage3</loc><lastmod>2026-10-05</lastmod></url>
 </urlset>

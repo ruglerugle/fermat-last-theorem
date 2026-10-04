@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>第3章 時計の算術と楕円曲線（mod・楕円曲線・aₚ） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="第3章「時計の算術と楕円曲線」。割った余りだけで計算する mod の世界、2つの有理点から3つ目の有理点を生む楕円曲線、そして素数ごとに点を数えて作る曲線の指紋 aₚ。証明の後半を支える道具をそろえる。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/elliptic-curves/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="第3章 時計の算術と楕円曲線（mod・楕円曲線・aₚ） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="フェルマーの式から少し離れて、後半の主役、楕円曲線とその「指紋」を手に入れる章。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/elliptic-curves/">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<link rel="stylesheet" href="../design-system.css?v=20261005a">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "第3章 時計の算術と楕円曲線",
+  "description": "割った余りだけで計算する mod の世界、2つの有理点から3つ目の有理点を生む楕円曲線、そして素数ごとに点を数えて作る曲線の指紋 aₚ。証明の後半を支える道具をそろえる。",
+  "url": "https://fermat.habatakijuku.com/elliptic-curves/",
+  "inLanguage": "ja",
+  "learningResourceType": "learning activity",
+  "educationalLevel": "中学生以上",
+  "isAccessibleForFree": true,
+  "isPartOf": {
+    "@type": "LearningResource",
+    "name": "フェルマーの最終定理、証明への道",
+    "url": "https://fermat.habatakijuku.com/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "ruglerugle"
+  },
+  "hasPart": [
+    {
+      "@type": "LearningResource",
+      "position": 1,
+      "name": "STAGE1 時計の算術",
+      "url": "https://fermat.habatakijuku.com/elliptic-curves/stage1"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 2,
+      "name": "STAGE2 点を足す曲線",
+      "url": "https://fermat.habatakijuku.com/elliptic-curves/stage2"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 3,
+      "name": "STAGE3 曲線の指紋",
+      "url": "https://fermat.habatakijuku.com/elliptic-curves/stage3"
+    }
+  ]
+}
+</script>
+<style>
+  .hero-curves{width:min(100%,420px);height:auto;display:block;margin:0 auto 6px}
+  .road{list-style:none;margin:0;padding:0;position:relative}
+  .road::before{content:"";position:absolute;left:27px;top:24px;bottom:24px;border-left:3px dashed #c9bfa9}
+  .road li{position:relative;display:flex;gap:16px;align-items:stretch;margin-bottom:16px}
+  .road li:last-child{margin-bottom:0}
+  .road .ch-no{flex-shrink:0;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:950;color:#fff;background:var(--accent);box-shadow:0 0 0 5px var(--paper),0 4px 10px rgba(0,0,0,.18);position:relative;z-index:1}
+  .road .quest-card{flex:1;min-width:0}
+  .road .cleared .ch-no{background:#2f9e5c}
+  .ch-progress{font-size:11.5px;font-weight:900;color:var(--muted)}
+  .chapter-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="サイト情報">
+    <a class="brand-badge" href="../" title="シリーズのトップへ" aria-label="シリーズのトップへ" style="text-decoration:none">📜</a>
+    <span class="brand-copy">
+      <strong>フェルマーの最終定理、証明への道</strong>
+      <small>FERMAT QUEST</small>
+    </span>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p style="font-weight:900;color:var(--gold);letter-spacing:.08em;margin-bottom:4px">第3章 ／ ELLIPTIC CURVES</p>
+      <h1><span class="line">時計の算術と楕円曲線</span></h1>
+      <p>フェルマーの式から少し離れて、後半の主役、楕円曲線とその「指紋」を手に入れる章。割った余りだけで計算する mod の世界、2つの有理点から3つ目の有理点を生む楕円曲線、そして素数ごとに点を数えて作る曲線の指紋 aₚ。証明の後半を支える道具をそろえる。</p>
+      <div class="chapter-nav"><a class="btn" href="../">🗺️ 旅の地図に戻る</a></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="board" aria-labelledby="quest-heading">
+      <div class="board-head">
+        <div><h2 id="quest-heading">ステージを選ぼう！</h2></div>
+        <p>STAGE1 から順番にクリアしよう（前のステージをクリアすると次が解放されます）</p>
+      </div>
+      <div class="quest-grid">
+        <a class="quest-card" href="stage1.html" data-stage="1" style="--accent:#9a6a1c;--accent-bg:#fbf2df">
+          <div class="q-top"><span class="q-num">1</span><span class="q-suit" aria-hidden="true">🕰️</span></div>
+          <div class="q-meta"><span class="q-tag">mod・合同式</span><span class="q-time">⏱ 約15分</span></div>
+          <div class="q-title">時計の算術</div>
+          <p class="q-desc">割った余りだけで計算する mod の世界。平方数の余りから「ありえない」を示し、x³＋y³＝z³ を mod 7 で調べる。その力と限界。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage2.html" data-stage="2" style="--accent:#2f8f65;--accent-bg:#eaf7ef">
+          <div class="q-top"><span class="q-num">2</span><span class="q-suit" aria-hidden="true">➰</span></div>
+          <div class="q-meta"><span class="q-tag">楕円曲線</span><span class="q-time">⏱ 約18分</span></div>
+          <div class="q-title">点を足す曲線</div>
+          <p class="q-desc">後半の主役、楕円曲線 y²＝x³＋ax＋b。2つの有理点を結ぶ直線から3つ目の有理点が生まれる仕組みと、曲線の上の「足し算」。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage3.html" data-stage="3" style="--accent:#3f5fa6;--accent-bg:#e9eef9">
+          <div class="q-top"><span class="q-num">3</span><span class="q-suit" aria-hidden="true">🔍</span></div>
+          <div class="q-meta"><span class="q-tag">mod p で点を数える</span><span class="q-time">⏱ 約15分</span></div>
+          <div class="q-title">曲線の指紋</div>
+          <p class="q-desc">楕円曲線を素数 p ごとに mod p で見て点を数える。目安の p からのずれ aₚ の列が、曲線の指紋になる。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+      </div>
+    </section>
+
+    <div id="book-recommend"></div>
+  </main>
+
+  <footer>
+    <p>NO DOWNLOAD. NO REGISTRATION. JUST LEARN. &nbsp;© <span id="year"></span> ruglerugle</p>
+    <div class="footer-suits" aria-hidden="true"><span>📜</span><span>🧩</span><span>➰</span><span>🌉</span></div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script src="../js/progress.js?v=20261005a"></script>
+<script>FQ.initCoverPage("elliptic-curves");</script>
+</body>
+</html>

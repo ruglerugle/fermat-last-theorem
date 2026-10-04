@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>第1章 余白の書き込み（ピタゴラス数・無限降下法） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="第1章「余白の書き込み」。フェルマーが本の余白に残した主張から旅を始める。n＝2 の解（整数の直角三角形）をすべて作る公式を導き、フェルマー自身が残した唯一の証明、無限降下法で n＝4 を証明する。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/margin/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="第1章 余白の書き込み（ピタゴラス数・無限降下法） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="n＝2 では無数にある解が、n≧3 では1つもない。その落差を、中学数学で実際に証明しながら確かめる章。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/margin/">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<link rel="stylesheet" href="../design-system.css?v=20261005a">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "第1章 余白の書き込み",
+  "description": "フェルマーが本の余白に残した主張から旅を始める。n＝2 の解（整数の直角三角形）をすべて作る公式を導き、フェルマー自身が残した唯一の証明、無限降下法で n＝4 を証明する。",
+  "url": "https://fermat.habatakijuku.com/margin/",
+  "inLanguage": "ja",
+  "learningResourceType": "learning activity",
+  "educationalLevel": "中学生以上",
+  "isAccessibleForFree": true,
+  "isPartOf": {
+    "@type": "LearningResource",
+    "name": "フェルマーの最終定理、証明への道",
+    "url": "https://fermat.habatakijuku.com/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "ruglerugle"
+  },
+  "hasPart": [
+    {
+      "@type": "LearningResource",
+      "position": 1,
+      "name": "STAGE1 余白の書き込み",
+      "url": "https://fermat.habatakijuku.com/margin/stage1"
+    },
+    {
+      "@type": "LearningResource",
+      "position": 2,
+      "name": "STAGE2 どこまでも小さくなる解",
+      "url": "https://fermat.habatakijuku.com/margin/stage2"
+    }
+  ]
+}
+</script>
+<style>
+  .hero-curves{width:min(100%,420px);height:auto;display:block;margin:0 auto 6px}
+  .road{list-style:none;margin:0;padding:0;position:relative}
+  .road::before{content:"";position:absolute;left:27px;top:24px;bottom:24px;border-left:3px dashed #c9bfa9}
+  .road li{position:relative;display:flex;gap:16px;align-items:stretch;margin-bottom:16px}
+  .road li:last-child{margin-bottom:0}
+  .road .ch-no{flex-shrink:0;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:950;color:#fff;background:var(--accent);box-shadow:0 0 0 5px var(--paper),0 4px 10px rgba(0,0,0,.18);position:relative;z-index:1}
+  .road .quest-card{flex:1;min-width:0}
+  .road .cleared .ch-no{background:#2f9e5c}
+  .ch-progress{font-size:11.5px;font-weight:900;color:var(--muted)}
+  .chapter-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="サイト情報">
+    <a class="brand-badge" href="../" title="シリーズのトップへ" aria-label="シリーズのトップへ" style="text-decoration:none">📜</a>
+    <span class="brand-copy">
+      <strong>フェルマーの最終定理、証明への道</strong>
+      <small>FERMAT QUEST</small>
+    </span>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p style="font-weight:900;color:var(--gold);letter-spacing:.08em;margin-bottom:4px">第1章 ／ THE MARGIN</p>
+      <h1><span class="line">余白の書き込み</span></h1>
+      <p>n＝2 では無数にある解が、n≧3 では1つもない。その落差を、中学数学で実際に証明しながら確かめる章。フェルマーが本の余白に残した主張から旅を始める。n＝2 の解（整数の直角三角形）をすべて作る公式を導き、フェルマー自身が残した唯一の証明、無限降下法で n＝4 を証明する。</p>
+      <div class="chapter-nav"><a class="btn" href="../">🗺️ 旅の地図に戻る</a></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="board" aria-labelledby="quest-heading">
+      <div class="board-head">
+        <div><h2 id="quest-heading">ステージを選ぼう！</h2></div>
+        <p>STAGE1 から順番にクリアしよう（前のステージをクリアすると次が解放されます）</p>
+      </div>
+      <div class="quest-grid">
+        <a class="quest-card" href="stage1.html" data-stage="1" style="--accent:#2f6f8f;--accent-bg:#e6f0f6">
+          <div class="q-top"><span class="q-num">1</span><span class="q-suit" aria-hidden="true">📜</span></div>
+          <div class="q-meta"><span class="q-tag">ピタゴラス数</span><span class="q-time">⏱ 約15分</span></div>
+          <div class="q-title">余白の書き込み</div>
+          <p class="q-desc">フェルマーが本の余白に残した主張と、358年の歴史の入口。n＝2 の解（整数の直角三角形）を、円の上の分数の点と直線の傾きから、すべて作る公式を導く。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+
+        <a class="quest-card" href="stage2.html" data-stage="2" style="--accent:#b5504a;--accent-bg:#fdefed">
+          <div class="q-top"><span class="q-num">2</span><span class="q-suit" aria-hidden="true">🪜</span></div>
+          <div class="q-meta"><span class="q-tag">無限降下法</span><span class="q-time">⏱ 約18分</span></div>
+          <div class="q-title">どこまでも小さくなる解</div>
+          <p class="q-desc">「解があれば、もっと小さい解が作れる」。フェルマー自身が残した唯一の証明で、x⁴＋y⁴＝z² に解がないことを中学数学で証明し、残りを奇数の素数の指数に絞る。</p>
+          <span class="q-cta">はじめる →</span>
+        </a>
+      </div>
+    </section>
+
+    <div id="book-recommend"></div>
+  </main>
+
+  <footer>
+    <p>NO DOWNLOAD. NO REGISTRATION. JUST LEARN. &nbsp;© <span id="year"></span> ruglerugle</p>
+    <div class="footer-suits" aria-hidden="true"><span>📜</span><span>🧩</span><span>➰</span><span>🌉</span></div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script src="../js/progress.js?v=20261005a"></script>
+<script>FQ.initCoverPage("margin");</script>
+</body>
+</html>

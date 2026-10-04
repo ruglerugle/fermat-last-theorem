@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>第2章 STAGE4 1通りの正体（素因数分解の一意性と素元） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="素因数分解の一意性とは何かを中学生向けに解説。「並べる順番と単数の違いを除いて1通り」という正確な意味と、それを支える素数の性質「ab を割り切れば a か b を割り切る」から一意性を導く。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/number-worlds/stage4">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="第2章 STAGE4 1通りの正体（素因数分解の一意性と素元） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="「素因数分解はただ1通り」は、正確には何を言っているのか。それを支えていたのは、素数がもつ1つの性質だった。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/number-worlds/stage4">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE4 1通りの正体",
+      "description": "素因数分解の一意性とは何かを中学生向けに解説。「並べる順番と単数の違いを除いて1通り」という正確な意味と、それを支える素数の性質「ab を割り切れば a か b を割り切る」から一意性を導く。",
+      "url": "https://fermat.habatakijuku.com/number-worlds/stage4",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 4,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "第2章 数の世界をひろげる",
+        "url": "https://fermat.habatakijuku.com/number-worlds/",
+        "isPartOf": {
+          "@type": "LearningResource",
+          "name": "フェルマーの最終定理、証明への道",
+          "url": "https://fermat.habatakijuku.com/"
+        }
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "第2章 数の世界をひろげる",
+          "item": "https://fermat.habatakijuku.com/number-worlds/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "STAGE4 1通りの正体",
+          "item": "https://fermat.habatakijuku.com/number-worlds/stage4"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="../design-system.css?v=20261005a">
+<style>
+
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="../" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">第2章 数の世界をひろげる ／ STAGE 4 ― 1通りの正体 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 7</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">第2章 STAGE 4</span><h1 class="chapter-title">1通りの正体</h1>
+        <div class="chapter-sub">素数の性質と素因数分解の一意性</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">素因数分解の一意性の正確な意味（並べる順番と単数の違いを除いて1通り）を理解し、既約元がどれも素元の性質「p が ab を割り切るなら、a か b を割り切る」をもてば一意性が成り立つことを説明しよう。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">前のステージで、数の世界の部品、既約元を見分けられるようになった。今日は「素因数分解はただ1通り」が正確には何を言っているのかを考えよう。12 を分けると、どうなるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">12＝2×2×3 です。3×2×2 と順番を変えても、同じ分け方です。それに (−2)×2×(−3) も 12 ですが、−1 を掛けた違いだけです。……並べる順番と、単数を掛ける違いは、同じ分け方と見なすんですね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。正確にはこう言う。「0 でも単数でもない数は、既約元の積に分けられる。その分け方は、<strong>並べる順番と、単数を掛ける違いを除いて、ただ1通り</strong>」。これを<strong>素因数分解の一意性</strong>という。では、なぜ整数ではただ1通りなのか。鍵になるのは素数がもつある性質だ。素数 p が2つの数の積 ab を割り切るとき、何が言えるかな？ たとえば 7 が ab を割り切るとき。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">ab の素因数分解の中に 7 があるはずで、ab の素因数は a の素因数と b の素因数を合わせたものなので、7 は a か b のどちらかを割り切ります。……でも、これは「素因数分解はただ1通り」を知っているから言えることです。一意性を証明するのに一意性を使ったら、ぐるぐる回りになってしまいます。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">いいところに気づいたね。だから順番を逆にする。「<strong>p が ab を割り切るなら、p は a か b を割り切る</strong>」という性質を、一意性を使わずに証明し、そこから一意性を導くんだ。この性質をもつ数を<strong>素元（そげん）</strong>と呼ぼう。整数の素数が素元であることは次のステージで証明する。今日は、素元の性質があれば一意性が出てくることを確かめる。その前に、素数でない数はこの性質をもたないことを見ておこう。6 で試してごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">6 は 4×9＝36 を割り切りますが、4 も 9 も割り切りません。6＝2×3 の 2 は 4 のほうに、3 は 9 のほうに入っていて、6 がまるごと片方に入るわけではないからです。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。では、既約元がどれも素元である世界で、ある数が2通りに分けられたとしよう。p₁p₂…p<sub>r</sub>＝q₁q₂…q<sub>s</sub>（p も q もすべて既約元）。p₁ に注目すると、何が言えるかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">p₁ は左辺を割り切るので、右辺の q₁q₂…q<sub>s</sub> も割り切ります。q₁ と残り（q₂…q<sub>s</sub>）の積と見て素元の性質を使うと、p₁ は q₁ を割り切るか、残りを割り切ります。これをくり返すと、p₁ は q₁, q₂, … のどれかを割り切ります。それを q<sub>j</sub> とすると、q<sub>j</sub>＝p₁×c と書けます。q<sub>j</sub> は既約元で p₁ は単数ではないので、c は単数です。つまり p₁ と q<sub>j</sub> は単数の違いを除いて同じ部品で、両辺から取り除けます。残りの部品でも同じことをくり返せば、最後には2つの分け方が、順番と単数の違いを除いて同じだと分かります。</div>
+        </div>
+      </div>
+
+      <div class="diagram-box">
+<svg viewBox="0 0 420 200" role="img" aria-label="60を2通りに並べた既約元の積。上の段は2、2、3、5、下の段は−3、5、2、−2。上の2は下の2と、もう1つの2は−2と、3は−3と、5は5と、単数を掛ける違いを除いて1つずつ対応する">
+          <text x="40" y="58" font-size="14" font-weight="900" fill="#1c2b26">60 ＝</text>
+          <text x="40" y="158" font-size="14" font-weight="900" fill="#1c2b26">60 ＝</text>
+          <line x1="120" y1="70" x2="260" y2="138" stroke="#b9b0a3" stroke-width="2" stroke-dasharray="5 4"/><line x1="190" y1="70" x2="330" y2="138" stroke="#b9b0a3" stroke-width="2" stroke-dasharray="5 4"/><line x1="260" y1="70" x2="120" y2="138" stroke="#b9b0a3" stroke-width="2" stroke-dasharray="5 4"/><line x1="330" y1="70" x2="190" y2="138" stroke="#b9b0a3" stroke-width="2" stroke-dasharray="5 4"/>
+          <rect x="101" y="36" width="38" height="30" rx="7" fill="#41846b"/><text x="120" y="57" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">2</text><rect x="171" y="36" width="38" height="30" rx="7" fill="#41846b"/><text x="190" y="57" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">2</text><rect x="241" y="36" width="38" height="30" rx="7" fill="#9a6a1c"/><text x="260" y="57" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">3</text><rect x="311" y="36" width="38" height="30" rx="7" fill="#3f6fb5"/><text x="330" y="57" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">5</text>
+          <rect x="101" y="136" width="38" height="30" rx="7" fill="#9a6a1c"/><text x="120" y="157" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">−3</text><rect x="171" y="136" width="38" height="30" rx="7" fill="#3f6fb5"/><text x="190" y="157" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">5</text><rect x="241" y="136" width="38" height="30" rx="7" fill="#41846b"/><text x="260" y="157" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">2</text><rect x="311" y="136" width="38" height="30" rx="7" fill="#41846b"/><text x="330" y="157" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">−2</text>
+          <text x="210" y="196" text-anchor="middle" font-size="11.5" font-weight="800" fill="#6b837a">−3＝(−1)×3、−2＝(−1)×2：単数 −1 を掛けただけの違い</text>
+        </svg>
+        <div class="diagram-caption">素元の性質があると、部品を1つずつ打ち消し合わせられる。60＝2×2×3×5＝(−3)×5×2×(−2) では、上の段のどの部品にも、下の段に単数の違いを除いて同じ部品が1つずつ見つかる（点線）。部品をすべて取り除けたら、2つの分け方は同じだったことになる</div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step"><strong>一意性</strong>：0 でも単数でもない数は既約元の積に分けられ、その分け方は、並べる順番と単数を掛ける違いを除いて1通り</span>
+        <span class="step"><strong>素元</strong>：p が ab を割り切るなら、p は a か b を割り切る、という性質をもつ数（6 は 4×9 を割り切るが 4 も 9 も割り切らないので、素元ではない）</span>
+        <span class="step">既約元がどれも素元なら：<span class="nw">p₁…p<sub>r</sub>＝q₁…q<sub>s</sub></span> → p₁ はどれかの q<sub>j</sub> を割り切る → <span class="nw">q<sub>j</sub>＝p₁×（単数）</span> → 両辺から取り除く → くり返す</span>
+        <span class="step">→ 既約元がどれも素元なら、素因数分解はただ1通り</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。まとめると、<strong>既約元がどれも素元なら、素因数分解はただ1通り</strong>になる。逆に言えば、ある世界で素因数分解が崩れるのは、「既約元なのに、素元の性質をもたない数」がいるときだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">整数の世界でも、素数が素元の性質をもつことは、まだ証明していません。一意性を使わずに、どうやって証明するんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">割り算を使うんだ。それも、小学校からおなじみの「余りのある割り算」だよ。次のステージで、それがどう素元の性質につながるかを見よう。そして、同じ割り算がガウス整数の世界でもできるかどうかが、ただ1通りになるかどうかの分かれ目になる。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">素因数分解の一意性：既約元の積への分け方は、並べる順番と単数を掛ける違いを除いて1通り</span>
+        <span class="step">「p が ab を割り切れば a か b を割り切る」は、一意性を知っていれば言えるが、一意性の証明に使うとぐるぐる回りになる</span>
+        <span class="step">素元：p が ab を割り切るなら、p は a か b を割り切る数。6 は素元ではない（4×9＝36 の例）</span>
+        <span class="step">既約元がどれも素元なら、部品を1つずつ打ち消し合わせて、素因数分解はただ1通りだと言える</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. 「素因数分解の一意性」の正確な意味は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">どんな数も、ちょうど2つの素数の積に分けられる</button>
+          <button class="choice-btn">既約元の積への分け方が、並べる順番と単数を掛ける違いを除いて1通り</button>
+          <button class="choice-btn">素数は、それ以上分けられない</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 12＝2×2×3＝3×2×2＝(−2)×2×(−3) のように、順番と単数（±1）の掛け方の違いは同じ分け方と見なす。そのうえで1通り、という意味。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. 6 が素元（p が ab を割り切れば a か b を割り切る数）でないことを示す例は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">6 は 4×9 を割り切るが、4 も 9 も割り切らない</button>
+          <button class="choice-btn">6 は 2×3 と分けられる</button>
+          <button class="choice-btn">6 は偶数である</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 6＝2×3 の 2 が 4 に、3 が 9 に分かれて入るので、6 はまるごと片方を割り切れない。素元の性質はこのような分かれ方を許さない。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. 既約元がどれも素元だと、なぜ一意性が言えるのか？</p>
+        <div class="choice-list">
+          <button class="choice-btn">既約元は1つしかないから</button>
+          <button class="choice-btn">どの数もノルムが素数になるから</button>
+          <button class="choice-btn">片方の分け方の部品は、もう片方のどれかの部品を割り切るので、単数の違いを除いて同じ部品として1つずつ打ち消し合わせられるから</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ p₁ は右辺の積を割り切るので、素元の性質をくり返し使うとどれかの q<sub>j</sub> を割り切る。q<sub>j</sub> は既約元なので q<sub>j</sub>＝p₁×（単数）。取り除いてくり返せば、2つの分け方は同じになる。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← 章のトップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/progress.js?v=20261005a"></script>
+<script src="../js/fermat.js?v=20261005a"></script>
+<script>FQ.initStagePage("number-worlds", 4);</script>
+<script>
+
+</script>
+</body>
+</html>

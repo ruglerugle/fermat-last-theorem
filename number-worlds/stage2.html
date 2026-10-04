@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1d352c">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RTQCP2HXM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RTQCP2HXM');
+</script>
+<title>第2章 STAGE2 数の世界（環とは・ガウス整数） ― フェルマーの最終定理、証明への道</title>
+<meta name="description" content="環とは何かを中学生向けに解説。足し算・引き算・掛け算をしても外に出ない数の集まりが環。整数、ガウス整数 a＋bi、a＋b√−5、a＋bω を作り、分数の世界で素因数分解を考えない理由まで確かめる。">
+<link rel="canonical" href="https://fermat.habatakijuku.com/number-worlds/stage2">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="フェルマーの最終定理、証明への道">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="第2章 STAGE2 数の世界（環とは・ガウス整数） ― フェルマーの最終定理、証明への道">
+<meta property="og:description" content="足しても、引いても、掛けても外に出ない数の集まり。それが素因数分解を考える舞台「環」。整数より広い数の世界を、自分の手で作る。">
+<meta property="og:url" content="https://fermat.habatakijuku.com/number-worlds/stage2">
+<meta property="og:image" content="https://fermat.habatakijuku.com/images/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="フェルマーの最終定理、証明への道：xⁿ＋yⁿ＝zⁿ は n が3以上なら自然数の解をもたない">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "name": "STAGE2 数の世界",
+      "description": "環とは何かを中学生向けに解説。足し算・引き算・掛け算をしても外に出ない数の集まりが環。整数、ガウス整数 a＋bi、a＋b√−5、a＋bω を作り、分数の世界で素因数分解を考えない理由まで確かめる。",
+      "url": "https://fermat.habatakijuku.com/number-worlds/stage2",
+      "inLanguage": "ja",
+      "learningResourceType": "learning activity",
+      "educationalLevel": "中学生以上",
+      "isAccessibleForFree": true,
+      "position": 2,
+      "isPartOf": {
+        "@type": "LearningResource",
+        "name": "第2章 数の世界をひろげる",
+        "url": "https://fermat.habatakijuku.com/number-worlds/",
+        "isPartOf": {
+          "@type": "LearningResource",
+          "name": "フェルマーの最終定理、証明への道",
+          "url": "https://fermat.habatakijuku.com/"
+        }
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ruglerugle"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "フェルマーの最終定理、証明への道",
+          "item": "https://fermat.habatakijuku.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "第2章 数の世界をひろげる",
+          "item": "https://fermat.habatakijuku.com/number-worlds/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "STAGE2 数の世界",
+          "item": "https://fermat.habatakijuku.com/number-worlds/stage2"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="../design-system.css?v=20261005a">
+<style>
+
+</style>
+</head>
+<body>
+<div class="app-shell side-collapsed" id="app-shell">
+  <header class="game-header">
+    <div class="brand">
+      <div class="brand-title"><a class="head-reset home-badge" href="../" title="トップへ" aria-label="トップへ">📜</a> <span>フェルマーの最終定理、証明への道</span></div>
+      <div class="brand-sub">第2章 数の世界をひろげる ／ STAGE 2 ― 数の世界 ―</div>
+    </div>
+    <div class="head-progress-wrap">
+      <div class="head-progress-label" id="progress-label">クリア 0 / 7</div>
+      <div class="head-progress" role="progressbar" aria-label="クリア済みステージ数" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><div class="head-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="header-actions">
+      <button class="head-reset" id="btn-reset-all">🔄 最初から</button>
+      <button class="head-reset" id="head-nav-toggle" title="ステージ一覧の表示切替">☰ ナビ</button>
+    </div>
+  </header>
+  <div class="game-layout">
+    <div class="side-backdrop" id="side-backdrop"></div>
+    <aside class="side-panel">
+      <div class="side-head">
+        <button class="side-toggle" id="sidebar-toggle" title="ステージ一覧の表示切替" aria-label="ステージ一覧の表示切替">☰</button>
+        <span class="side-head-text">📚 ステージ一覧</span>
+      </div>
+      <div class="side-list" id="side-list"></div>
+    </aside>
+    <main class="main-area">
+      <div class="chapter-head">
+        <span class="chapter-badge">第2章 STAGE 2</span><h1 class="chapter-title">数の世界</h1>
+        <div class="chapter-sub">足し算・引き算・掛け算で閉じた世界（環）</div>
+      </div>
+      <div class="mission-box">
+        <div class="mission-label">🎯 ミッション</div>
+        <div class="mission-text">足し算・引き算・掛け算で閉じた数の集まり（環）とは何かを理解し、ガウス整数 a＋bi、a＋b√−5、a＋bω が環になることを確かめよう。分数の世界では素因数分解を考えない理由も説明できれば合格。</div>
+        <span class="mission-status" id="mission-status">未達成</span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt=""></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">前のステージの最後に、どんな数の集まりなら素因数分解を考えられるのか、という問いが残ったね。まず、いちばん身近な整数の世界をよく見よう。整数どうしを足しても、引いても、掛けても、答えはまた整数だ。こういう「計算しても外に出ない」ことを、<strong>閉じている</strong>という。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt=""></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">自然数 1, 2, 3, … は閉じていません。2−5＝−3 で外に出ます。分数（有理数）は、足し算・引き算・掛け算はもちろん、0 以外で割る割り算でも閉じています。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。0 と 1 を含み、足し算・引き算・掛け算で閉じた数の集まりを<strong>環（かん）</strong>と呼ぶ。この章では「数の世界」とも呼ぶことにしよう。整数は環だ。有理数のように、0 以外で割る割り算でも閉じているものは、特に<strong>体（たい）</strong>と呼ばれる。では、素因数分解を考える舞台として、有理数の世界はどうかな？</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">有理数の世界では、6＝(1/2)×12＝1.5×4 のように、0 以外のどんな数でも 6 の約数になってしまいます。どの数も、ほかのどんな数でも割り切れるので、「これ以上分けられない数」がなくなります。素因数分解を考えるには、割り算がいつもはできない世界のほうがいい、ということですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。素因数分解の舞台は、割り算がいつもはできない環なんだ。そのかわり、「割り切れる」「約数」「倍数」が意味をもつ。そして、<strong>分けたあとの数も、同じ世界の中の数に限る</strong>。整数の素因数分解で、掛け合わせる数を整数に限るのと同じ約束だ。では、整数より広い数の世界を作ってみよう。a, b を整数として、a＋bi の形の数を全部集める。これを<strong>ガウス整数</strong>という。掛け算で閉じているか確かめてごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">(a＋bi)(c＋di)＝ac＋adi＋bci＋bdi²＝(ac−bd)＋(ad＋bc)i。ac−bd も ad＋bc も整数なので、またガウス整数です。足し算と引き算は、a どうし、b どうしを足し引きするだけなので閉じています。0 も 1 も入っているので、ガウス整数は環です。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。同じように、a＋b√−5（a, b は整数）も環になる。√−5 は √5 i のことで、2乗すると −5 になる数だよ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">(a＋b√−5)(c＋d√−5)＝ac＋ad√−5＋bc√−5＋bd(√−5)²＝(ac−5bd)＋(ad＋bc)√−5。これも a＋b√−5 の形に戻るので、閉じています。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">前のステージでラメが使った a＋bω（a, b は整数）も環だ。ただ、掛けると ω² が出てくるところが少し違う。前のステージで確かめた ω＋ω²＝−1 を使ってごらん。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">ω＋ω²＝−1 から ω²＝−1−ω です。(a＋bω)(c＋dω)＝ac＋(ad＋bc)ω＋bdω²＝ac＋(ad＋bc)ω＋bd(−1−ω)＝(ac−bd)＋(ad＋bc−bd)ω。ω² が消えて、a＋bω の形に戻りました。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">ガウス整数：<span class="nw">(a＋bi)(c＋di)＝(ac−bd)＋(ad＋bc)i</span>（i²＝−1 を使う）</span>
+        <span class="step">a＋b√−5：<span class="nw">(a＋b√−5)(c＋d√−5)＝(ac−5bd)＋(ad＋bc)√−5</span>（(√−5)²＝−5 を使う）</span>
+        <span class="step">a＋bω：<span class="nw">(a＋bω)(c＋dω)＝(ac−bd)＋(ad＋bc−bd)ω</span>（ω²＝−1−ω を使う）</span>
+        <span class="step">どれも、整数の a, b, c, d から作った整数を並べた形に戻る → 掛け算で閉じている</span>
+      </div>
+
+      <div class="diagram-box">
+<div class="cv-wrap"><canvas id="cv-world" aria-label="数の世界を、複素数の平面に並ぶ点の集まりとして描いた図。2つの数 z と w と、その積 zw が、どれも同じ点の並びの上に乗っている"></canvas></div>
+        <div class="sim-controls">
+          <label>世界 <select id="sel-world"><option value="i">a＋bi（ガウス整数）</option><option value="5">a＋b√−5</option><option value="w">a＋bω</option></select></label>
+        </div>
+        <div class="sim-controls">
+          <label>z＝ <input type="number" id="in-za" min="-3" max="3" value="2"> ＋ <input type="number" id="in-zb" min="-3" max="3" value="1"> <span id="lbl-z">i</span></label>
+          <label>w＝ <input type="number" id="in-wa" min="-3" max="3" value="1"> ＋ <input type="number" id="in-wb" min="-3" max="3" value="1"> <span id="lbl-w">i</span></label>
+        </div>
+        <div class="readout" id="ro-world"></div>
+        <div class="diagram-caption"><strong>数の世界を点の並びで見る</strong>。それぞれの世界の数を、複素数の平面（横が実数の部分、縦が i の部分）の点として並べた。ガウス整数は正方形の目、a＋b√−5 は縦に長い長方形の目（縦の間隔 √5≈2.24）、a＋bω は正三角形の目に並ぶ。z と w（青）を選ぶと、積 zw（赤）も必ず同じ並びの点に乗る。これが「掛け算で閉じている」ということ</div>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">環になるのは、当たり前ではないんだ。たとえば、3乗すると 2 になる数を ∛2 として、a＋b∛2 の形の数を集めてみる。∛2×∛2＝∛4 は、a＋b∛2 の形には書けないことが分かっている。だから、この集まりは掛け算で外に出てしまって、環にならない。数の世界を作るときは、閉じているかを必ず確かめるんだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="../images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">ラメの数 x＋ζy は、どの世界に住んでいるんですか？ p＝3 なら、さっきの a＋bω の世界ですよね。</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="../images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">そう。一般の p では、ζ の累乗に整数を掛けて足した <span class="nw">a₀＋a₁ζ＋a₂ζ²＋…＋a<sub>p−2</sub>ζ<sup>p−2</sup></span> の形の数が環をつくる。ζ<sup>p−1</sup> まで要らないのは、1＋ζ＋ζ²＋…＋ζ<sup>p−1</sup>＝0 から、ζ<sup>p−1</sup> がほかの累乗で書けるからだ（p＝3 なら ω²＝−1−ω だったね）。x と y が整数なら、x＋ζy はこの世界の数だ。ラメの証明は、この世界の中で素因数分解がただ1通りだと思い込んでいたことになる。次は、この世界の中で「これ以上分けられない数」をどう見分けるかを考えよう。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">【このステージの成果】</span>
+        <span class="step">環（数の世界）：0 と 1 を含み、足し算・引き算・掛け算で閉じた数の集まり。整数は環、自然数は環ではない（引き算で外に出る）</span>
+        <span class="step">体：0 以外で割る割り算でも閉じた環（有理数など）。体ではどの数もほかの数で割り切れるので、素因数分解を考えない</span>
+        <span class="step">ガウス整数 a＋bi、a＋b√−5、a＋bω は環。分けたあとの数も同じ世界の中に限る</span>
+        <span class="step">ラメの数 x＋ζy は、<span class="nw">a₀＋a₁ζ＋…＋a<sub>p−2</sub>ζ<sup>p−2</sup></span> の形の数がつくる環に住んでいる</span>
+      </div>
+
+      <h2 class="quiz-head">確認クイズ</h2>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q1. 次のうち、環（足し算・引き算・掛け算で閉じた数の集まり）でないものは？</p>
+        <div class="choice-list">
+          <button class="choice-btn">整数全体</button>
+          <button class="choice-btn">ガウス整数 a＋bi 全体</button>
+          <button class="choice-btn">自然数 1, 2, 3, … 全体</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 自然数は引き算で外に出る（2−5＝−3）。整数とガウス整数は、足し算・引き算・掛け算のどれをしても同じ集まりに戻る。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q2. 有理数（分数）の世界で素因数分解を考えない理由は？</p>
+        <div class="choice-list">
+          <button class="choice-btn">0 以外で割る割り算ができるので、どの数もほかのどんな数でも割り切れ、「これ以上分けられない数」がなくなるから</button>
+          <button class="choice-btn">有理数は掛け算で閉じていないから</button>
+          <button class="choice-btn">有理数には負の数がないから</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 有理数の世界では 6＝(1/2)×12＝1.5×4 のように何でも約数になる。素因数分解の舞台は、割り算がいつもはできない環。</div>
+      </div>
+      <div class="quiz-card" data-quiz>
+        <p class="quiz-q">Q3. a＋b√−5 の世界で (1＋2√−5)(1−√−5) を計算すると？</p>
+        <div class="choice-list">
+          <button class="choice-btn">−9＋√−5</button>
+          <button class="choice-btn">11＋√−5</button>
+          <button class="choice-btn">1−2√−5</button>
+        </div>
+        <div class="quiz-explain" hidden>正解！ 1−√−5＋2√−5−2(√−5)²＝1＋√−5＋10＝11＋√−5。(√−5)²＝−5 なので、−2×(−5)＝＋10。</div>
+      </div>
+
+      <div class="stage-nav">
+        <a class="btn" href="index.html">← 章のトップへ</a>
+        <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
+      </div>
+
+      <div id="book-recommend"></div>
+    </main>
+  </div>
+</div>
+
+<script src="../js/progress.js?v=20261005a"></script>
+<script src="../js/fermat.js?v=20261005a"></script>
+<script>FQ.initStagePage("number-worlds", 2);</script>
+<script>
+/* 数の世界を点の並びで見る */
+(function(){
+  var sel=document.getElementById('sel-world'), ro=document.getElementById('ro-world');
+  var ids=['in-za','in-zb','in-wa','in-wb'].map(function(id){return document.getElementById(id);});
+  var S5=Math.sqrt(5), S3=Math.sqrt(3)/2;
+  var W={
+    i:{unit:'i', pos:function(a,b){return [a,b];}, mul:function(a,b,c,d){return [a*c-b*d,a*d+b*c];}},
+    '5':{unit:'√−5', pos:function(a,b){return [a,b*S5];}, mul:function(a,b,c,d){return [a*c-5*b*d,a*d+b*c];}},
+    w:{unit:'ω', pos:function(a,b){return [a-b/2,b*S3];}, mul:function(a,b,c,d){return [a*c-b*d,a*d+b*c-b*d];}}
+  };
+  function name(a,b,u){ if(b===0) return FL.signed(a); var s=(a!==0?FL.signed(a):''); var bb=Math.abs(b); return s+(b>0?(a!==0?'＋':''):'−')+(bb===1?'':bb)+u; }
+  var st=FL.canvas('cv-world',0.8,draw);
+  function draw(st){
+    var w=W[sel.value], v=ids.map(function(el){var x=Math.max(-3,Math.min(3,parseInt(el.value,10)||0)); el.value=x; return x;});
+    document.getElementById('lbl-z').textContent=w.unit; document.getElementById('lbl-w').textContent=w.unit;
+    var p=w.mul(v[0],v[1],v[2],v[3]);
+    var Z=w.pos(v[0],v[1]), Wp=w.pos(v[2],v[3]), P=w.pos(p[0],p[1]);
+    var span=Math.max(8,2.4*Math.max(Math.abs(P[0]),Math.abs(P[1]),Math.abs(Z[0]),Math.abs(Z[1]),Math.abs(Wp[0]),Math.abs(Wp[1]))+1);
+    var ctx=st.ctx; ctx.clearRect(0,0,st.W,st.H); ctx.fillStyle=FL.C.paper; ctx.fillRect(0,0,st.W,st.H);
+    var vw=FL.view(st,span,0,0);
+    FL.axes(ctx,st,vw,0,{labels:false});
+    var R=Math.ceil(span);
+    for(var a=-R*2;a<=R*2;a++) for(var b=-R*2;b<=R*2;b++){
+      var q=w.pos(a,b), x=vw.X(q[0]), y=vw.Y(q[1]);
+      if(x<-5||x>st.W+5||y<-5||y>st.H+5) continue;
+      FL.dot(ctx,x,y,span>20?1.6:2.6,'#9fb8ad');
+    }
+    function mark(q,c,t){ FL.dot(ctx,vw.X(q[0]),vw.Y(q[1]),6,c,'#fff'); FL.text(ctx,t,vw.X(q[0])+9,vw.Y(q[1])-8,{color:c,size:13,halo:true}); }
+    mark(Z,FL.C.blue,'z'); mark(Wp,FL.C.blue,'w'); mark(P,FL.C.red,'zw');
+    FL.text(ctx,'実数の部分',st.W-8,vw.Y(0)-6,{color:FL.C.muted,align:'right',size:11});
+    ro.innerHTML='<span>z＝<b>'+name(v[0],v[1],w.unit)+'</b></span><span>w＝<b>'+name(v[2],v[3],w.unit)+'</b></span><span>zw＝<b class="ng">'+name(p[0],p[1],w.unit)+'</b></span>';
+  }
+  sel.addEventListener('change',function(){st.redraw();});
+  ids.forEach(function(el){el.addEventListener('input',function(){st.redraw();});});
+})();
+</script>
+</body>
+</html>
