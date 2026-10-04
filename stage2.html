@@ -199,6 +199,44 @@
             <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
             <div class="dialog-name student">うさ美</div>
           </div>
+          <div class="dialog-bubble">互いに素でない組もありますよね。6, 8, 10 は両方偶数ですし、9, 12, 15 はどれも 3 で割り切れます。そういう組は、考えなくていいんですか？</div>
+        </div>
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">考えなくていいんだ。理由を確かめよう。a と b に共通の素因数 d があるとする。a² も b² も d² で割り切れるから、a²＋b²、つまり c² も d² で割り切れる。c を素因数分解したときの d の個数は、c² の中の個数のちょうど半分だから、c も d で割り切れる。だから a, b, c は全部 d で割れて、a²＋b²＝c² の両辺を d² で割ると (a/d)²＋(b/d)²＝(c/d)²。ひとまわり小さい、整数の直角三角形になる。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
+          <div class="dialog-bubble">共通の素因数がなくなるまで割り続ければ、最後は互いに素な組に行き着きます。逆に言えば、互いに素でない組は、どれも互いに素な組を整数倍したもの、ということですか？ 6, 8, 10 は 2 で割ると 3, 4, 5 なので、3, 4, 5 の2倍です。</div>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span class="step">a と b に共通の素因数 d がある → <span class="nw">a²＋b²</span> は d² で割り切れる → <span class="nw">c²</span> も d² で割り切れる</span>
+        <span class="step">c を素因数分解したときの d の個数は、c² の中の個数の半分 → c も d で割り切れる</span>
+        <span class="step">両辺を d² で割る：<span class="nw">(a/d)²＋(b/d)²＝(c/d)²</span>（小さい整数の直角三角形になる）</span>
+        <span class="step">共通の素因数がなくなるまでくり返すと、互いに素な組 (a₀, b₀, c₀) に行き着く。割った数を全部掛けたものを k とすると <span class="nw">(a, b, c)＝(ka₀, kb₀, kc₀)</span></span>
+      </div>
+
+      <div class="dialogue-scene">
+        <div class="dialog-row">
+          <div class="dialog-character">
+            <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name mentor">ねこ博士</div>
+          </div>
+          <div class="dialog-bubble">その通り。だから、互いに素な組だけを調べれば十分なんだ。</div>
+        </div>
+        <div class="dialog-row right">
+          <div class="dialog-character">
+            <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
+            <div class="dialog-name student">うさ美</div>
+          </div>
           <div class="dialog-bubble">後半は STAGE1 の公式で、t＝m/n を約分した分数にしておくということですね。前半の「どちらか一方だけが偶数」はなぜですか？ 両方偶数なら 2 が共通の約数になるので、互いに素ではありません。でも、両方奇数の場合は……？</div>
         </div>
         <div class="dialog-row">
@@ -278,7 +316,7 @@
             <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
             <div class="dialog-name mentor">ねこ博士</div>
           </div>
-          <div class="dialog-bubble">これで道具がそろった。いよいよ降下の手順だ。x⁴＋y⁴＝z² をみたす自然数があると仮定する。まず、x と y に共通の素因数 d があったとする。左辺 x⁴＋y⁴ は d⁴ で割り切れるから、z² も d⁴ で割り切れて、z は d² で割り切れる（z を素因数分解したときの d の個数は、z² の中の個数のちょうど半分だから）。両辺を d⁴ で割ると (x/d)⁴＋(y/d)⁴＝(z/d²)² で、より小さい解に取りかえられる。だから、はじめから <strong>x と y は互いに素</strong>としてよい。式を (x²)²＋(y²)²＝z² と書き直すと、何に見えるかな？</div>
+          <div class="dialog-bubble">これで道具がそろった。いよいよ降下の手順だ。x⁴＋y⁴＝z² をみたす自然数があると仮定する。まず、x と y に共通の素因数 d があったとする。左辺 x⁴＋y⁴ は d⁴ で割り切れるから、z² も d⁴ で割り切れて、z は d² で割り切れる（さっき c が d で割り切れることを確かめたのと同じ理由だ）。両辺を d⁴ で割ると (x/d)⁴＋(y/d)⁴＝(z/d²)² で、より小さい解に取りかえられる。だから、はじめから <strong>x と y は互いに素</strong>としてよい。式を (x²)²＋(y²)²＝z² と書き直すと、何に見えるかな？</div>
         </div>
         <div class="dialog-row right">
           <div class="dialog-character">
