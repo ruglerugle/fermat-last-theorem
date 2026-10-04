@@ -199,19 +199,24 @@
       </div>
 
       <div class="diagram-box">
-        <svg viewBox="0 0 420 220" role="img" aria-label="左は原点から伸びる3本の矢印 1、ω、ω²。どれも長さ1で、120度ずつ回っている。右はその3本を先端から先端へつなげた図で、正三角形を一周して出発点に戻るので、足すと0になる">
-          <defs><marker id="ar3w9a6a1c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9a6a1c"/></marker><marker id="ar3w41846b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#41846b"/></marker><marker id="ar3w3f6fb5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3f6fb5"/></marker></defs>
-          <line x1="40" y1="120" x2="220" y2="120" stroke="#b9b0a3"/><line x1="130" y1="30" x2="130" y2="210" stroke="#b9b0a3"/>
-          <line x1="130.0" y1="120.0" x2="200.0" y2="120.0" stroke="#9a6a1c" stroke-width="2.6" marker-end="url(#ar3w9a6a1c)"/><line x1="130.0" y1="120.0" x2="95.0" y2="59.4" stroke="#41846b" stroke-width="2.6" marker-end="url(#ar3w41846b)"/><line x1="130.0" y1="120.0" x2="95.0" y2="180.6" stroke="#3f6fb5" stroke-width="2.6" marker-end="url(#ar3w3f6fb5)"/>
-          <text x="210" y="124" text-anchor="start" font-size="14" font-weight="900" fill="#9a6a1c">1</text><text x="89.00000000000001" y="53.37822173508929" text-anchor="end" font-size="14" font-weight="900" fill="#41846b">ω</text><text x="88.99999999999997" y="194.6217782649107" text-anchor="end" font-size="14" font-weight="900" fill="#3f6fb5">ω²</text>
-          <text x="130" y="22" text-anchor="middle" font-size="12" font-weight="900" fill="#1c2b26">長さ1、120° ずつ</text>
-          <line x1="290.0" y1="150.0" x2="360.0" y2="150.0" stroke="#9a6a1c" stroke-width="2.6" marker-end="url(#ar3w9a6a1c)"/><line x1="360.0" y1="150.0" x2="325.0" y2="89.4" stroke="#41846b" stroke-width="2.6" marker-end="url(#ar3w41846b)"/><line x1="325.0" y1="89.4" x2="290.0" y2="150.0" stroke="#3f6fb5" stroke-width="2.6" marker-end="url(#ar3w3f6fb5)"/>
-          <circle cx="290" cy="150" r="4" fill="#1c2b26"/>
-          <text x="325" y="168" text-anchor="middle" font-size="13" font-weight="900" fill="#9a6a1c">1</text><text x="352.5" y="119.68911086754464" text-anchor="start" font-size="13" font-weight="900" fill="#41846b">ω</text><text x="297.5" y="119.68911086754463" text-anchor="end" font-size="13" font-weight="900" fill="#3f6fb5">ω²</text>
-          <text x="325" y="22" text-anchor="middle" font-size="12" font-weight="900" fill="#1c2b26">つなげると出発点に戻る</text>
-          <text x="325" y="205" text-anchor="middle" font-size="13" font-weight="900" fill="#2e5f4d">1＋ω＋ω²＝0</text>
+        <svg viewBox="0 0 420 250" role="img" aria-label="ωとω²を矢印として足す図。原点からωとω²の矢印を引き、それぞれの先端からもう一方と平行な線を引くと、ひし形ができる。原点から向かいの頂点への対角線が ω＋ω² で、ちょうど −1 を指している">
+          <defs><marker id="aw1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#41846b"/></marker><marker id="aw2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3f6fb5"/></marker><marker id="aws" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c8433f"/></marker><marker id="aw0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9a6a1c"/></marker></defs>
+          <line x1="90" y1="125" x2="360" y2="125" stroke="#b9b0a3"/><line x1="230" y1="17" x2="230" y2="233" stroke="#b9b0a3"/>
+          <circle cx="230" cy="125" r="90" fill="none" stroke="#7fc0a8" stroke-width="1.4" stroke-dasharray="5 4"/>
+          <polygon points="230.0,125.0 185.0,47.1 140.0,125.0 185.0,202.9" fill="rgba(200,67,63,.07)"/>
+          <line x1="185.0" y1="47.1" x2="140.0" y2="125.0" stroke="#3f6fb5" stroke-width="1.6" stroke-dasharray="6 4"/>
+          <line x1="185.0" y1="202.9" x2="140.0" y2="125.0" stroke="#41846b" stroke-width="1.6" stroke-dasharray="6 4"/>
+          <line x1="230" y1="125" x2="320.0" y2="125.0" stroke="#9a6a1c" stroke-width="2.2" marker-end="url(#aw0)" opacity=".6"/>
+          <line x1="230" y1="125" x2="185.0" y2="47.1" stroke="#41846b" stroke-width="2.8" marker-end="url(#aw1)"/>
+          <line x1="230" y1="125" x2="185.0" y2="202.9" stroke="#3f6fb5" stroke-width="2.8" marker-end="url(#aw2)"/>
+          <line x1="230" y1="125" x2="142.0" y2="125.0" stroke="#c8433f" stroke-width="3.2" marker-end="url(#aws)"/>
+          <text x="177.0" y="41.1" text-anchor="end" font-size="15" font-weight="900" fill="#41846b">ω</text>
+          <text x="177.0" y="218.9" text-anchor="end" font-size="15" font-weight="900" fill="#3f6fb5">ω²</text>
+          <text x="328.0" y="130.0" text-anchor="start" font-size="14" font-weight="900" fill="#9a6a1c">1</text>
+          <text x="132.0" y="117.0" text-anchor="end" font-size="13.5" font-weight="900" fill="#c8433f">ω＋ω²＝−1</text>
+          <text x="236.0" y="141.0" text-anchor="start" font-size="11" font-weight="900" fill="#6b837a">0</text>
         </svg>
-        <div class="diagram-caption">ω＋ω²＝−1 を矢印で見る。1, ω, ω² はどれも長さ1で、120° ずつ向きが違う（左）。矢印の足し算は先端に次の矢印をつなぐことなので、3本をつなげると正三角形を一周して出発点に戻り、1＋ω＋ω²＝0（右）。だから ω＋ω²＝−1</div>
+        <div class="diagram-caption">ω＋ω² を矢印の足し算で見る。原点から ω（緑）と ω²（青）の矢印を引き、それぞれの先端から、もう一方の矢印と平行な線（点線）を引くと、ひし形ができる。原点から向かいの頂点への対角線（赤）が ω＋ω²。ω と ω² は上下対称なので、縦の成分は打ち消し合い、横は −1/2 が2つで −1。対角線はちょうど −1 を指す</div>
       </div>
 
       <div class="dialogue-scene">
