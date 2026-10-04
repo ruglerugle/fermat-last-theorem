@@ -198,20 +198,21 @@
             <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
             <div class="dialog-name mentor">ねこ博士</div>
           </div>
-          <div class="dialog-bubble">いい質問だね。そういう組はないんだ。確かめよう。a と b に共通の素因数 d（たとえば 7）があるとする。a² も b² も d² で割り切れるから、a²＋b²、つまり c² も d² で割り切れる。c を素因数分解したときの d の個数は、c² の中の個数のちょうど半分だから、c² の中に d が2個以上あれば、c の中にも1個以上ある。つまり c も d で割り切れる。だから a, b, c は全部 d で割れて、a²＋b²＝c² の両辺を d² で割ると (a/d)²＋(b/d)²＝(c/d)²。ひとまわり小さい、整数の直角三角形になる。</div>
+          <div class="dialog-bubble">いい質問だね。そういう組はないんだ。確かめよう。a と b に共通の素因数 d（たとえば 7）があるとする。a² も b² も d² で割り切れるから、a²＋b²、つまり c² も d² で割り切れる。c を素因数分解したときの d の個数は、c² の中の個数のちょうど半分だから、c² の中に d が2個以上あれば、c の中にも1個以上ある。つまり c も d で割り切れる。だから a, b, c は全部 d で割れて、a²＋b²＝c² の両辺を d² で割ると (a/d)²＋(b/d)²＝(c/d)²。ひとまわり小さい、整数の直角三角形になる。a と c、b と c に共通の素因数がある場合も同じだ。たとえば a と c が d で割り切れるなら、b²＝c²−a² も d² で割り切れるから、同じ理由で b も d で割り切れる。</div>
         </div>
         <div class="dialog-row right">
           <div class="dialog-character">
             <div class="dialog-avatar student"><img src="images/rabbit.webp?v=20261004d" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
             <div class="dialog-name student">うさ美</div>
           </div>
-          <div class="dialog-bubble">共通の素因数がなくなるまで割り続ければ、最後は a, b が互いに素な組に行き着きます。逆に言えば、a, b が互いに素でない組は、どれも a, b が互いに素な組を整数倍したもの、ということですか？</div>
+          <div class="dialog-bubble">3つのうちどの2つに共通の素因数があっても、結局3つとも割り切れるんですね。共通の素因数がなくなるまで割り続ければ、最後は互いに素な組に行き着きます。逆に言えば、3つのうち2つが互いに素でない組は、どれも互いに素な組を整数倍したもの、ということですか？</div>
         </div>
       </div>
 
       <div class="formula-box">
         <span class="step">a と b に共通の素因数 d がある → <span class="nw">a²＋b²</span> は d² で割り切れる → <span class="nw">c²</span> も d² で割り切れる</span>
         <span class="step">c を素因数分解したときの d の個数は、c² の中の個数の半分 → c も d で割り切れる</span>
+        <span class="step">a と c（または b と c）に共通の素因数 d がある場合も、<span class="nw">b²＝c²−a²</span>（または <span class="nw">a²＝c²−b²</span>）から、残りの1つも d で割り切れる</span>
         <span class="step">両辺を d² で割る：<span class="nw">(a/d)²＋(b/d)²＝(c/d)²</span>（小さい整数の直角三角形になる）</span>
         <span class="step">共通の素因数がなくなるまでくり返すと、互いに素な組 (a₀, b₀, c₀) に行き着く。割った数を全部掛けたものを k とすると <span class="nw">(a, b, c)＝(ka₀, kb₀, kc₀)</span></span>
       </div>
