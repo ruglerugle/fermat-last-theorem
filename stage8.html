@@ -233,6 +233,26 @@
           </div>
           <div class="dialog-bubble">フライ曲線の判別式は 16(abc)²ᵖ なので、a, b, c の素因数は全部、指数が 2p の倍数です。つまり全部、取り除けます。残るのは……2 だけです。</div>
         </div>
+      </div>
+
+      <div class="diagram-box">
+        <svg viewBox="0 0 420 230" role="img" aria-label="フライ曲線の導手を作る素数を並べた図。2と、a、b、cの素因数。a、b、cの素因数は判別式の中で指数が2pの倍数なので、mod pで見ると取り除ける。残るのは2だけで、レベル2になる。しかし重さ2・レベル2のq から始まる種類のモジュラー形式は存在しない">
+          <text x="210" y="20" text-anchor="middle" font-size="13" font-weight="900" fill="#1c2b26">フライ曲線の導手をつくる素数</text>
+          <rect x="18" y="32" width="70" height="40" rx="8" fill="#9a6a1c"/><text x="53" y="49" text-anchor="middle" font-size="12.5" font-weight="900" fill="#fff">2</text><text x="53" y="65" text-anchor="middle" font-size="10.5" font-weight="800" fill="#fff">特別</text>
+          <rect x="98" y="32" width="96" height="40" rx="8" fill="#41846b"/><text x="146" y="49" text-anchor="middle" font-size="12.5" font-weight="900" fill="#fff">a の素因数</text><text x="146" y="65" text-anchor="middle" font-size="10.5" font-weight="800" fill="#fff">指数 2p の倍数</text>
+          <rect x="204" y="32" width="96" height="40" rx="8" fill="#41846b"/><text x="252" y="49" text-anchor="middle" font-size="12.5" font-weight="900" fill="#fff">b の素因数</text><text x="252" y="65" text-anchor="middle" font-size="10.5" font-weight="800" fill="#fff">指数 2p の倍数</text>
+          <rect x="310" y="32" width="96" height="40" rx="8" fill="#41846b"/><text x="358" y="49" text-anchor="middle" font-size="12.5" font-weight="900" fill="#fff">c の素因数</text><text x="358" y="65" text-anchor="middle" font-size="10.5" font-weight="800" fill="#fff">指数 2p の倍数</text>
+          <line x1="98" y1="84" x2="406" y2="84" stroke="#c8433f" stroke-width="2"/>
+          <text x="252" y="102" text-anchor="middle" font-size="11.5" font-weight="900" fill="#c8433f">mod p でぼかすと指紋に映らない → 取り除く（リベットの定理）</text>
+          <path d="M53,76 L53,134" stroke="#9a6a1c" stroke-width="2" marker-end="url(#ar8l)"/>
+          <defs><marker id="ar8l" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9a6a1c"/></marker></defs>
+          <rect x="18" y="140" width="140" height="34" rx="8" fill="#fbf2df" stroke="#9a6a1c"/><text x="88" y="162" text-anchor="middle" font-size="12" font-weight="900" fill="#9a6a1c">残るのは 2 だけ → レベル 2</text>
+          <rect x="18" y="186" width="388" height="34" rx="8" fill="#fbe9e8" stroke="#c8433f"/><text x="212" y="208" text-anchor="middle" font-size="12" font-weight="900" fill="#c8433f">重さ2・レベル2 の、q から始まる種類のモジュラー形式は存在しない → 矛盾</text>
+        </svg>
+        <div class="diagram-caption">リベットの定理で「レベルを下げる」ようす。フライ曲線の導手は、2 と a, b, c の素因数からできている。a, b, c の素因数は判別式 16(abc)²ᵖ の中で指数が 2p の倍数なので、mod p で見た指紋には映らず、レベルから取り除ける。残るのは 2 だけだが、そこに当てはまるモジュラー形式は存在しない</div>
+      </div>
+
+      <div class="dialogue-scene">
         <div class="dialog-row">
           <div class="dialog-character">
             <div class="dialog-avatar mentor"><img src="images/cat.webp" width="300" height="386" alt="" loading="lazy" decoding="async"></div>
